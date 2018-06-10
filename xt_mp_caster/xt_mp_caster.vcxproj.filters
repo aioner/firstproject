@@ -1,0 +1,177 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="源文件\mssrc">
+      <UniqueIdentifier>{7b15db49-4c18-47d9-8559-89a1e2d413d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\msink">
+      <UniqueIdentifier>{12993308-a87c-4b0b-a229-71b9fdd8bce9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\mp">
+      <UniqueIdentifier>{54a12dd4-e2c4-46ed-97e5-85d1f9c59b1f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\cfg">
+      <UniqueIdentifier>{a852053a-31b0-4a8c-96f5-a584984de759}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="头文件\库引出文件">
+      <UniqueIdentifier>{b01704c7-ba81-4756-82e1-b5bcbb9cc44d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\mssrc">
+      <UniqueIdentifier>{06ad1ee2-412e-49de-b4c6-21d89c0b3bf0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\msink">
+      <UniqueIdentifier>{655239a3-6bf1-482a-9337-00cdd10d8b9c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\mp">
+      <UniqueIdentifier>{36582fc0-1a12-4d36-87a1-b92c08b2de46}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="caster_engine.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="mp.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="mp_28181_ps.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="mp_caster.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ReSendMan.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="send_side_controller.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="traffic_shaping.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="xt_av_check.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="xt_mp_caster_api.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="XTDemuxMan.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="mssrc_frame.cpp">
+      <Filter>源文件\mssrc</Filter>
+    </ClCompile>
+    <ClCompile Include="mssrc_rtp.cpp">
+      <Filter>源文件\mssrc</Filter>
+    </ClCompile>
+    <ClCompile Include="mssrc_rv_rtp.cpp">
+      <Filter>源文件\mssrc</Filter>
+    </ClCompile>
+    <ClCompile Include="msink_memory.cpp">
+      <Filter>源文件\msink</Filter>
+    </ClCompile>
+    <ClCompile Include="msink_rtp.cpp">
+      <Filter>源文件\msink</Filter>
+    </ClCompile>
+    <ClCompile Include="msink_rv_rtp.cpp">
+      <Filter>源文件\msink</Filter>
+    </ClCompile>
+    <ClCompile Include="bc_mp.cpp">
+      <Filter>源文件\mp</Filter>
+    </ClCompile>
+    <ClCompile Include="caster_config.cpp">
+      <Filter>源文件\cfg</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="caster_config.h">
+      <Filter>源文件\cfg</Filter>
+    </ClInclude>
+    <ClInclude Include="caster_engine.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mp.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mp_28181_ps.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mp_caster.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mp_caster_config.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="msec_timer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ReSendMan.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="send_side_controller.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="traffic_shaping.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="xt_av_check.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="XTDemuxMan.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="xt_mp_caster_api.h">
+      <Filter>头文件\库引出文件</Filter>
+    </ClInclude>
+    <ClInclude Include="xt_mp_caster_def.h">
+      <Filter>头文件\库引出文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\share\xt_mp_def.h">
+      <Filter>头文件\库引出文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mssrc_frame.h">
+      <Filter>头文件\mssrc</Filter>
+    </ClInclude>
+    <ClInclude Include="mssrc_rtp.h">
+      <Filter>头文件\mssrc</Filter>
+    </ClInclude>
+    <ClInclude Include="mssrc_rv_rtp.h">
+      <Filter>头文件\mssrc</Filter>
+    </ClInclude>
+    <ClInclude Include="msink_memory.h">
+      <Filter>头文件\msink</Filter>
+    </ClInclude>
+    <ClInclude Include="msink_rtp.h">
+      <Filter>头文件\msink</Filter>
+    </ClInclude>
+    <ClInclude Include="msink_rv_rtp.h">
+      <Filter>头文件\msink</Filter>
+    </ClInclude>
+    <ClInclude Include="bc_mp.h">
+      <Filter>头文件\mp</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="xt_mp_caster.rc">
+      <Filter>资源文件</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="changelog.txt" />
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+</Project>

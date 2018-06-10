@@ -1,0 +1,38 @@
+CC          := arm-hisiv300-linux-uclibcgnueabi-gcc
+CXX         := arm-hisiv300-linux-uclibcgnueabi-g++
+
+INC_PATH    := -I../../include/RvRtp/common -I../../include/RvRtp/rtprtcp -I../../include -I../../third_library
+
+DIST_LIB    := -L../../bin/arm -L../../bin  -L../../third_library/boost/lib/arm
+LIB_PATH    := $(DIST_LIB) 
+LIB	    := -lpthread -lm -ltghelper -lrv32rtp -lrvcommon -lboost_thread-mt -lboost_system-mt -lboost_date_time-mt -lboost_atomic-mt
+
+MODULE_DEFINES :=-fPIC -shared -fvisibility=hidden -DLINUX -D_GNU_SOURCE
+CFLAGS         := $(MODULE_DEFINES) -Wall -o 
+TARGET      := ../../bin/arm/librv_adapter.so
+SRCC	    := $(wildcard *.c)
+COBJ	    := $(SRCC:.c=.o)
+SRCXX	    := $(wildcard *.cpp)
+CXXOBJ      := $(SRCXX:.cpp=.o)
+OBJ	    := $(COBJ) $(CXXOBJ)
+
+PUB_INC	:= ../../include/rv_adapter
+
+$(TARGET):$(OBJ) 
+	$(CXX) $(INC_PATH) $(LIB_PATH) $(CFLAGS) $@ $(OBJ) $(LIB)
+	#arm-hisiv300-linux-uclibcgnueabi-strip $(TRARGET)
+#rm -fR $(PUB_INC)
+#	mkdir -p $(PUB_INC)
+	cp rv_def.h $(PUB_INC)
+	cp rv_api.h $(PUB_INC)
+	cp $(TARGET) ../../bin/arm/upgrade_xtlibs/app/libs
+
+$(COBJ):%.o:%.c 
+	$(CC) $(INC_PATH) $(CFLAGS) $@ -c $<
+
+$(CXXOBJ):%.o:%.cpp 
+	$(CXX) $(INC_PATH) $(CFLAGS) $@ -c $<
+
+.PHONY:clean
+clean:
+	rm -f $(TARGET) *~ *.o

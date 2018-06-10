@@ -1,0 +1,293 @@
+# depslib dependency file v1.0
+1414054923 source:/home/shenjing/Workspace/RvRtsp/RvRtspClient/appl/RvRtspClientSample/main.c
+	"rvrtspsample.h"
+	"rvtypes.h"
+	<stdio.h>
+	"rvsdp.h"
+	<stdio.h>
+	<stdlib.h>
+	"rvrtspsample.h"
+
+1412755530 /home/shenjing/Workspace/RvRtsp/RvRtspClient/appl/RvRtspClientSample/rvrtspsample.h
+	<RvRtspClientInc.h>
+
+1412755531 /home/shenjing/Workspace/RvRtsp/RvRtspClient/include/rtsp/RvRtspClientInc.h
+	"RvRtspUsrConfig.h"
+	"RvRtspClient.h"
+	"RvRtspClientConnection.h"
+	"RvRtspClientSession.h"
+	"RvRtspClientTypes.h"
+	"RvRtspFirstLineTypes.h"
+	"RvRtspHeaderTypes.h"
+	"RvRtspMessageTypes.h"
+	"RvRtspUtils.h"
+	"RvRtspMsg.h"
+	"rtp.h"
+	"rtcp.h"
+	"payload.h"
+
+1412755531 /home/shenjing/Workspace/RvRtsp/RvRtspClient/include/rtsp/RvRtspUsrConfig.h
+
+1412755531 /home/shenjing/Workspace/RvRtsp/RvRtspClient/include/rtsp/RvRtspClient.h
+	"RvRtspUsrConfig.h"
+	"rvtypes.h"
+	"RvRtspClientTypes.h"
+	"RvRtspClientConnection.h"
+
+1412755531 /home/shenjing/Workspace/RvRtsp/RvRtspClient/include/common/rvtypes.h
+	<stddef.h>
+	"rvconfig.h"
+	"rv64bits.h"
+
+1413344790 /home/shenjing/Workspace/RvRtsp/RvRtspClient/include/common/rvconfig.h
+	"rvarchdefs.h"
+	"rvosdefs.h"
+	"rvtooldefs.h"
+	"rvinterfacesdefs.h"
+	"rvbuildconfig.h"
+	"rvbuildconfig.h"
+	"rvccoreconfig.h"
+	"rvarchconfig.h"
+	"rvosconfig.h"
+	"rvtoolconfig.h"
+	"rvusrconfig.h"
+	"rvcflags.h"
+	"rvdependencies.h"
+
+1412755531 /home/shenjing/Workspace/RvRtsp/RvRtspClient/include/common/rvarchdefs.h
+
+1412755531 /home/shenjing/Workspace/RvRtsp/RvRtspClient/include/common/rvosdefs.h
+
+1412755531 /home/shenjing/Workspace/RvRtsp/RvRtspClient/include/common/rvtooldefs.h
+
+1412755531 /home/shenjing/Workspace/RvRtsp/RvRtspClient/include/common/rvinterfacesdefs.h
+
+1412755531 /home/shenjing/Workspace/RvRtsp/RvRtspClient/include/common/rvccoreconfig.h
+	"rvccoredefs.h"
+
+1412755531 /home/shenjing/Workspace/RvRtsp/RvRtspClient/include/common/rvccoredefs.h
+	"rvinterfacesdefs.h"
+
+1412755531 /home/shenjing/Workspace/RvRtsp/RvRtspClient/include/common/rvarchconfig.h
+
+1412755531 /home/shenjing/Workspace/RvRtsp/RvRtspClient/include/common/rvosconfig.h
+	"rvsolaris.h"
+	"rvlinux.h"
+	"rvhpux.h"
+	"rvtru64.h"
+	"rvunixware.h"
+	"rvwin32.h"
+	"rvwince.h"
+	"rvvxworks.h"
+	"rvpsos.h"
+	"rvose.h"
+	"rvnucleus.h"
+	"rvsymbian.h"
+	"rvmopi.h"
+	"rvintegrity.h"
+	"rvosa.h"
+	"rvfreebsd.h"
+	"rvnetbsd.h"
+	"rvmac.h"
+
+1414726162 /home/shenjing/Workspace/RvRtsp/RvRtspClient/include/common/rvlinux.h
+
+1412755531 /home/shenjing/Workspace/RvRtsp/RvRtspClient/include/common/rvwin32.h
+
+1412755531 /home/shenjing/Workspace/RvRtsp/RvRtspClient/include/common/rvtoolconfig.h
+	"rvgnu.h"
+	"rvsun.h"
+	"rvdiab.h"
+	"rvghs.h"
+	"rvads.h"
+	"rvmsvc.h"
+	"rvemvc.h"
+	"rvcompaqc.h"
+	"rvcadul.h"
+	"rvhpuxc.h"
+	"rvmwccsym.h"
+
+1403915004 /home/shenjing/Workspace/RvRtsp/RvRtspClient/include/common/rvgnu.h
+	<limits.h>
+
+1412755531 /home/shenjing/Workspace/RvRtsp/RvRtspClient/include/common/rvmsvc.h
+	<windows.h>
+	<limits.h>
+
+1412755531 /home/shenjing/Workspace/RvRtsp/RvRtspClient/include/common/rvusrconfig.h
+
+1412755531 /home/shenjing/Workspace/RvRtsp/RvRtspClient/include/common/rvcflags.h
+
+1412755531 /home/shenjing/Workspace/RvRtsp/RvRtspClient/include/common/rvdependencies.h
+
+1412755531 /home/shenjing/Workspace/RvRtsp/RvRtspClient/include/common/rv64bits.h
+
+1412755531 /home/shenjing/Workspace/RvRtsp/RvRtspClient/include/rtsp/RvRtspClientTypes.h
+	"RvRtspUsrConfig.h"
+	"rvtypes.h"
+	"rverror.h"
+
+1412755531 /home/shenjing/Workspace/RvRtsp/RvRtspClient/include/common/rverror.h
+	"rvtypes.h"
+
+1412755531 /home/shenjing/Workspace/RvRtsp/RvRtspClient/include/rtsp/RvRtspClientConnection.h
+	"RvRtspUsrConfig.h"
+	"RvRtspClientTypes.h"
+	"RvRtspMessageTypes.h"
+	"RvRtspClientSession.h"
+
+1412755531 /home/shenjing/Workspace/RvRtsp/RvRtspClient/include/rtsp/RvRtspMessageTypes.h
+	"RvRtspCommonTypes.h"
+	"RvRtspFirstLineTypes.h"
+	"RvRtspHeaderTypes.h"
+
+1412755531 /home/shenjing/Workspace/RvRtsp/RvRtspClient/include/rtsp/RvRtspCommonTypes.h
+	"rvtypes.h"
+	"rverror.h"
+	"RvRtspUsrConfig.h"
+
+1412755531 /home/shenjing/Workspace/RvRtsp/RvRtspClient/include/rtsp/RvRtspFirstLineTypes.h
+
+1412755531 /home/shenjing/Workspace/RvRtsp/RvRtspClient/include/rtsp/RvRtspHeaderTypes.h
+
+1412755531 /home/shenjing/Workspace/RvRtsp/RvRtspClient/include/rtsp/RvRtspClientSession.h
+	"RvRtspUsrConfig.h"
+	"RvRtspClientTypes.h"
+	"RvRtspMessageTypes.h"
+
+1412755531 /home/shenjing/Workspace/RvRtsp/RvRtspClient/include/rtsp/RvRtspUtils.h
+	"RvRtspCommonTypes.h"
+
+1412755531 /home/shenjing/Workspace/RvRtsp/RvRtspClient/include/rtsp/RvRtspMsg.h
+
+1412755532 /home/shenjing/Workspace/RvRtsp/RvRtspClient/include/rtsp/rvsdp.h
+	"rvsdpconfig.h"
+	"rvsdpenums.h"
+	"rvalloc.h"
+	"rvsdpdataprivate.h"
+	"rvsdpapiprivate.h"
+	"rvsdplist.h"
+	"rvsdpstrings.h"
+	"rvsdpversion.h"
+	"rvsdpdatastruct.h"
+	"rpool_API.h"
+
+1412755532 /home/shenjing/Workspace/RvRtsp/RvRtspClient/include/rtsp/rvsdpconfig.h
+
+1412755532 /home/shenjing/Workspace/RvRtsp/RvRtspClient/include/rtsp/rvsdpenums.h
+	"rverror.h"
+
+1412755531 /home/shenjing/Workspace/RvRtsp/RvRtspClient/include/common/rvalloc.h
+	"rvtypes.h"
+	"rverror.h"
+
+1412755532 /home/shenjing/Workspace/RvRtsp/RvRtspClient/include/rtsp/rvsdpdataprivate.h
+	"rvsdplist.h"
+
+1412755532 /home/shenjing/Workspace/RvRtsp/RvRtspClient/include/rtsp/rvsdplist.h
+	"rvtypes.h"
+	"rvsdpenums.h"
+
+1412755532 /home/shenjing/Workspace/RvRtsp/RvRtspClient/include/rtsp/rvsdpapiprivate.h
+	"rvsdpenums.h"
+	"rvsdplist.h"
+	"rvsdpstrings.h"
+
+1412755532 /home/shenjing/Workspace/RvRtsp/RvRtspClient/include/rtsp/rvsdpstrings.h
+	"rvsdpenums.h"
+	"rvtypes.h"
+
+1412755532 /home/shenjing/Workspace/RvRtsp/RvRtspClient/include/rtsp/rvsdpversion.h
+
+1412755532 /home/shenjing/Workspace/RvRtsp/RvRtspClient/include/rtsp/rvsdpdatastruct.h
+
+1414723193 source:/home/shenjing/Workspace/RvRtsp/RvRtspClient/appl/RvRtspClientSample/rvrtspsample.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"rvtypes.h"
+	"rvrtspsample.h"
+	"RvRtspClientInc.h"
+	"rvadtstamp.h"
+	"rvloglistener.h"
+	"rvsdp.h"
+	<unistd.h>
+
+1413967291 /home/shenjing/Workspace/RvRtsp/RvRtspClient/include/common/rvadtstamp.h
+	"rvccore.h"
+
+1412755531 /home/shenjing/Workspace/RvRtsp/RvRtspClient/include/common/rvccore.h
+	"rvconfig.h"
+	"rvtypes.h"
+	"rverror.h"
+
+1412755531 /home/shenjing/Workspace/RvRtsp/RvRtspClient/include/common/rvloglistener.h
+	"rvccore.h"
+	"rvstdio.h"
+	"rvlog.h"
+	"rvsemaphore.h"
+	<winsock2.h>
+	<inet.h>
+	<inc/nu_net.h>
+	<pna.h>
+	<sys/types.h>
+	<sys/socket.h>
+	<netinet/in.h>
+	<arpa/inet.h>
+	<unistd.h>
+	<errno.h>
+	<sockLib.h>
+
+1412755531 /home/shenjing/Workspace/RvRtsp/RvRtspClient/include/common/rvstdio.h
+	"rvccore.h"
+	"rvansi.h"
+	"rverror.h"
+	<stdio.h>
+	<ctype.h>
+	<search.h>
+	<string.h>
+	<stdlib.h>
+	<dbgprintf.h>
+	<stdarg.h>
+
+1412755531 /home/shenjing/Workspace/RvRtsp/RvRtspClient/include/common/rvansi.h
+	<stdio.h>
+	<stdarg.h>
+	<outfmt.h>
+	<ctype.h>
+	<stdlib.h>
+	<string.h>
+	<stdlib.h>
+
+1412755531 /home/shenjing/Workspace/RvRtsp/RvRtspClient/include/common/rvlog.h
+	"rvtypes.h"
+	"rverror.h"
+	"rvadlock.h"
+	"rvloginternal.h"
+
+1412755531 /home/shenjing/Workspace/RvRtsp/RvRtspClient/include/common/rvadlock.h
+	"rvccore.h"
+	"rvadlock_t.h"
+
+1403915098 /home/shenjing/Workspace/RvRtsp/RvRtspClient/include/common/rvadlock_t.h
+	"rvtypes.h"
+	<windows.h>
+	<pthread.h>
+
+1412755531 /home/shenjing/Workspace/RvRtsp/RvRtspClient/include/common/rvloginternal.h
+
+1412755531 /home/shenjing/Workspace/RvRtsp/RvRtspClient/include/common/rvsemaphore.h
+	"rvccore.h"
+	"rvadsema4.h"
+	"rvlog.h"
+
+1412755531 /home/shenjing/Workspace/RvRtsp/RvRtspClient/include/common/rvadsema4.h
+	"rvccore.h"
+	"rvadsema4_t.h"
+	"rvlog.h"
+
+1403915472 /home/shenjing/Workspace/RvRtsp/RvRtspClient/include/common/rvadsema4_t.h
+	"rvtypes.h"
+	<semaphore.h>
+	<windows.h>
+

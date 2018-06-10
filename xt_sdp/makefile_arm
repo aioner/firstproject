@@ -1,0 +1,33 @@
+CXX := arm-hisiv300-linux-uclibcgnueabi-g++
+AR := ar
+
+INC_PATH := 
+#CXXFLAGS := -g3 -O0 -Wall -fPIC -fvisibility=hidden 
+CXXFLAGS := -g -o -Wall -fPIC -fvisibility=hidden 
+
+LIB_PATH :=
+LIBS :=
+LD_FLAGS := 
+
+TARGET := ../../../bin/arm/libxt_sdp.a
+
+CXX_SRCS := $(wildcard *.cpp)
+CXX_OBJS := $(CXX_SRCS:%.cpp=%.o)
+
+OBJS := $(CXX_OBJS)
+
+$(TARGET):$(OBJS)
+	$(AR) rcs $@ $^
+
+$(CXX_OBJS):%.o:%.cpp
+	$(CXX) -c $(CXXFLAGS)  $< -o $@ $(INC_PATH)
+
+.PHONY:clean
+clean:
+	-rm -f *.o *.a
+
+
+
+
+
+

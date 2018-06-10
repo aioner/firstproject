@@ -1,0 +1,501 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>rvcommon</ProjectName>
+    <ProjectGuid>{76DF5BE5-1335-4B64-AD83-FD69E2AA67A5}</ProjectGuid>
+    <RootNamespace>rvcommon</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>NotSet</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>NotSet</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>NotSet</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>NotSet</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC60.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC60.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>14.0.25431.1</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(SolutionDir)..\pub\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)..\obj\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(SolutionDir)..\pub\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)..\obj\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>$(SolutionDir)..\pub\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)..\obj\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>$(SolutionDir)..\pub\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)..\obj\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <BuildLog>
+      <Path>$(IntDir)BuildLog.htm</Path>
+    </BuildLog>
+    <Midl>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>.\..\binaries\$(Platform)\$(Configuration)\lib/rvcommon.tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../common/ceutils;../common/ares;../common/cbase;../common/ccore;../common/config;../common/config/arch;../common/config/os;../common/config/tool;../common/cutils;../common/ccore/memdrivers;../common/ccore/netdrivers;../common/cbase/netdrivers;../common/adapters;../common/adapters/windows;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>RV_DEBUG;_DEBUG;_USRDLL;RVCORE_EXPORTS;_WINDOWS;WIN32;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>.\..\binaries\$(Platform)\$(Configuration)\obj/rvcommon.pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)</ProgramDataBaseFileName>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>odbc32.lib;odbccp32.lib;ws2_32.lib;traffic.lib;Iphlpapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)$(ProjectName)_d.dll</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(TargetDir)$(TargetName).pdb</ProgramDatabaseFile>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention />
+      <ImportLibrary>$(TargetDir)$(TargetName).lib</ImportLibrary>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <OutputFile>.\..\binaries\$(Platform)\$(Configuration)\lib/rvcommon.bsc</OutputFile>
+    </Bscmake>
+    <PostBuildEvent>
+      <Command>nmake /I /f commonInclude.mak</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <BuildLog>
+      <Path>$(IntDir)BuildLog.htm</Path>
+    </BuildLog>
+    <Midl>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>.\..\binaries\$(Platform)\$(Configuration)\lib/rvcommon.tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <AdditionalOptions>/D /ALIGN:8192" " %(AdditionalOptions)</AdditionalOptions>
+      <Optimization>Disabled</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>../common/ceutils;../common/ares;../common/cbase;../common/ccore;../common/config;../common/config/arch;../common/config/os;../common/config/tool;../common/cutils;../common/ccore/memdrivers;../common/ccore/netdrivers;../common/cbase/netdrivers;../common/adapters;../common/adapters/windows;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>RV_RELEASE;NDEBUG;_USRDLL;RVCORE_EXPORTS;_WINDOWS;WIN32;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeaderOutputFile>.\..\binaries\$(Platform)\$(Configuration)\obj/rvcommon.pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)</ProgramDataBaseFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>odbc32.lib;odbccp32.lib;ws2_32.lib;traffic.lib;Iphlpapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)$(ProjectName).dll</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(TargetDir)$(TargetName).pdb</ProgramDatabaseFile>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention />
+      <ImportLibrary>$(TargetDir)$(TargetName).lib</ImportLibrary>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <OutputFile>.\..\binaries\$(Platform)\$(Configuration)\lib/rvcommon.bsc</OutputFile>
+    </Bscmake>
+    <PostBuildEvent>
+      <Command>nmake /I /f commonInclude.mak</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <BuildLog>
+      <Path>$(IntDir)BuildLog.htm</Path>
+    </BuildLog>
+    <Midl>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TargetEnvironment>X64</TargetEnvironment>
+      <TypeLibraryName>.\..\binaries\$(Platform)\$(Configuration)\lib/rvcommon.tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>../common/ceutils;../common/ares;../common/cbase;../common/ccore;../common/config;../common/config/arch;../common/config/os;../common/config/tool;../common/cutils;../common/ccore/memdrivers;../common/ccore/netdrivers;../common/cbase/netdrivers;../common/adapters;../common/adapters/windows;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>RV_DEBUG;_DEBUG;_USRDLL;RVCORE_EXPORTS;_WINDOWS;WIN32;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>.\..\binaries\$(Platform)\$(Configuration)\obj/rvcommon.pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)</ProgramDataBaseFileName>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>odbc32.lib;odbccp32.lib;ws2_32.lib;traffic.lib;Iphlpapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)$(ProjectName)_d.dll</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(TargetDir)$(TargetName).pdb</ProgramDatabaseFile>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention />
+      <ImportLibrary>$(TargetDir)$(TargetName).lib</ImportLibrary>
+      <TargetMachine>MachineX64</TargetMachine>
+    </Link>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <OutputFile>.\..\binaries\$(Platform)\$(Configuration)\lib/rvcommon.bsc</OutputFile>
+    </Bscmake>
+    <PostBuildEvent>
+      <Command>nmake /I /f commonInclude.mak</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <BuildLog>
+      <Path>$(IntDir)BuildLog.htm</Path>
+    </BuildLog>
+    <Midl>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TargetEnvironment>X64</TargetEnvironment>
+      <TypeLibraryName>.\..\binaries\$(Platform)\$(Configuration)\lib/rvcommon.tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <AdditionalOptions>/D /ALIGN:8192" " %(AdditionalOptions)</AdditionalOptions>
+      <Optimization>Disabled</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>../common/ceutils;../common/ares;../common/cbase;../common/ccore;../common/config;../common/config/arch;../common/config/os;../common/config/tool;../common/cutils;../common/ccore/memdrivers;../common/ccore/netdrivers;../common/cbase/netdrivers;../common/adapters;../common/adapters/windows;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>RV_RELEASE;NDEBUG;_USRDLL;RVCORE_EXPORTS;_WINDOWS;WIN32;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeaderOutputFile>.\..\binaries\$(Platform)\$(Configuration)\obj/rvcommon.pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)</ProgramDataBaseFileName>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Link>
+      <AdditionalOptions>/ALIGN:8192 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>odbc32.lib;odbccp32.lib;ws2_32.lib;traffic.lib;Iphlpapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)$(ProjectName).dll</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(TargetDir)$(TargetName).pdb</ProgramDatabaseFile>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention />
+      <ImportLibrary>$(TargetDir)$(TargetName).lib</ImportLibrary>
+      <TargetMachine>MachineX64</TargetMachine>
+    </Link>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <OutputFile>.\..\binaries\$(Platform)\$(Configuration)\lib/rvcommon.bsc</OutputFile>
+    </Bscmake>
+    <PostBuildEvent>
+      <Command>nmake /I /f commonInclude.mak</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="adapters\windows\rvadclock.c" />
+    <ClCompile Include="adapters\windows\rvadlock.c" />
+    <ClCompile Include="adapters\windows\rvadmutex.c" />
+    <ClCompile Include="adapters\windows\rvadsema4.c" />
+    <ClCompile Include="adapters\windows\rvadthread.c" />
+    <ClCompile Include="adapters\windows\rvadtstamp.c" />
+    <ClCompile Include="adapters\windows\rvwindscp.cpp" />
+    <ClCompile Include="ares\ares_expand_name.c" />
+    <ClCompile Include="ares\ares_init.c" />
+    <ClCompile Include="ares\ares_process.c" />
+    <ClCompile Include="ares\ares_query.c" />
+    <ClCompile Include="ares\ares__read_line.c" />
+    <ClCompile Include="ares\rvares.c" />
+    <ClCompile Include="ares\rvarescache.c" />
+    <ClCompile Include="ares\rvarescachep.c" />
+    <ClCompile Include="ares\rvehd.c" />
+    <ClCompile Include="ares\rvoscomp.c" />
+    <ClCompile Include="cbase\rvcbase.c" />
+    <ClCompile Include="cbase\rvevent.c" />
+    <ClCompile Include="cbase\rvglobals.c" />
+    <ClCompile Include="cbase\rvqueue.c" />
+    <ClCompile Include="cbase\rvsmq.c" />
+    <ClCompile Include="cbase\rvtimer.c" />
+    <ClCompile Include="cbase\rvtimerengine.c" />
+    <ClCompile Include="ccore\memdrivers\rvosmem.c" />
+    <ClCompile Include="ccore\memdrivers\rvpoolmem.c" />
+    <ClCompile Include="ccore\netdrivers\rvhost.c" />
+    <ClCompile Include="ccore\netdrivers\rvif.c" />
+    <ClCompile Include="ccore\netdrivers\rvifmonitor.c" />
+    <ClCompile Include="ccore\netdrivers\rvportrange.c" />
+    <ClCompile Include="ccore\netdrivers\rvselect.c" />
+    <ClCompile Include="ccore\netdrivers\rvsocket.c" />
+    <ClCompile Include="ccore\netdrivers\rvtls.c" />
+    <ClCompile Include="ccore\netdrivers\rvtlstransport.c" />
+    <ClCompile Include="ccore\netdrivers\rvtransport.c" />
+    <ClCompile Include="ccore\netdrivers\rvtransportsocket.c" />
+    <ClCompile Include="ccore\rv2waylock.c" />
+    <ClCompile Include="ccore\rv64ascii.c" />
+    <ClCompile Include="ccore\rvccore.c" />
+    <ClCompile Include="ccore\rvccoreglobals.c" />
+    <ClCompile Include="ccore\rvclock.c" />
+    <ClCompile Include="ccore\rvcondvar.c" />
+    <ClCompile Include="ccore\rvlock.c" />
+    <ClCompile Include="ccore\rvlog.c" />
+    <ClCompile Include="ccore\rvloglistener.c" />
+    <ClCompile Include="ccore\rvmemory.c" />
+    <ClCompile Include="ccore\rvmutex.c" />
+    <ClCompile Include="ccore\rvnotify.c" />
+    <ClCompile Include="ccore\rvsemaphore.c" />
+    <ClCompile Include="ccore\rvstdio.c" />
+    <ClCompile Include="ccore\rvthread.c" />
+    <ClCompile Include="ccore\rvthreadtls.c" />
+    <ClCompile Include="ccore\rvtimestamp.c" />
+    <ClCompile Include="ccore\rvtm.c" />
+    <ClCompile Include="ceutils\rvalloc.c" />
+    <ClCompile Include="ceutils\rvptrvector.c" />
+    <ClCompile Include="cutils\rv64bits.c" />
+    <ClCompile Include="cutils\rvaddress.c" />
+    <ClCompile Include="cutils\rvansi.c" />
+    <ClCompile Include="cutils\rvbase64.c" />
+    <ClCompile Include="cutils\rvema.c" />
+    <ClCompile Include="cutils\rvhashu.c" />
+    <ClCompile Include="cutils\rvnet2host.c" />
+    <ClCompile Include="cutils\rvntptime.c" />
+    <ClCompile Include="cutils\rvobjlist.c" />
+    <ClCompile Include="cutils\rvobjpool.c" />
+    <ClCompile Include="cutils\rvpqueue.c" />
+    <ClCompile Include="cutils\rvra.c" />
+    <ClCompile Include="cutils\rvrandomgenerator.c" />
+    <ClCompile Include="cutils\rvresource.c" />
+    <ClCompile Include="cutils\rvsqrt.c" />
+    <ClCompile Include="cutils\rvstrutils.c" />
+    <ClCompile Include="cutils\rvtime.c" />
+    <ClCompile Include="ipsec\rvimsipsec.c" />
+    <ClCompile Include="ipsec\rvwindowsipsec.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="adapters\rvadclock.h" />
+    <ClInclude Include="adapters\rvadlock.h" />
+    <ClInclude Include="adapters\rvadmutex.h" />
+    <ClInclude Include="adapters\rvadsema4.h" />
+    <ClInclude Include="adapters\rvadthread.h" />
+    <ClInclude Include="adapters\rvadtstamp.h" />
+    <ClInclude Include="adapters\windows\rvadlock_t.h" />
+    <ClInclude Include="adapters\windows\rvadmutex_t.h" />
+    <ClInclude Include="adapters\windows\rvadsema4_t.h" />
+    <ClInclude Include="adapters\windows\rvadthread_t.h" />
+    <ClInclude Include="ares\ares.h" />
+    <ClInclude Include="ares\ares_dns.h" />
+    <ClInclude Include="ares\ares_private.h" />
+    <ClInclude Include="ares\rvares.h" />
+    <ClInclude Include="ares\rvarescache.h" />
+    <ClInclude Include="ares\rvarescached.h" />
+    <ClInclude Include="ares\rvarescachep.h" />
+    <ClInclude Include="ares\rvehd.h" />
+    <ClInclude Include="ares\rvoscomp.h" />
+    <ClInclude Include="cbase\rvcbase.h" />
+    <ClInclude Include="cbase\rvcbaseconfig.h" />
+    <ClInclude Include="cbase\rvcbasedefs.h" />
+    <ClInclude Include="cbase\rvevent.h" />
+    <ClInclude Include="cbase\rvglobalindexes.h" />
+    <ClInclude Include="cbase\rvglobals.h" />
+    <ClInclude Include="cbase\rvqueue.h" />
+    <ClInclude Include="cbase\rvsmq.h" />
+    <ClInclude Include="cbase\rvtimer.h" />
+    <ClInclude Include="cbase\rvtimerengine.h" />
+    <ClInclude Include="ccore\memdrivers\rvosmem.h" />
+    <ClInclude Include="ccore\memdrivers\rvpoolmem.h" />
+    <ClInclude Include="ccore\netdrivers\rvhost.h" />
+    <ClInclude Include="ccore\netdrivers\rvif.h" />
+    <ClInclude Include="ccore\netdrivers\rvifmonitor.h" />
+    <ClInclude Include="ccore\netdrivers\rvnettypes.h" />
+    <ClInclude Include="ccore\netdrivers\rvportrange.h" />
+    <ClInclude Include="ccore\netdrivers\rvselect.h" />
+    <ClInclude Include="ccore\netdrivers\rvselectinternal.h" />
+    <ClInclude Include="ccore\netdrivers\rvsocket.h" />
+    <ClInclude Include="ccore\netdrivers\rvtls.h" />
+    <ClInclude Include="ccore\netdrivers\rvtlstransport.h" />
+    <ClInclude Include="ccore\netdrivers\rvtransport.h" />
+    <ClInclude Include="ccore\netdrivers\rvtransportsocket.h" />
+    <ClInclude Include="ccore\netdrivers\rvwindscp.h" />
+    <ClInclude Include="ccore\resource.h" />
+    <ClInclude Include="ccore\rv2waylock.h" />
+    <ClInclude Include="ccore\rv64ascii.h" />
+    <ClInclude Include="ccore\rvassert.h" />
+    <ClInclude Include="ccore\rvccore.h" />
+    <ClInclude Include="ccore\rvccoreconfig.h" />
+    <ClInclude Include="ccore\rvccoredefs.h" />
+    <ClInclude Include="ccore\rvccoreglobals.h" />
+    <ClInclude Include="ccore\rvccorestrings.h" />
+    <ClInclude Include="ccore\rvccoreversion.h" />
+    <ClInclude Include="ccore\rvclock.h" />
+    <ClInclude Include="ccore\rvcommoncorepublic.h" />
+    <ClInclude Include="ccore\rvcondvar.h" />
+    <ClInclude Include="ccore\rvlock.h" />
+    <ClInclude Include="ccore\rvlog.h" />
+    <ClInclude Include="ccore\rvloginternal.h" />
+    <ClInclude Include="ccore\rvloglistener.h" />
+    <ClInclude Include="ccore\rvmemory.h" />
+    <ClInclude Include="ccore\rvmutex.h" />
+    <ClInclude Include="ccore\rvnotify.h" />
+    <ClInclude Include="ccore\rvsemaphore.h" />
+    <ClInclude Include="ccore\rvstdio.h" />
+    <ClInclude Include="ccore\rvthread.h" />
+    <ClInclude Include="ccore\rvthreadtls.h" />
+    <ClInclude Include="ccore\rvtimestamp.h" />
+    <ClInclude Include="ccore\rvtm.h" />
+    <ClInclude Include="ceutils\rvalloc.h" />
+    <ClInclude Include="ceutils\rvhash.h" />
+    <ClInclude Include="ceutils\rvlist.h" />
+    <ClInclude Include="ceutils\rvptrvector.h" />
+    <ClInclude Include="ceutils\rvvector.h" />
+    <ClInclude Include="config\arch\rvarchconfig.h" />
+    <ClInclude Include="config\arch\rvarchdefs.h" />
+    <ClInclude Include="config\os\rvosconfig.h" />
+    <ClInclude Include="config\os\rvosdefs.h" />
+    <ClInclude Include="config\os\rvwin32.h" />
+    <ClInclude Include="config\rvcflags.h" />
+    <ClInclude Include="config\rvconfig.h" />
+    <ClInclude Include="config\rvdependencies.h" />
+    <ClInclude Include="config\rvinterfacesdefs.h" />
+    <ClInclude Include="config\rvusrconfig.h" />
+    <ClInclude Include="config\tool\rvmsvc.h" />
+    <ClInclude Include="config\tool\rvtoolconfig.h" />
+    <ClInclude Include="config\tool\rvtooldefs.h" />
+    <ClInclude Include="cutils\rv64bits.h" />
+    <ClInclude Include="cutils\rvaddress.h" />
+    <ClInclude Include="cutils\rvansi.h" />
+    <ClInclude Include="cutils\rvbase64.h" />
+    <ClInclude Include="cutils\rvema.h" />
+    <ClInclude Include="cutils\rverror.h" />
+    <ClInclude Include="cutils\rvhashu.h" />
+    <ClInclude Include="cutils\rvnet2host.h" />
+    <ClInclude Include="cutils\rvntptime.h" />
+    <ClInclude Include="cutils\rvobjlist.h" />
+    <ClInclude Include="cutils\rvobjpool.h" />
+    <ClInclude Include="cutils\rvpqueue.h" />
+    <ClInclude Include="cutils\rvra.h" />
+    <ClInclude Include="cutils\rvrandomgenerator.h" />
+    <ClInclude Include="cutils\rvresource.h" />
+    <ClInclude Include="cutils\rvsqrt.h" />
+    <ClInclude Include="cutils\rvstrutils.h" />
+    <ClInclude Include="cutils\rvtime.h" />
+    <ClInclude Include="cutils\rvtypes.h" />
+    <ClInclude Include="ipsec\rvimsipsec.h" />
+    <ClInclude Include="ipsec\rvimsipsecprivate.h" />
+    <ClInclude Include="ipsec\rvimsipsecpublic.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="ccore\rvccoreversion.rc">
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">ccore;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">ccore;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">ccore;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release|x64'">ccore;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

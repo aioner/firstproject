@@ -1,0 +1,1581 @@
+#ifndef _USE_COMMON_CTRL_MSG_
+#include "std_sip_engine.h"
+#include "Router_config.h"
+#include "std_sip_task.h"
+#include "XTEngine.h"
+#include "rtpid_mgr.h"
+
+#include "XTRouterLog.h"
+
+std_sip_engine std_sip_engine::self_;
+
+std_sip_engine::std_sip_engine():
+sip_hanle_(XT_SIP_INVALID_HANDLE)
+{
+}
+
+std_sip_engine::~std_sip_engine()
+{
+}
+
+//回调
+//option 失败响应
+int8_t std_sip_engine::on_xt_sip_heartbeat_not_pong_cb(void *ctx, const char *target,uint32_t count)
+{
+    std_sip_engine *sip_engine = static_cast<std_sip_engine *>(ctx);
+    if (NULL == sip_engine)
+    {
+        return -1;
+    }
+
+    WRITE_LOG(DBLOGINFO,ll_info,"option 失败响应 target[%s]",target);
+    sip_engine->sip_client_register_request_refresh(target);
+
+    return 0;
+}
+
+//注册结果响应
+void std_sip_engine::on_client_register_response(void *ctx, xt_sip_client_register_handle_t h, xt_sip_msg_handle_t msg, uint8_t success)
+{
+    std_sip_engine *sip_engine = static_cast<std_sip_engine *>(ctx);
+    if (NULL == sip_engine)
+    {
+        return;
+    }
+
+    //获取from
+    std::string target;
+    long ret_code = sip_engine->parse_from_by_msg(msg,target);
+    if (ret_code < 0)
+    {
+        return;
+    }
+
+    WRITE_LOG(DBLOGINFO,ll_info,"register_respons target[%s] success[%d]",target.c_str(), success);
+    if (0 < success)
+    {
+        sip_engine->update_regist_info_handle(target,h);
+        sip_engine->add_options(target.c_str());
+    }
+    else
+    {
+        sip_engine->del_options(target.c_str());
+    }
+}
+//1.交换先启动，中心未启动，注册失败回调该函数开始重试
+//2.交换登陆中心成功，中心重启
+// 1)中心短暂重启，未触发心跳包失败，通过回话保活知道断线，然后刷新注册，重新登陆中心时间等于回话保活时间+注册刷新时间
+// 2)中心长时间重启，触发心跳包失败，通过心跳知道断线，调用重试注册，重新登陆中心时间等于重试注册时间
+//regist 失败响应 请求重试时间 -1为不重试/第一次注册失败使用
+int std_sip_engine::on_client_register_request_retry(void *ctx, xt_sip_client_register_handle_t h, int retrysec, xt_sip_msg_handle_t msg)
+{
+    std_sip_engine *sip_engine = static_cast<std_sip_engine *>(ctx);
+    if (NULL == sip_engine)
+    {
+        return -1;
+    }
+
+    return sip_engine->get_regist_retry_time_interval();
+}
+
+void std_sip_engine::on_client_register_removed(void *ctx, xt_sip_client_register_handle_t h, xt_sip_msg_handle_t msg)
+{
+    std_sip_engine *sip_engine = static_cast<std_sip_engine *>(ctx);
+    if (NULL == sip_engine)
+    {
+        return;
+    }
+
+    std::string target;
+    long ret_code = sip_engine->parse_from_by_msg(msg,target);
+    if (ret_code < 0)
+    {
+        return;
+    };
+
+    sip_engine->notify_regist_removed();
+}
+
+//INVITE with sdp
+void std_sip_engine::on_server_invite_offer(void *ctx, xt_sip_server_invite_handle_t h, xt_sip_msg_handle_t msg, const char *sdp, uint32_t len)
+{
+    std_sip_engine *sip_engine = static_cast<std_sip_engine *>(ctx);
+    if (NULL == sip_engine)
+    {
+        return;
+    }
+
+    std_sip_session_t session;
+    session.creat_time = boost::posix_time::second_clock::local_time();
+
+    //获取call id
+    long ret_code = sip_engine->parse_call_id_by_msg(msg,session.call_id);
+    if (ret_code < 0)
+    {
+        return;
+    }
+
+    //获取from
+    //获取from
+    ret_code = sip_engine->parse_from_by_msg(msg,session.target);
+    if (ret_code < 0)
+    {
+        return;
+    }
+
+    session.sdp_len = len;
+    if (0 < session.sdp_len)
+    {
+        session.sdp.assign(sdp,session.sdp_len);
+    }
+    else
+    {
+        session.sdp.clear();
+    }
+
+    //to
+    //获取to
+    ret_code = sip_engine->parse_to_by_msg(msg,session.to);
+    if (ret_code < 0)
+    {
+        return;
+    }
+
+    WRITE_LOG(DBLOGINFO,ll_info,"call_id[%s] target[%s] to[%s] INVITE with sdp[%s]",
+        session.call_id.c_str(), session.target.c_str(), session.to.c_str(), session.sdp.c_str());
+
+    if (SIP_INVITE == sip_engine->get_session_type(session.call_id))
+    {
+        sip_engine->add_session(session);
+
+        invite_task* ptr_task = new invite_task(session,h,mode_offer);
+        if (NULL != ptr_task)
+        {
+            ptr_task->process_event();
+        }
+    }
+    else
+    {
+        re_invite_task* ptr_task = new re_invite_task(session,h,mode_offer);
+        if (NULL != ptr_task)
+        {
+            ptr_task->process_event();
+        }
+    }
+}
+
+//INVITE no sdp
+void std_sip_engine::on_sip_server_invite_offer_required(void *ctx, xt_sip_server_invite_handle_t h, xt_sip_msg_handle_t msg)
+{
+    std_sip_engine *sip_engine = static_cast<std_sip_engine *>(ctx);
+    if (NULL == sip_engine)
+    {
+        return;
+    }
+
+    std_sip_session_t session;
+    session.creat_time = boost::posix_time::second_clock::local_time();
+
+    //获取call id
+    long ret_code = sip_engine->parse_call_id_by_msg(msg,session.call_id);
+    if (ret_code < 0)
+    {
+        return;
+    }
+
+    //获取from
+    ret_code = sip_engine->parse_from_by_msg(msg,session.target);
+    if (ret_code < 0)
+    {
+        return;
+    }
+
+    session.sdp.clear();
+    session.sdp_len = 0;
+
+    //to
+    //获取to
+    ret_code = sip_engine->parse_to_by_msg(msg,session.to);
+    if (ret_code < 0)
+    {
+        return;
+    }
+
+    WRITE_LOG(DBLOGINFO,ll_info,"call_id[%s] target[%s] to[%s] INVITE with no sdp", 
+        session.call_id.c_str(), session.target.c_str(), session.to.c_str());
+
+    if (SIP_INVITE == sip_engine->get_session_type(session.call_id))
+    {
+        sip_engine->add_session(session);
+        invite_task* ptr_task = new invite_task(session,h,mode_answer);
+        if (NULL != ptr_task)
+        {
+            ptr_task->process_event();
+        }
+    }
+    else
+    {
+        re_invite_task* ptr_task = new re_invite_task(session,h,mode_answer);
+        if (NULL != ptr_task)
+        {
+            ptr_task->process_event();
+        }
+    }
+}
+
+//ACK with sdp
+void std_sip_engine::on_sip_server_invite_answer(void *ctx, xt_sip_server_invite_handle_t h, xt_sip_msg_handle_t msg, const char *sdp, uint32_t len)
+{
+    std_sip_engine *sip_engine = static_cast<std_sip_engine *>(ctx);
+    if (NULL == sip_engine)
+    {
+        return;
+    }
+
+    //获取call id
+    std::string call_id;
+    long ret_code = sip_engine->parse_call_id_by_msg(msg,call_id);
+    if (ret_code < 0)
+    {
+        return;
+    }
+    std::string _sdp;
+    if (len > 0)
+    {
+        _sdp.assign(sdp,len);
+    }
+    else
+    {
+        _sdp.clear();
+    }
+
+    WRITE_LOG(DBLOGINFO,ll_info,"call_id[%s] ACK with sdp[%s]", call_id.c_str(), _sdp.c_str());
+
+    ack_with_sdp_task* ptr_task = new ack_with_sdp_task(call_id,_sdp,h);
+    if (NULL != ptr_task)
+    {
+        ptr_task->process_event();
+    }
+
+}
+
+//ACK no sdp
+void std_sip_engine::on_server_invite_connected_confirmed(void *ctx, xt_sip_server_invite_handle_t h, xt_sip_msg_handle_t msg)
+{
+    std_sip_engine *sip_engine = static_cast<std_sip_engine *>(ctx);
+    if (NULL == sip_engine)
+    {
+        return;
+    }
+}
+
+//收到BYE
+void std_sip_engine::on_sip_server_invite_terminated(void *ctx, xt_sip_server_invite_handle_t h, xt_sip_msg_handle_t msg, xt_sip_invite_terminated_reason_t reason)
+{
+    std_sip_engine *sip_engine = static_cast<std_sip_engine *>(ctx);
+    if (NULL == sip_engine)
+    {
+        return;
+    }
+    /*
+    //invite会话结束的原因
+    typedef enum _xt_sip_invite_terminated_reason_t
+    {
+    XT_SIP_TERMINATED_REASON_ERROR,
+    XT_SIP_TERMINATED_REASON_TIMEOUT,
+    XT_SIP_TERMINATED_REASON_REPLACED,
+    XT_SIP_TERMINATED_REASON_LOCAL_BYE,
+    XT_SIP_TERMINATED_REASON_REMOTE_BYE,
+    XT_SIP_TERMINATED_REASON_LOCAL_CANCEL,
+    XT_SIP_TERMINATED_REASON_REMOTE_CANCEL,
+    XT_SIP_TERMINATED_REASON_REJECTED, //拒绝
+    XT_SIP_TERMINATED_REASON_REFERRED
+    } xt_sip_invite_terminated_reason_t;
+    */
+    do 
+    {
+        long ret_code = 0;
+        std::string call_id;
+        ret_code = sip_engine->parse_call_id_by_msg(msg,call_id);
+        if (ret_code < 0)
+        {
+            break;
+        }
+
+        WRITE_LOG(DBLOGINFO,ll_info,"call_id[%s] 收到BYE reason[%d]",call_id.c_str(), reason);
+
+        invite_bye_task* ptr_task = new invite_bye_task(call_id,reason);
+        if (NULL != ptr_task)
+        {
+            ptr_task->process_event();
+        }
+    } while (0);
+}
+
+//收到会话内的INFO
+void std_sip_engine::on_server_invite_info(void *ctx, xt_sip_server_invite_handle_t h, xt_sip_msg_handle_t msg)
+{
+    std_sip_engine *sip_engine = static_cast<std_sip_engine *>(ctx);
+    if (NULL == sip_engine)
+    {
+        return;
+    }
+}
+
+//发送会话内的INFO操作结果
+void std_sip_engine::on_server_invite_info_response(void *ctx, xt_sip_server_invite_handle_t h, xt_sip_msg_handle_t msg, uint8_t success)
+{
+    std_sip_engine *sip_engine = static_cast<std_sip_engine *>(ctx);
+    if (NULL == sip_engine)
+    {
+        return;
+    }
+}
+
+//收到会话内的MESSAGE
+void std_sip_engine::on_server_invite_message(void *ctx, xt_sip_server_invite_handle_t h, xt_sip_msg_handle_t msg)
+{
+    std_sip_engine *sip_engine = static_cast<std_sip_engine *>(ctx);
+    if (NULL == sip_engine)
+    {
+        return;
+    }
+}
+
+//发送会话内的MESSAGE操作结果响应
+void std_sip_engine::on_server_invite_message_response(void *ctx, xt_sip_server_invite_handle_t h, xt_sip_msg_handle_t msg, uint8_t success)
+{
+    std_sip_engine *sip_engine = static_cast<std_sip_engine *>(ctx);
+    if (NULL == sip_engine)
+    {
+        return;
+    }
+
+}
+
+//收到会话外的MESSAGE
+void std_sip_engine::on_server_message_arrived(void *ctx, xt_sip_server_message_handle_t h, xt_sip_msg_handle_t msg )
+{
+    std_sip_engine *sip_engine = static_cast<std_sip_engine *>(ctx);
+    if (NULL == sip_engine)
+    {
+        return;
+    }
+    /*
+    <Control>
+    <commandname>"switchset"</commandname>
+    <seq>1</seq>
+    <max-dst>3</max-dst>
+    <src>
+    <rtpid>1</rtpid>
+    </src>
+    <dst>
+    <rtpid>2</rtpid>
+    <rtpid>3</rtpid>
+    <rtpid>4</rtpid>
+    </dst>
+    </Control>
+    */
+    long oper_code = -1;
+    do 
+    {
+        std::string msg_ctx;
+        long ret_code = sip_engine->parse_content_body_by_msg(msg,msg_ctx);
+        WRITE_LOG(DBLOGINFO,ll_info,"on_server_message_arrived[%s]",msg_ctx.c_str());
+        if (ret_code < 0)
+        {
+            break;
+        }
+
+        xtXml xml;
+        xml.LoadXMLStr(msg_ctx.c_str());
+
+        xtXmlNodePtr root = xml.getRoot();
+        if (root.IsNull())
+        {
+            break;
+        }
+
+        const char *root_v = root.GetName();
+        if (::strcmp(root_v,"Control")==0)
+        {
+            xtXmlNodePtr command = xml.getNode(root, "commandname");
+            if (command.IsNull())
+            {
+                break;
+            }
+            const char *commandname = xml.getValue(command);
+            if (::strcmp(commandname,"\"switchset\"")==0)
+            {
+                xtXmlNodePtr ptr_seq = xml.getNode(root, "seq");
+                if (ptr_seq.IsNull())
+                {
+                    break;
+                }
+                std::string seq = xml.getValue(ptr_seq);
+
+                xtXmlNodePtr ptr_max_dst =  xml.getNode(root, "max-dst");
+                if (ptr_max_dst.IsNull())
+                {
+                    break;
+                }
+
+                int max_dst = INT_VALUE_NA;
+                const char* max_dst_v = xml.getValue(ptr_max_dst);
+                if (NULL == max_dst_v)
+                {
+                    break;
+                }
+                else
+                {
+                    max_dst = ::str_to_num<int>(max_dst_v);
+                }
+
+                xtXmlNodePtr ptr_src =  xml.getNode(root, "src");
+                if (ptr_src.IsNull())
+                {
+                    break;
+                }
+
+                xtXmlNodePtr ptr_src_rtp_id = ptr_src.GetFirstChild("rtpid");
+                if (ptr_src_rtp_id.IsNull())
+                {
+                    break;
+                }
+                rtp_id_t src_rtp_id = RTP_ID_VALUE_NA;
+                const char* src_rtp_id_v = xml.getValue(ptr_src_rtp_id);
+                if (NULL == src_rtp_id_v)
+                {
+                    break;
+                }
+                else
+                {
+                    //去掉前后引号
+                    char tmp[1024]={0x0};
+                    int len = strlen(src_rtp_id_v);
+                    memcpy(tmp, src_rtp_id_v+1,len-2);
+                    tmp[len-2]='\0';
+
+                    src_rtp_id = ::str_to_num<rtp_id_t>(tmp);
+                }
+
+                switchset_data_t swt_data;
+                swt_data.src_rtp_id = src_rtp_id;
+
+                xtXmlNodePtr ptr_dst =  xml.getNode(root, "dst");
+                if (ptr_dst.IsNull())
+                {
+                    break;
+                }
+                xtXmlNodePtr ptr_dst_rtp_id = ptr_dst.GetFirstChild("rtpid");
+                if (ptr_dst_rtp_id.IsNull())
+                {
+                    break;
+                }
+                for( ;!ptr_dst_rtp_id.IsNull(); ptr_dst_rtp_id = ptr_dst_rtp_id.NextSibling("rtpid"))
+                {
+                    const char *val = xml.getValue(ptr_dst_rtp_id);
+                    if (NULL == val)
+                    {
+                        continue;
+                    }
+                    //去掉前后引号
+                    char tmp[1024]={0x0};
+                    int len = strlen(val);
+                    memcpy(tmp, val+1,len-2);
+                    tmp[len-2]='\0';
+
+                    rtp_id_t dst_rtp_id = ::str_to_num<rtp_id_t>(tmp);
+                    swt_data.dst_rtp_ids.push_back(dst_rtp_id);
+                }
+
+                if (swt_data.dst_rtp_ids.empty())
+                {
+                    break;
+                }
+
+                switchset_task* ptr_task = new switchset_task(h,swt_data);
+                if (NULL != ptr_task)
+                {
+                    ptr_task->process_event();
+                }
+            }
+        }
+
+        oper_code = 1;
+    } while (0);
+
+    if (oper_code < 0)
+    {
+        WRITE_LOG(DBLOGINFO,ll_error,"on_server_message_arrived[pares xml error!]",1);
+        sip_engine->response_optstatus_fail("pares xml error!");
+    }
+    else
+    {
+        // 回复200 ok，表示接受该消息
+        ::xt_sip_server_message_accept(h, 200); //针对message回复，否则message一直发送
+    }
+}
+
+int std_sip_engine::std_sip_start()
+{
+    std_sip_status status= SIP_STATUS_OK;
+    int ret_code = 0;
+    do 
+    {
+        status = load_cfg();
+        if (status !=  SIP_STATUS_OK)
+        {
+            ret_code = -1;
+            break;
+        }
+
+        status = start();
+        if (status !=  SIP_STATUS_OK)
+        {
+            ret_code = -2;
+            break;
+        }
+        regist();
+        ret_code=1;
+    } while (0);
+
+    return ret_code;
+}
+int std_sip_engine::std_sip_stop()
+{
+    int ret_code=-1;
+    do 
+    {
+        unregist();
+        stop();
+        ret_code=1;
+    } while (0);
+
+    return ret_code;
+}
+
+std_sip_status std_sip_engine::load_cfg()
+{
+    std_sip_status oper_status = SIP_STATUS_OK;
+    do 
+    {
+        //create cfg
+        cfg_info_.session_keep_alive_time_interval = config::_()->sip_cfg_session_keep_alive_time_interval(90);
+        cfg_info_.registration_retry_time_interval = config::_()->sip_cfg_registration_retry_time_interval(60);
+        uint32_t protocl = config::_()->sip_cfg_protocol(3);
+        switch(protocl)
+        {
+        case 0:
+            {
+                cfg_info_.protocol = SIP_FOR_TCP;
+                break;
+            } 
+        case 1:
+            {
+                cfg_info_.protocol = SIP_FOR_UDP;
+                break;
+            }
+        case 2:
+            {
+                cfg_info_.protocol = SIP_FOR_TCP_UDP;
+                break;
+            }
+        default:
+            {
+                cfg_info_.protocol = SIP_FOR_NA;
+                break;
+            }
+        }
+
+        if (SIP_FOR_NA == cfg_info_.protocol)
+        {
+            oper_status = SIP_STATUS_PROTOCOL_ERR;
+            break;
+        }
+
+
+        cfg_info_.transport = config::_()->sip_cfg_transport(5060);
+        cfg_info_.tls_port = config::_()->sip_cfg_tls_port(0);
+        cfg_info_.dtls_port = config::_()->sip_cfg_dtls_port(0);
+
+        //register cfg
+        cfg_info_.expires = config::_()->sip_cfg_expires(60);
+        cfg_info_.link_keep_alive_time_interval = config::_()->sip_cfg_link_keep_alive_time_interval(25000);
+        cfg_info_.regist_retry_time_interval = config::_()->sip_cfg_regist_retry_time_interval(60);
+
+        cfg_info_.channle_type = config::_()->sip_cfg_channle_type(4);
+        cfg_info_.net_delay = config::_()->sip_cfg_delay(0);
+        cfg_info_.net_packetloss = config::_()->sip_cfg_packetloss(0);
+        cfg_info_.net_mtu = config::_()->mtu(1500);
+        cfg_info_.net_bandwidth = config::_()->sip_cfg_bandwidth(4096);
+        cfg_info_.usre =  config::_()->sip_cfg_usre("");
+        if (cfg_info_.usre.empty())
+        {
+            oper_status = SIP_STATUS_USRE_IS_EMPTY;
+            break;
+        }
+
+        cfg_info_.pwd = config::_()->sip_cfg_password("");
+        if (cfg_info_.pwd.empty())
+        {
+            oper_status = SIP_STATUS_PWD_IS_EMPTY;
+            break;
+        }
+
+        std::list<std::string> domains;
+        config::instance()->sip_cfg_get_domain(domains);
+        if (domains.empty())
+        {
+            oper_status = SIP_STATUS_DOMAIM_IS_EMPTY;
+            break;
+        }
+
+        cfg_info_.main_domain = domains.front();
+        domains.pop_front();
+        cfg_info_.back_domains = domains; 
+
+    } while (0);
+
+
+    return oper_status;
+}
+
+std_sip_status std_sip_engine::start()
+{
+    WRITE_LOG(DBLOGINFO,ll_info,"xt_session_sip::start start!\n",1);
+
+    ::xt_sip_log_init(XT_SIP_LOG_NONE, "xt_sip_test", "xt_sip_test.log");
+
+    xt_sip_options_t options = { 0 }; 
+    options.flags = XT_SIP_TRAITS_CLIENT_INVITE | XT_SIP_TRAITS_SERVER_INVITE | XT_SIP_TRAITS_PAGER_MESSAGE |XT_SIP_TRAITS_CLIENT_REGISTER;
+    options.domain = cfg_info_.main_domain.c_str();
+    options.user = cfg_info_.usre.c_str();
+    options.pwd = cfg_info_.pwd.c_str();
+    options.realm = cfg_info_.main_domain.c_str();
+
+    options.tcp_port = 0;
+    options.udp_port  = 0;
+    if (SIP_FOR_TCP == cfg_info_.protocol)
+    {
+        options.tcp_port = cfg_info_.transport;
+    }
+    if (SIP_FOR_UDP == cfg_info_.protocol)
+    {
+        options.udp_port = cfg_info_.transport;
+    }
+    if (SIP_FOR_TCP_UDP == cfg_info_.protocol)
+    {
+        options.tcp_port = cfg_info_.transport;
+        options.udp_port = cfg_info_.transport;
+    }
+    if (options.udp_port == 0  && options.tcp_port == 0)
+    {
+
+        WRITE_LOG(DBLOGINFO,ll_error,"sip start fail! tcp port and udp port is 0!\n",1);
+        return SIP_STATUS_PORT_IS_EMPTY;
+    }
+
+    printf("domain:%s user:%s pwd:%s realm:%s tcpport:%d udpport:%d\n",
+        options.domain,options.user,options.pwd,options.realm,options.tcp_port,options.udp_port);
+
+    /*
+    typedef struct _xt_sip_server_invite_callback_t
+    {
+    xt_sip_server_invite_offer_callback_t on_offer; //invite 带 sdp
+    xt_sip_server_invite_answer_callback_t on_answer;//ack  带 sdp
+    xt_sip_server_invite_connected_confirmed_callback_t on_connected_confirmed;//ack 不带 sdp
+    xt_sip_server_invite_terminated_callback_t on_terminated; //BYE
+    xt_sip_server_invite_offer_required_callback_t on_offer_required;//invite 不带 sdp
+    xt_sip_server_invite_info_callback_t on_info;//收到会话内的info
+    xt_sip_server_invite_info_response_callback_t on_info_response;//发info 的操作结果
+    xt_sip_server_invite_message_callback_t on_message;//收到会话内的messge
+    xt_sip_server_invite_message_response_callback_t on_message_response;//发送messge的操作结果
+    } xt_sip_server_invite_callback_t;
+    */
+
+    xt_sip_server_invite_callback_t server_invite_cb = { 0 };
+    server_invite_cb.on_offer = on_server_invite_offer;
+    server_invite_cb.on_answer = on_sip_server_invite_answer;
+    server_invite_cb.on_connected_confirmed = on_server_invite_connected_confirmed;
+    server_invite_cb.on_terminated = on_sip_server_invite_terminated;
+    server_invite_cb.on_offer_required = on_sip_server_invite_offer_required;
+    server_invite_cb.on_info = on_server_invite_info;
+    server_invite_cb.on_info_response = on_server_invite_info_response;
+    server_invite_cb.on_message = on_server_invite_message;
+    server_invite_cb.on_message_response = on_server_invite_message_response;
+
+    options.server_invite_callback = &server_invite_cb;
+    options.server_invite_callback_ctx = static_cast<void*>(this);
+
+    xt_sip_server_message_callback_t server_message_cb = { 0 };
+    server_message_cb.on_arrived = on_server_message_arrived;
+
+    options.server_message_callback = &server_message_cb;
+    options.server_message_callback_ctx = static_cast<void*>(this);
+
+    xt_sip_ext_options_t ext_optins = {0};
+    ext_optins.default_session_time = cfg_info_.session_keep_alive_time_interval;
+    ext_optins.default_registration_retry_time = cfg_info_.session_keep_alive_time_interval;
+    ext_optins.tls_port = cfg_info_.tls_port;
+    ext_optins.dtls_port = cfg_info_.dtls_port;
+
+    xt_sip_client_digest_credential_t* ptr_dc = NULL;
+    std::size_t dc_num=cfg_info_.back_domains.size();
+
+    if (!cfg_info_.back_domains.empty())
+    {
+        try
+        {
+            ptr_dc = new xt_sip_client_digest_credential_t[dc_num];
+        }
+        catch (...)
+        {
+            return SIP_STATUS_MALLOC_MEM_FAIL;
+        }
+
+        if (ptr_dc == NULL)
+        {
+            return SIP_STATUS_MALLOC_MEM_FAIL;
+        }
+
+        sip_cfg_info_t::back_domain_handle_t itr = cfg_info_.back_domains.begin();
+        for(int index=0;cfg_info_.back_domains.end() != itr; ++itr)
+        {
+            ptr_dc[index].realm = itr->c_str();
+            ptr_dc[index].user = cfg_info_.usre.c_str();;
+            ptr_dc[index].pwd = cfg_info_.pwd.c_str();
+        }
+    }
+    ext_optins.ext_client_digest_credential_num = dc_num;
+    ext_optins.ext_client_digest_credential = ptr_dc;
+
+    xt_sip_status_t ret_code = ::xt_sip_create(&options, &ext_optins, &sip_hanle_);
+    if (ptr_dc)
+    {
+        delete[] ptr_dc;
+        ptr_dc = NULL;
+    }
+    if (ret_code != XT_SIP_STATUS_OK)
+    {
+
+        WRITE_LOG(DBLOGINFO,ll_error,"xt_sip_create fail ret_code[%d]",ret_code);
+        return SIP_STATUS_CREATE_FAIL;
+    }
+
+    WRITE_LOG(DBLOGINFO,ll_info,"xt_session_sip::start:ret_code[%d] domain[%s] username[%s] password[%s] realm[%s] tcp_port[%d] udp_port[%d] session_time[%d] tls_port[%d] dtls_port[%d]",
+        ret_code,options.domain,options.user,options.pwd,options.realm,options.tcp_port,options.udp_port,ext_optins.default_session_time,ext_optins.tls_port,ext_optins.dtls_port);
+
+    return SIP_STATUS_OK;
+}
+
+void std_sip_engine::stop()
+{
+
+    WRITE_LOG(DBLOGINFO,ll_error,"xt_session_sip::stop start!\n",1);
+    ::xt_sip_destroy(sip_hanle_);
+    WRITE_LOG(DBLOGINFO,ll_error,"xt_session_sip::stop end!\n",1);
+}
+
+std_sip_status std_sip_engine::regist()
+{
+    std_sip_status status = SIP_STATUS_OK;
+    do 
+    {
+        unregist();
+
+        std::list<std::string> targets;
+        get_regist_target(targets);
+        if (targets.empty())
+        {
+            status = SIP_STATUS_TARGET_IS_EMPTY;
+            break;
+        }
+
+        std::list<std::string>::iterator itr = targets.begin();
+        for(; targets.end() != itr; ++itr)
+        {
+            register_info_t register_info;
+            register_info.handle = XT_SIP_INVALID_HANDLE;
+            register_info.target = *itr;
+
+            xt_sip_client_register_request_t request;
+            request.target = register_info.target.c_str();
+            request.expires = cfg_info_.expires;
+
+            WRITE_LOG(DBLOGINFO,ll_info,"start regist target[%s]",register_info.target.c_str());
+            //信道描述
+            xt_sip_channel_category_t sip_ch;
+            sip_ch.bandwidth = cfg_info_.net_bandwidth;
+            sip_ch.delay = cfg_info_.net_delay;
+            sip_ch.mtu = cfg_info_.net_mtu;
+            sip_ch.packetloss = cfg_info_.net_packetloss;
+            sip_ch.type = cfg_info_.channle_type;
+
+            request.channel = &sip_ch;
+            request.sdp = NULL;
+            request.length = 0; 
+
+            xt_sip_client_register_callback_t cicall = { 0 }; 
+            cicall.on_removed = on_client_register_removed;
+            cicall.on_request_retry = on_client_register_request_retry;
+            cicall.on_response = on_client_register_response;
+
+            add_regist_info(register_info);
+
+            xt_sip_status_t ret_code = ::xt_sip_make_client_register(sip_hanle_,NULL,&request, NULL,&cicall, this, 3000);
+            if (XT_SIP_STATUS_OK != ret_code)
+            {
+                continue;
+            }
+        }
+    } while (0);
+
+    return status;
+}
+
+void std_sip_engine::unregist()
+{
+    register_inf_container_t register_info_lst;
+    get_register_info(register_info_lst);
+    register_inf_container_handel_t itr = register_info_lst.begin();
+    for (; register_info_lst.end() != itr; )
+    {
+
+        if (XT_SIP_INVALID_HANDLE != itr->handle)
+        {
+            WRITE_LOG(DBLOGINFO,ll_error,"unregist():xt_sip_client_register_remove_all\n",1);
+            xt_sip_status_t status =::xt_sip_client_register_remove_all(itr->handle);
+
+            WRITE_LOG(DBLOGINFO,ll_error,"unregist():xt_sip_heartbeat_remove_target\n",1);
+            status = ::xt_sip_heartbeat_remove_target(sip_hanle_,itr->target.c_str());
+
+            WRITE_LOG(DBLOGINFO,ll_error,"unregist():wait_regist_removed target[%s]\n",itr->target.c_str());
+            wait_regist_removed();
+
+            WRITE_LOG(DBLOGINFO,ll_error,"unregist(): xt_sip_client_register_handle_delete\n",1);
+            ::xt_sip_client_register_handle_delete(itr->handle);
+
+
+            itr->handle = XT_SIP_INVALID_HANDLE; 
+
+            del_regist_info(*itr);
+
+            register_info_lst.erase(itr++);
+        }
+        else
+        {
+            ++itr;
+        }
+    }
+}
+
+//注意target格式
+void std_sip_engine::get_regist_target(std::list<std::string>& regist_target)
+{
+    regist_target.clear();
+
+    std::string target("sip:");
+    target.append(cfg_info_.usre);
+    target.append("@");
+    target.append(cfg_info_.main_domain);
+    regist_target.push_back(target);
+
+    sip_cfg_info_t::back_domain_handle_t itr = cfg_info_.back_domains.begin();
+    for(;cfg_info_.back_domains.end() != itr; ++itr)
+    {
+        target.assign("sip:");
+        target.append(cfg_info_.usre);
+        target.append("@");
+        target.append(*itr);
+        target.append(":");
+        std::ostringstream os;
+        os<<cfg_info_.transport;
+        target.append(os.str());
+        regist_target.push_back(target);
+    }
+}
+
+void std_sip_engine::get_register_info(register_inf_container_t& register_info)
+{
+    boost::unique_lock<boost::shared_mutex> lock(register_info_lst_mutex_);
+    register_info.clear();
+    register_info = register_info_lst_;
+}
+
+void std_sip_engine::add_regist_info(const register_info_t& inf)
+{
+    boost::unique_lock<boost::shared_mutex> lock(register_info_lst_mutex_);
+    register_info_lst_.push_back(inf);
+}
+
+void std_sip_engine::update_regist_info_handle(const std::string& target,const xt_sip_client_register_handle_t handle)
+{
+    boost::unique_lock<boost::shared_mutex> lock(register_info_lst_mutex_);
+    register_inf_container_handel_t itr = register_info_lst_.begin();
+    for(; register_info_lst_.end() != itr; ++itr)
+    {
+        if (target == itr->target)
+        {
+            if (XT_SIP_INVALID_HANDLE != itr->handle)
+            {
+                ::xt_sip_client_register_handle_delete(itr->handle);
+                itr->handle = XT_SIP_INVALID_HANDLE;
+            }
+            itr->handle = ::xt_sip_client_register_handle_clone(handle);
+        }
+    }
+}
+void std_sip_engine::del_regist_info(const std::string& target)
+{
+    boost::unique_lock<boost::shared_mutex> lock(register_info_lst_mutex_);
+    register_inf_container_handel_t itr = register_info_lst_.begin();
+    for(; register_info_lst_.end() != itr;)
+    {
+        if (target == itr->target)
+        {
+            register_info_lst_.erase(itr++);
+        }
+        else
+        {
+            ++itr;
+        }
+    }
+}
+
+void std_sip_engine::del_regist_info(const register_info_t& inf)
+{
+    boost::unique_lock<boost::shared_mutex> lock(register_info_lst_mutex_);
+    register_info_lst_.remove(inf);
+}
+xt_sip_client_register_handle_t std_sip_engine::get_register_handle(const char* target)
+{
+    boost::unique_lock<boost::shared_mutex> lock(register_info_lst_mutex_);
+    register_inf_container_handel_t itr = register_info_lst_.begin();
+    for(; register_info_lst_.end() != itr; ++itr)
+    {
+        if (target == itr->target)
+        {
+            return itr->handle;
+        }
+    }
+
+    return NULL;
+}
+
+void std_sip_engine::del_options(const char* target)
+{
+    xt_sip_status_t ret_code = ::xt_sip_heartbeat_remove_target(sip_hanle_,target);
+    WRITE_LOG(DBLOGINFO,ll_info,"del_options xt_sip_heartbeat_remove_target[%s] ret_code[%d]",target,ret_code);
+}
+void std_sip_engine::add_options(const char* target)
+{
+    xt_sip_status_t ret_code = ::xt_sip_heartbeat_add_target(
+        sip_hanle_, target,cfg_info_.link_keep_alive_time_interval, cfg_info_.link_keep_alive_time_interval, on_xt_sip_heartbeat_not_pong_cb, this);
+
+    WRITE_LOG(DBLOGINFO,ll_info,"add_options xt_sip_heartbeat_add_target[%s] ret_code[%d]",target,ret_code);
+}
+
+void std_sip_engine::sip_client_register_request_refresh(const char* target)
+{
+    xt_sip_client_register_handle_t handle = get_register_handle(target);
+    if (XT_SIP_INVALID_HANDLE == handle)
+    {
+        return;
+    } 
+    xt_sip_status_t ret_code = ::xt_sip_client_register_request_refresh(handle,cfg_info_.expires);
+    WRITE_LOG(DBLOGINFO,ll_info,"xt_sip_client_register_request_refresh ret_code[%d] target[%s]",ret_code,target);
+}
+
+void std_sip_engine::notify_regist_removed()
+{
+    boost::unique_lock<boost::recursive_mutex>lock(regist_removed_mutex_);
+    regist_removed_condition_.notify_one();
+}
+void std_sip_engine::wait_regist_removed(uint32_t outtime/*=10*/)
+{
+    boost::xtime now;
+    boost::xtime_get(&now, boost::TIME_UTC_);
+    now.sec += outtime;
+    regist_removed_condition_.timed_wait(regist_removed_mutex_, now);
+}
+
+// 根据msg解析出call_id
+long std_sip_engine::parse_call_id_by_msg(const xt_sip_msg_handle_t msg,std::string& call_id)
+{
+    long ret_code = 0;
+    do 
+    {
+        //获取call id
+        xt_sip_buf_handle_t cid = ::xt_sip_msg_get_call_id(msg);
+        if (XT_SIP_INVALID_HANDLE == cid)
+        {
+            ret_code = -1;
+            break;
+        }
+        const char * cid_data = static_cast<char*>(::xt_sip_buf_get_data(cid));
+        if (NULL == cid_data)
+        {
+            ::xt_sip_buf_handle_delete(cid);
+            ret_code = -2;
+            break;
+        }
+        call_id.assign(cid_data,::xt_sip_buf_get_len(cid));
+        ::xt_sip_buf_handle_delete(cid);
+        ret_code=1;
+    } while (0);
+
+    return ret_code;
+}
+//根据msg解析出from
+long std_sip_engine::parse_from_by_msg(const xt_sip_msg_handle_t msg,std::string& from)
+{
+    long ret_code = 0;
+    do 
+    {
+        xt_sip_buf_handle_t from_buf = ::xt_sip_msg_get_from(msg);
+        if (XT_SIP_INVALID_HANDLE == from_buf)
+        {
+            ret_code = -1;
+            break;
+        }
+
+        const char* from_data = static_cast<char*>(::xt_sip_buf_get_data(from_buf));
+        if (NULL == from_data)
+        {
+            ::xt_sip_buf_handle_delete(from_buf);
+            ret_code = -2;
+            break;
+        }
+        from.assign(from_data,::xt_sip_buf_get_len(from_buf));
+        ::xt_sip_buf_handle_delete(from_buf);
+
+        ret_code = 1;
+    } while (0);
+    return ret_code;
+
+}
+
+//根据msg解析出to
+long std_sip_engine::parse_to_by_msg(const xt_sip_msg_handle_t msg,std::string& to)
+{
+    long ret_code = 0;
+    do 
+    {
+        xt_sip_buf_handle_t tobuf = ::xt_sip_msg_get_to(msg);
+        if (XT_SIP_INVALID_HANDLE == tobuf)
+        {
+            ret_code = -1;
+            break;
+        }
+        const char* todata = static_cast<char*>(::xt_sip_buf_get_data(tobuf));
+        if (NULL == todata)
+        {
+            ::xt_sip_buf_handle_delete(tobuf);
+            ret_code = -2;
+            break;
+        }
+        to.assign(todata,::xt_sip_buf_get_len(tobuf));
+        ::xt_sip_buf_handle_delete(tobuf);
+
+        ret_code = 1;
+    } while (0);
+    return ret_code;
+}
+
+//根据msg解析出content body
+long std_sip_engine::parse_content_body_by_msg(const xt_sip_msg_handle_t msg,std::string& ctx)
+{
+    long ret_code = 0;
+    do 
+    {
+        xt_sip_buf_handle_t buf = ::xt_sip_msg_get_content_body(msg);
+        if (XT_SIP_INVALID_HANDLE == buf)
+        {
+            ret_code = -1;
+            break;
+        }
+        const char * data = static_cast<char*>(::xt_sip_buf_get_data(buf));
+        if (NULL == data)
+        {
+            ret_code = -2;
+            break;
+        }
+        uint32_t len_data = ::xt_sip_buf_get_len(buf);
+        if (len_data <= 0)
+        {
+            ret_code = -3;
+            break;
+        }
+        ctx.assign(data,len_data);
+        ::xt_sip_buf_handle_delete(buf);
+
+        ret_code = 1;
+    } while (0);
+    return ret_code;
+}
+
+// 回复opt ok
+void std_sip_engine::response_optstatus_ok()
+{
+    do 
+    {
+        std::string msg_ctx;
+        xtXml res_xml;
+        res_xml.LoadXMLStr("<Response></Response>");
+
+        xtXmlNodePtr Response = res_xml.getRoot();
+        if (Response.IsNull())
+        {
+            break;
+        }
+
+        xtXmlNodePtr commandname = Response.NewChild("commandname");
+        if (!commandname.IsNull())
+        {
+            commandname.SetValue("optstatus");
+        }
+
+        xtXmlNodePtr response_ = Response.NewChild("response");
+        if (!response_.IsNull())
+        {
+            std::ostringstream os;
+            os<<200;
+            response_.SetValue(os.str().c_str());
+        }
+
+        xtXmlNodePtr seq1 = Response.NewChild("seq");
+        if (!seq1.IsNull())
+        {
+            std::ostringstream os;
+            os<<1;
+            seq1.SetValue(os.str().c_str());
+        }
+        msg_ctx.assign(res_xml.GetXMLStrEx());
+
+        xt_sip_client_message_response_t tmp_response1 = { 0 };
+        xt_sip_client_message_request_t	request1 = { 0 };
+        request1.target ;//= /*from.c_str();*/ ;
+        request1.content_type = "application/command+xml";
+        request1.content = msg_ctx.c_str();
+        request1.content_length = msg_ctx.length();
+        if (XT_SIP_STATUS_OK != ::xt_sip_make_client_message(sip_hanle_, NULL, &request1, &tmp_response1, NULL, NULL,3000))
+        {
+            WRITE_LOG(DBLOGINFO,ll_error,"response_optstatus_ok:xt_sip_make_client_message fail",1);
+        }
+
+    } while (0);
+
+}
+
+//回复opt fail
+void std_sip_engine::response_optstatus_fail(const std::string& fail_case)
+{
+    do 
+    {
+        std::string msg_ctx;
+        xtXml res_xml;
+        res_xml.LoadXMLStr("<Response></Response>");
+
+        xtXmlNodePtr Response = res_xml.getRoot();
+        if (Response.IsNull())
+        {
+            break;
+        }
+
+        xtXmlNodePtr commandname = Response.NewChild("commandname");
+        if (!commandname.IsNull())
+        {
+            commandname.SetValue("optstatus");
+        }
+
+        xtXmlNodePtr response_ = Response.NewChild("response");
+        if (!response_.IsNull())
+        {
+            std::ostringstream os;
+            os<<401;
+            response_.SetValue(os.str().c_str());
+        }
+
+        xtXmlNodePtr seq1 = Response.NewChild("seq");
+        if (!seq1.IsNull())
+        {
+            std::ostringstream os;
+            os<<1;
+            seq1.SetValue(os.str().c_str());
+        }
+
+        xtXmlNodePtr error = Response.NewChild("error");
+        if (!error.IsNull())
+        {
+            error.SetValue(fail_case.c_str());
+        }
+
+        msg_ctx.assign(res_xml.GetXMLStrEx());
+        xt_sip_client_message_response_t tmp_response1 = { 0 };
+        xt_sip_client_message_request_t	request1 = { 0 };
+        request1.target ;//= /*from.c_str();*/ ;
+        request1.content_type = "application/command+xml";
+        request1.content = msg_ctx.c_str();
+        request1.content_length = msg_ctx.length();
+        if (XT_SIP_STATUS_OK != ::xt_sip_make_client_message(sip_hanle_, NULL, &request1, &tmp_response1, NULL, NULL,3000))
+        {
+            WRITE_LOG(DBLOGINFO,ll_error,"response_optstatus_fail:xt_sip_make_client_message fail",1);
+        }
+
+    } while (0);
+
+}
+
+//回复chan status
+void std_sip_engine::response_chanstatus(char* ch_status)
+{
+    /*
+    <Notify>
+    <commandname>"chanstatus"</commandname>
+    <seq>1</seq>
+    <devname>"member1"</devname>
+    <devid>"00000000001"</devid>
+    <groupid>"123"</groupid>
+    <channelstatus>establish/cleanup</channelstatus>
+    <chanid>1</chanid>
+    </Notify>
+    */
+    std::string msg_ctx;
+    xtXml res_xml;
+    res_xml.LoadXMLStr("<Notify></Notify>");
+    xtXmlNodePtr Notify = res_xml.getRoot();
+    if (Notify.IsNull())
+    {
+        return;
+    }
+
+    xtXmlNodePtr commandname = Notify.NewChild("commandname");
+    if (!commandname.IsNull())
+    {
+        commandname.SetValue("chanstatus");
+    }
+
+    xtXmlNodePtr seq = Notify.NewChild("seq");
+    if (!seq.IsNull())
+    {
+        std::ostringstream os;
+        os<<1;
+        seq.SetValue(os.str().c_str());
+    }
+
+    xtXmlNodePtr devname = Notify.NewChild("devname");
+    if (!devname.IsNull())
+    {
+        devname.SetValue("xtrouter");
+    }
+
+    xtXmlNodePtr groupid = Notify.NewChild("groupid");
+    if (!groupid.IsNull())
+    {
+        std::ostringstream os;
+        os<<123;
+        groupid.SetValue(os.str().c_str());
+    }
+
+    xtXmlNodePtr channelstatus = Notify.NewChild("channelstatus");
+    if (!channelstatus.IsNull())
+    {
+        channelstatus.SetValue("ch_status");
+    }
+
+    xtXmlNodePtr chanid = Notify.NewChild("chanid");
+    if (!chanid.IsNull())
+    {
+        std::ostringstream os;
+        os<<0;
+        chanid.SetValue(os.str().c_str());
+    }
+    msg_ctx.assign(res_xml.GetXMLStrEx());
+    xt_sip_client_message_response_t tmp_response1 = { 0 };
+    xt_sip_client_message_request_t	request1 = { 0 };
+    request1.target ;//= /*from.c_str();*/ ;
+    request1.content_type = "application/command+xml";
+    request1.content = msg_ctx.c_str();
+    request1.content_length = msg_ctx.length();
+    if (XT_SIP_STATUS_OK != ::xt_sip_make_client_message(sip_hanle_, NULL, &request1, &tmp_response1, NULL, NULL,3000))
+    {
+        WRITE_LOG(DBLOGINFO,ll_error,"response_chanstatus:xt_sip_make_client_message fail",1);
+    }
+}
+
+//会话管理
+void std_sip_engine::add_session(const std_sip_session_t& session)
+{
+    boost::unique_lock<boost::shared_mutex> lock(session_mgr_mutex_);
+    sip_session_mgr_container_handle_t itr = std_sip_session_mgr_lst.find(session.call_id);
+    if ( std_sip_session_mgr_lst.end() == itr)
+    {
+        std_sip_session_mgr_lst[session.call_id] = session;
+    }
+
+}
+void std_sip_engine::del_session(const std_sip_session_t& session)
+{
+    boost::unique_lock<boost::shared_mutex> lock(session_mgr_mutex_);
+    sip_session_mgr_container_handle_t itr = std_sip_session_mgr_lst.find(session.call_id);
+    if ( std_sip_session_mgr_lst.end() != itr)
+    {
+        std_sip_session_mgr_lst.erase(itr++);
+    }
+
+}
+void std_sip_engine::del_session(const std::string& call_id)
+{
+    boost::unique_lock<boost::shared_mutex> lock(session_mgr_mutex_);
+    sip_session_mgr_container_handle_t itr = std_sip_session_mgr_lst.find(call_id);
+    if ( std_sip_session_mgr_lst.end() != itr)
+    {
+        std_sip_session_mgr_lst.erase(itr++);
+    }
+
+}
+long std_sip_engine::get_session(const std::string& call_id,std_sip_session_t& session)
+{
+    boost::unique_lock<boost::shared_mutex> lock(session_mgr_mutex_);
+    sip_session_mgr_container_handle_t itr = std_sip_session_mgr_lst.find(call_id);
+    if ( std_sip_session_mgr_lst.end() != itr)
+    {
+        session = itr->second;
+        return 0;
+    }
+    return -1;
+}
+
+void std_sip_engine::add_send_rtp_id_to_session(const std::string& call_id,const rtp_id_t& rtp_id)
+{
+    boost::unique_lock<boost::shared_mutex> lock(session_mgr_mutex_);
+    sip_session_mgr_container_handle_t itr = std_sip_session_mgr_lst.find(call_id);
+    if ( std_sip_session_mgr_lst.end() == itr)
+    {
+        return;
+    }
+    itr->second.send_rtp_ids.push_back(rtp_id);
+}
+
+void std_sip_engine::add_recv_rtp_id_to_session(const std::string& call_id,const rtp_id_t& rtp_id)
+{
+    boost::unique_lock<boost::shared_mutex> lock(session_mgr_mutex_);
+    sip_session_mgr_container_handle_t itr = std_sip_session_mgr_lst.find(call_id);
+    if ( std_sip_session_mgr_lst.end() == itr)
+    {
+        return;
+    }
+    itr->second.recv_rtp_ids.push_back(rtp_id);
+    return;
+}
+
+long std_sip_engine::update_session(const std_sip_session_t& session)
+{
+    boost::unique_lock<boost::shared_mutex> lock(session_mgr_mutex_);
+    sip_session_mgr_container_handle_t itr = std_sip_session_mgr_lst.find(session.call_id);
+    if ( std_sip_session_mgr_lst.end() == itr)
+    {
+        return -1;
+    }
+
+    itr->second = session;
+    return 1;
+}
+
+
+std_sip_session_type_t std_sip_engine::get_session_type(const std::string& call_id)
+{
+    boost::unique_lock<boost::shared_mutex> lock(session_mgr_mutex_);
+    sip_session_mgr_container_handle_t itr = std_sip_session_mgr_lst.find(call_id);
+    if ( std_sip_session_mgr_lst.end() != itr)
+    {
+        return SIP_REINVITE;
+    }
+    return SIP_INVITE;
+}
+
+//根据sdp解析sdp的方向
+sdp_direction_t std_sip_engine::parse_sdp_direction(const std::string& sdp)
+{
+    sdp_direction_t ret_dir = dir_na;
+    do 
+    {
+        xt_sdp::parse_buffer_t sdp_buffer(sdp.c_str(),sdp.length());
+        xt_sdp::sdp_session_t sdp_ctx;
+        try
+        {
+            sdp_ctx.parse(sdp_buffer);
+        }
+        catch(...)
+        {
+            printf("parse_sdp_direction catch\n");
+            break;
+        }
+
+        bool is_exists_sendonly = false;
+        bool is_exists_recvonly = false;
+        bool is_exists_sendrecv = false;
+
+        //写在媒体里以媒体里的为准
+        xt_sdp::sdp_session_t::medium_container_t::iterator itr;
+        for(itr = sdp_ctx.media_.begin(); sdp_ctx.media_.end() != itr; ++itr)
+        {
+            if (itr->attribute_helper_.exists("sendonly"))
+            {
+                is_exists_sendonly = true;
+            }
+
+            if (itr->attribute_helper_.exists("recvonly"))
+            {
+                is_exists_recvonly = true;
+            }
+
+            if (itr->attribute_helper_.exists("sendrecv"))
+            {
+                is_exists_sendrecv = true;
+            }
+        }
+
+        //写在session里
+        if (!is_exists_sendonly && !is_exists_recvonly && !is_exists_sendrecv)
+        {
+            if (sdp_ctx.attribute_helper_.exists("sendonly"))
+            {
+                is_exists_sendonly = true;
+            }
+
+            if (sdp_ctx.attribute_helper_.exists("recvonly"))
+            {
+                is_exists_recvonly = true;
+            }
+
+            if (sdp_ctx.attribute_helper_.exists("sendrecv"))
+            {
+                is_exists_sendrecv = true;
+            }
+        }
+
+        //双向
+        if ( (is_exists_recvonly && is_exists_sendonly) || is_exists_sendrecv)
+        {
+            ret_dir = dir_sendrecv;
+            break;
+        }
+
+        //单向接收
+        if (is_exists_recvonly && !is_exists_sendonly)
+        {
+            ret_dir = dir_recvonly;
+            break;
+        }
+
+        //单向发送
+        if (is_exists_sendonly && !is_exists_recvonly)
+        {
+            ret_dir = dir_sendonly;
+            break;
+        }
+
+
+    } while (0);
+
+    return ret_dir;
+}
+
+//功能调度接口
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+long std_sip_engine::add_send_dst(const int srcno,const rtp_id_t rtpid,const std::string& dst_sdp)
+{
+    long ret_code=0;
+    do 
+    {
+        xt_sdp::parse_buffer_t pb(dst_sdp.c_str(), dst_sdp.length());
+        xt_sdp::sdp_session_t xsdp;
+        try
+        {
+            xsdp.parse(pb);
+
+        }
+        catch(...)
+        {
+
+        }
+
+        svr_info svr[MAX_TRACK];
+        int tracknum = xsdp.media_.size();
+        ret_code = media_server::get_svr_info(svr,tracknum,srcno);
+        std::list<std::string> lsta;
+        bool is_send = false;
+        xt_sdp::sdp_session_t::medium_container_t::iterator itr = xsdp.media_.begin();
+        for (;xsdp.media_.end() != itr; ++itr)
+        {
+            rtp_dst_info_t send_dst;
+
+            if (itr->connections_.empty())
+            {
+                send_dst.dst_ip = xsdp.connection_.address_;
+
+            }
+            else
+            {
+                xt_sdp::sdp_session_t::connection_t c = itr->connections_.front();
+                send_dst.dst_ip = c.address();
+            }
+
+            send_dst.dst_port = (unsigned short)itr->port_;
+
+            for(int i=0; i<tracknum; ++i)
+            {
+
+                if (0 != itr->name_.compare(svr[i].trackname))
+                {
+                    continue;
+                }
+
+                send_dst.trackid = svr[i].trackid;
+
+                if (itr->attribute_helper_.exists("rtpport-mux"))
+                {
+                    send_dst.dst_demux = true;
+                    lsta = itr->attribute_helper_.get_values("muxid");
+                    if (!lsta.empty())
+                    {
+                        send_dst.dst_demuxid = ::str_to_num<int>(lsta.front().c_str());
+                    }
+                    lsta.clear();
+                }
+                else
+                {
+                    send_dst.dst_demux = false;
+                    send_dst.dst_demuxid = 0;
+                }
+
+                WRITE_LOG(DBLOGINFO,ll_info,"std_sip_engine::add_send_dst srcno[%d] trackid[%d] send_ip[%s] sendport[%d] demux[%d] muxid[%d]",
+                    srcno,send_dst.trackid,send_dst.dst_ip.c_str(),send_dst.dst_port,send_dst.dst_demux,send_dst.dst_demuxid);
+
+                ret_code = media_server::add_send(srcno,send_dst.trackid,send_dst.dst_ip.c_str(),send_dst.dst_port,send_dst.dst_demux,send_dst.dst_demuxid);
+                if (ret_code < 0)
+                {
+                    continue;
+                }
+
+                rtp_id_mr::_()->add_rtp_dst_to_rtpid(rtpid,send_dst);
+                is_send = true;
+            }
+
+        }
+        //没有任何流被推送出去
+        if (!is_send)
+        {
+            WRITE_LOG(DBLOGINFO,ll_error,"没有任何流被推送出去",1);
+            ret_code = -5;
+            break;
+        }
+
+        ret_code=1;
+    } while (0);
+    return ret_code;
+}
+#endif //#ifndef _USE_COMMON_CTRL_MSG_
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////

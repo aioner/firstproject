@@ -1,0 +1,306 @@
+ Unknown 04/09/14 22:01:22 RA          : DEBUG - raConstruct (Rtsp): 300 elements of size 304 (total of 91200)
+ Unknown 04/09/14 22:01:22 RA          : DEBUG - raConstruct (RtspMsgRequests): 10 elements of size 224 (total of 2240)
+ Unknown 04/09/14 22:01:22 RA          : DEBUG - raConstruct (RtspMsgResponses): 10 elements of size 472 (total of 4720)
+ Unknown 04/09/14 22:01:22 RA          : DEBUG - raConstruct (RtspMshHeaders): 400 elements of size 16 (total of 6400)
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - RvRtspInit - Select Engine Constructed
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - RvRtspInit - Ares DNS Engine Constructed
+RvUserDe 04/09/14 22:01:23 RA          : DEBUG - raConstruct (Connections): 2 elements of size 1552 (total of 3104)
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - RvRtspInit - RTSP Module Initialized, Version: 002.000.000, patch = 0
+RvUserDe 04/09/14 22:01:23 RA          : DEBUG - raConstruct (Describe): 10 elements of size 32 (total of 320)
+RvUserDe 04/09/14 22:01:23 RA          : DEBUG - raConstruct (DNS): 5 elements of size 16 (total of 80)
+RvUserDe 04/09/14 22:01:23 RA          : DEBUG - raConstruct (SESSIONS): 20 elements of size 160 (total of 3200)
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - RvRtspConnectionConstruct - new
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - RvRtspConnectionConnect - Address is already an IP4 address
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - rvRtspTransportConnect - select connect
+RvUserDe 04/09/14 22:01:23 SELECT      : DEBUG - Occured event: fd=504,event=Connect ,error=0
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - RtspTransportSend adding buffer to txQueue
+RvUserDe 04/09/14 22:01:23 TIMER       : DEBUG - RvTimerStart: event allocated(tqueue=019071E4; timer=01939D1C; event=006098C8)
+RvUserDe 04/09/14 22:01:23 SELECT      : DEBUG - Occured event: fd=504,event=Write ,error=0
+RvUserDe 04/09/14 22:01:23 SELECT      : DEBUG - Occured event: fd=504,event=Write ,error=0
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG -  --> Message Sent:
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0000 DESCRIBE rtsp://admin:12345@172.16.2.113:554/mpeg4/ch01/main/av_stream RTSP/1.0
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0001 CSeq: 1
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0002 Authorization: Basic YWRtaW46MTIzNDU=
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0003 Accept: application/sdp, application/rtsl, application/mheg;level=2
+RvUserDe 04/09/14 22:01:23 SELECT      : DEBUG - Occured event: fd=504,event=Write ,error=0
+RvUserDe 04/09/14 22:01:23 SELECT      : DEBUG - Occured event: fd=504,event=Read ,error=0
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - Received data on socket - 100
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG -  <-- Message Received:
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0000 RTSP/1.0 200 OK
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0001 CSeq: 1
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0002 Content-Type: application/sdp
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0003 Content-Base: rtsp://admin:12345@172.16.2.1
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - Received data from App - 100
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG -  <-- Message Chunk Received:
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0000 RTSP/1.0 200 OK
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0001 CSeq: 1
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0002 Content-Type: application/sdp
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0003 Content-Base: rtsp://admin:12345@172.16.2.1
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - RtspTransportDoReceive - Data received on socket ignored
+RvUserDe 04/09/14 22:01:23 SELECT      : DEBUG - Occured event: fd=504,event=Read ,error=0
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - Received data on socket - 100
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG -  <-- Message Received:
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0000 13:554/mpeg4/ch01/main/av_stream/
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0001 Content-Length: 864
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0003 v=0
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0004 o=- 1397080051022639 1397080051022639
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - Received data from App - 100
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG -  <-- Message Chunk Received:
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0000 13:554/mpeg4/ch01/main/av_stream/
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0001 Content-Length: 864
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0003 v=0
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0004 o=- 1397080051022639 1397080051022639
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - RtspTransportDoReceive - Data received on socket ignored
+RvUserDe 04/09/14 22:01:23 SELECT      : DEBUG - Occured event: fd=504,event=Read ,error=0
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - Received data on socket - 100
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG -  <-- Message Received:
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0000  IN IP4 172.16.2.113
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0001 s=Media Presentation
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0002 e=NONE
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0003 b=AS:5100
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0004 t=0 0
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0005 a=control:rtsp://admin:12345@1
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - Received data from App - 100
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG -  <-- Message Chunk Received:
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0000  IN IP4 172.16.2.113
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0001 s=Media Presentation
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0002 e=NONE
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0003 b=AS:5100
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0004 t=0 0
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0005 a=control:rtsp://admin:12345@1
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - RtspTransportDoReceive - Data received on socket ignored
+RvUserDe 04/09/14 22:01:23 SELECT      : DEBUG - Occured event: fd=504,event=Read ,error=0
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - Received data on socket - 100
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG -  <-- Message Received:
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0000 72.16.2.113:554/mpeg4/ch01/main/av_stream/
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0001 m=video 0 RTP/AVP 96
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0002 b=AS:5000
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0003 a=control:rtsp://admin:
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - Received data from App - 100
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG -  <-- Message Chunk Received:
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0000 72.16.2.113:554/mpeg4/ch01/main/av_stream/
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0001 m=video 0 RTP/AVP 96
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0002 b=AS:5000
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0003 a=control:rtsp://admin:
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - RtspTransportDoReceive - Data received on socket ignored
+RvUserDe 04/09/14 22:01:23 SELECT      : DEBUG - Occured event: fd=504,event=Read ,error=0
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - Received data on socket - 100
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG -  <-- Message Received:
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0000 12345@172.16.2.113:554/mpeg4/ch01/main/av_stream/trackID=1
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0001 a=rtpmap:96 H264/90000
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0002 a=fmtp:96 profil
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - Received data from App - 100
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG -  <-- Message Chunk Received:
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0000 12345@172.16.2.113:554/mpeg4/ch01/main/av_stream/trackID=1
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0001 a=rtpmap:96 H264/90000
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0002 a=fmtp:96 profil
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - RtspTransportDoReceive - Data received on socket ignored
+RvUserDe 04/09/14 22:01:23 SELECT      : DEBUG - Occured event: fd=504,event=Read ,error=0
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - Received data on socket - 100
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG -  <-- Message Received:
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0000 e-level-id=420029; packetization-mode=1; sprop-parameter-sets=Z0KAKIiLUDwBE0IAAA4QAAK/IAg=,aM44gA==
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - Received data from App - 100
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG -  <-- Message Chunk Received:
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0000 e-level-id=420029; packetization-mode=1; sprop-parameter-sets=Z0KAKIiLUDwBE0IAAA4QAAK/IAg=,aM44gA==
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - RtspTransportDoReceive - Data received on socket ignored
+RvUserDe 04/09/14 22:01:23 SELECT      : DEBUG - Occured event: fd=504,event=Read ,error=0
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - Received data on socket - 100
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG -  <-- Message Received:
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0001 m=audio 0 RTP/AVP 0
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0002 b=AS:50
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0003 a=control:rtsp://admin:12345@172.16.2.113:554/mpeg4/ch01/main/av_stre
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - Received data from App - 100
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG -  <-- Message Chunk Received:
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0001 m=audio 0 RTP/AVP 0
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0002 b=AS:50
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0003 a=control:rtsp://admin:12345@172.16.2.113:554/mpeg4/ch01/main/av_stre
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - RtspTransportDoReceive - Data received on socket ignored
+RvUserDe 04/09/14 22:01:23 SELECT      : DEBUG - Occured event: fd=504,event=Read ,error=0
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - Received data on socket - 100
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG -  <-- Message Received:
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0000 am/trackID=2
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0001 a=rtpmap:0 PCMU/8000
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0002 m=application 0 RTP/AVP 107
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0003 b=AS:50
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0004 a=control:rtsp://admin:123
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - Received data from App - 100
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG -  <-- Message Chunk Received:
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0000 am/trackID=2
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0001 a=rtpmap:0 PCMU/8000
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0002 m=application 0 RTP/AVP 107
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0003 b=AS:50
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0004 a=control:rtsp://admin:123
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - RtspTransportDoReceive - Data received on socket ignored
+RvUserDe 04/09/14 22:01:23 SELECT      : DEBUG - Occured event: fd=504,event=Read ,error=0
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - Received data on socket - 100
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG -  <-- Message Received:
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0000 45@172.16.2.113:554/mpeg4/ch01/main/av_stream/trackID=3
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0001 a=rtpmap:107 vnd.onvif.metadata/90000
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0002 a=Me
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - Received data from App - 100
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG -  <-- Message Chunk Received:
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0000 45@172.16.2.113:554/mpeg4/ch01/main/av_stream/trackID=3
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0001 a=rtpmap:107 vnd.onvif.metadata/90000
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0002 a=Me
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - RtspTransportDoReceive - Data received on socket ignored
+RvUserDe 04/09/14 22:01:23 SELECT      : DEBUG - Occured event: fd=504,event=Read ,error=0
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - Received data on socket - 100
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG -  <-- Message Received:
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0000 dia_header:MEDIAINFO=494D4B48010100000400010010710110401F000000FA00000000000000000000000000000000000
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - Received data from App - 100
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG -  <-- Message Chunk Received:
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0000 dia_header:MEDIAINFO=494D4B48010100000400010010710110401F000000FA00000000000000000000000000000000000
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - RtspTransportDoReceive - Data received on socket ignored
+RvUserDe 04/09/14 22:01:23 SELECT      : DEBUG - Occured event: fd=504,event=Read ,error=0
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - Received data on socket - 22
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG -  <-- Message Received:
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0000 0;
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0001 a=appversion:1.0
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - Received data from App - 22
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG -  <-- Message Chunk Received:
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0000 0;
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0001 a=appversion:1.0
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - RtspConnectionHandleResponse check if session response
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - RtspConnectionHandleResponse receive answer to describe
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - RtspTransportSend adding buffer to txQueue
+RvUserDe 04/09/14 22:01:23 TIMER       : DEBUG - RvTimerStart: event allocated(tqueue=019071E4; timer=0060E0B8; event=006098C8)
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - RtspTransportDoReceive - Data received on socket ignored
+RvUserDe 04/09/14 22:01:23 SELECT      : DEBUG - Occured event: fd=504,event=Write ,error=0
+RvUserDe 04/09/14 22:01:23 SELECT      : DEBUG - Occured event: fd=504,event=Write ,error=0
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG -  --> Message Sent:
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0000 SETUP rtsp://admin:12345@172.16.2.113:554/mpeg4/ch01/main/av_stream/trackID=1 RTSP/1.0
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0001 CSeq: 2
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0002 Authorization: Basic YWRtaW46MTIzNDU=
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0003 Transport: RTP/AVP/UDP;unicast;client_port=5000-5001;destination=172.16.70.21;ttl=127
+RvUserDe 04/09/14 22:01:23 SELECT      : DEBUG - Occured event: fd=504,event=Write ,error=0
+RvUserDe 04/09/14 22:01:23 SELECT      : DEBUG - Occured event: fd=504,event=Read ,error=0
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - Received data on socket - 100
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG -  <-- Message Received:
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0000 RTSP/1.0 200 OK
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0001 CSeq: 2
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0002 Session:       1856934756
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0003 Transport: RTP/AVP/UDP;unicast;client_port=5000
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - Received data from App - 100
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG -  <-- Message Chunk Received:
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0000 RTSP/1.0 200 OK
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0001 CSeq: 2
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0002 Session:       1856934756
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0003 Transport: RTP/AVP/UDP;unicast;client_port=5000
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - RtspTransportDoReceive - Data received on socket ignored
+RvUserDe 04/09/14 22:01:23 SELECT      : DEBUG - Occured event: fd=504,event=Read ,error=0
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - Received data on socket - 100
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG -  <-- Message Received:
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0000 -5001;destination=172.16.70.21;ttl=127;server_port=8208-8209;ssrc=37bc96af;mode="play"
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0001 Date:  Wed, 
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - Received data from App - 100
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG -  <-- Message Chunk Received:
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0000 -5001;destination=172.16.70.21;ttl=127;server_port=8208-8209;ssrc=37bc96af;mode="play"
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0001 Date:  Wed, 
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - RtspTransportDoReceive - Data received on socket ignored
+RvUserDe 04/09/14 22:01:23 SELECT      : DEBUG - Occured event: fd=504,event=Read ,error=0
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - Received data on socket - 28
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG -  <-- Message Received:
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0000 Apr 09 2014 21:47:31 GMT
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - Received data from App - 28
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG -  <-- Message Chunk Received:
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0000 Apr 09 2014 21:47:31 GMT
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - RtspConnectionHandleResponse check if session response
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - RtspConnectionHandleResponse YUP it is a session response
+RvUserDe 04/09/14 22:01:23 TIMER       : DEBUG - RvTimerStart: event allocated(tqueue=019071E4; timer=0060E0A8; event=006098C8)
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - RtspTransportSend adding buffer to txQueue
+RvUserDe 04/09/14 22:01:23 TIMER       : DEBUG - RvTimerStart: event allocated(tqueue=019071E4; timer=0060E0B8; event=00609908)
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - RtspTransportDoReceive - Data received on socket ignored
+RvUserDe 04/09/14 22:01:23 SELECT      : DEBUG - Occured event: fd=504,event=Write ,error=0
+RvUserDe 04/09/14 22:01:23 SELECT      : DEBUG - Occured event: fd=504,event=Write ,error=0
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG -  --> Message Sent:
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0000 SETUP rtsp://admin:12345@172.16.2.113:554/mpeg4/ch01/main/av_stream/trackID=2 RTSP/1.0
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0001 CSeq: 3
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0002 Authorization: Basic YWRtaW46MTIzNDU=
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0003 Session: 
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0004 Transport: RTP/AVP/UDP;unicast;client_port=5002-5003;destination=172.16.70.21;ttl=127
+RvUserDe 04/09/14 22:01:23 SELECT      : DEBUG - Occured event: fd=504,event=Write ,error=0
+RvUserDe 04/09/14 22:01:23 SELECT      : DEBUG - Occured event: fd=504,event=Read ,error=0
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - Received data on socket - 100
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG -  <-- Message Received:
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0000 RTSP/1.0 200 OK
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0001 CSeq: 3
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0002 Session:       1856934756
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0003 Transport: RTP/AVP/UDP;unicast;client_port=5002
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - Received data from App - 100
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG -  <-- Message Chunk Received:
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0000 RTSP/1.0 200 OK
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0001 CSeq: 3
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0002 Session:       1856934756
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0003 Transport: RTP/AVP/UDP;unicast;client_port=5002
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - RtspTransportDoReceive - Data received on socket ignored
+RvUserDe 04/09/14 22:01:23 SELECT      : DEBUG - Occured event: fd=504,event=Read ,error=0
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - Received data on socket - 100
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG -  <-- Message Received:
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0000 -5003;destination=172.16.70.21;ttl=127;server_port=8210-8211;ssrc=1be0b86c;mode="play"
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0001 Date:  Wed, 
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - Received data from App - 100
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG -  <-- Message Chunk Received:
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0000 -5003;destination=172.16.70.21;ttl=127;server_port=8210-8211;ssrc=1be0b86c;mode="play"
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0001 Date:  Wed, 
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - RtspTransportDoReceive - Data received on socket ignored
+RvUserDe 04/09/14 22:01:23 SELECT      : DEBUG - Occured event: fd=504,event=Read ,error=0
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - Received data on socket - 28
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG -  <-- Message Received:
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0000 Apr 09 2014 21:47:31 GMT
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - Received data from App - 28
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG -  <-- Message Chunk Received:
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0000 Apr 09 2014 21:47:31 GMT
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - RtspConnectionHandleResponse check if session response
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - RtspConnectionHandleResponse YUP it is a session response
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - RtspTransportSend adding buffer to txQueue
+RvUserDe 04/09/14 22:01:23 TIMER       : DEBUG - RvTimerStart: event allocated(tqueue=019071E4; timer=0060E0B8; event=00609908)
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - RtspTransportDoReceive - Data received on socket ignored
+RvUserDe 04/09/14 22:01:23 SELECT      : DEBUG - Occured event: fd=504,event=Write ,error=0
+RvUserDe 04/09/14 22:01:23 SELECT      : DEBUG - Occured event: fd=504,event=Write ,error=0
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG -  --> Message Sent:
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0000 PLAY rtsp://admin:12345@172.16.2.113:554/mpeg4/ch01/main/av_stream RTSP/1.0
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0001 CSeq: 4
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0002 Authorization: Basic YWRtaW46MTIzNDU=
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0003 Session: 
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0004 Range: npt=0.0000000-
+RvUserDe 04/09/14 22:01:23 SELECT      : DEBUG - Occured event: fd=504,event=Write ,error=0
+RvUserDe 04/09/14 22:01:23 SELECT      : DEBUG - Occured event: fd=504,event=Read ,error=0
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - Received data on socket - 100
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG -  <-- Message Received:
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0000 RTSP/1.0 200 OK
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0001 CSeq: 4
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0002 Session:       1856934756
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0003 RTP-Info: url=rtsp://admin:12345@172.16.2.113:5
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - Received data from App - 100
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG -  <-- Message Chunk Received:
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0000 RTSP/1.0 200 OK
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0001 CSeq: 4
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0002 Session:       1856934756
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0003 RTP-Info: url=rtsp://admin:12345@172.16.2.113:5
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - RtspTransportDoReceive - Data received on socket ignored
+RvUserDe 04/09/14 22:01:23 SELECT      : DEBUG - Occured event: fd=504,event=Read ,error=0
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - Received data on socket - 100
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG -  <-- Message Received:
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0000 54/mpeg4/ch01/main/av_stream/trackID=1;seq=12279;rtptime=2037000860,url=rtsp://admin:12345@172.16.2.
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - Received data from App - 100
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG -  <-- Message Chunk Received:
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0000 54/mpeg4/ch01/main/av_stream/trackID=1;seq=12279;rtptime=2037000860,url=rtsp://admin:12345@172.16.2.
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - RtspTransportDoReceive - Data received on socket ignored
+RvUserDe 04/09/14 22:01:23 SELECT      : DEBUG - Occured event: fd=504,event=Read ,error=0
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - Received data on socket - 100
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG -  <-- Message Received:
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0000 113:554/mpeg4/ch01/main/av_stream/trackID=2;seq=0;rtptime=0
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0001 Date:  Wed, Apr 09 2014 21:47:31 GMT
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - Received data from App - 100
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG -  <-- Message Chunk Received:
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0000 113:554/mpeg4/ch01/main/av_stream/trackID=2;seq=0;rtptime=0
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - 0001 Date:  Wed, Apr 09 2014 21:47:31 GMT
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - RtspTransportDoReceive - Data received on socket ignored
+RvUserDe 04/09/14 22:01:23 SELECT      : DEBUG - Occured event: fd=504,event=Read ,error=0
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - Received data on socket - 1
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG -  <-- Message Received:
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - Received data from App - 1
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG -  <-- Message Chunk Received:
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - RtspConnectionHandleResponse check if session response
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - RtspConnectionHandleResponse YUP it is a session response
+RvUserDe 04/09/14 22:01:23 RTSP        : DEBUG - RtspTransportDoReceive - Data received on socket ignored

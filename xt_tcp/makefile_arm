@@ -1,0 +1,37 @@
+CC          := arm-hisiv300-linux-uclibcgnueabi-gcc
+CXX         := arm-hisiv300-linux-uclibcgnueabi-g++
+
+INC_PATH    := -I../../third_library
+
+LIB_PATH    := -L../../bin/arm
+LIB	    := -lpthread -lm #-lboost_thread -lboost_filesystem -lboost_system -lboost_date_time
+
+MODULE_DEFINES :=-fPIC -fvisibility=hidden -DLINUX -D_GNU_SOURCE -DXT_TCP_EXPORTS -DBOOST_ASIO_DISABLE_EPOLL
+CFLAGS	    := $(MODULE_DEFINES) -Wall -g -o  
+
+BIN         :=	../../bin/arm
+TARGET      := $(BIN)/libxt_tcp.a
+
+SRCC	    := $(wildcard *.c)
+              
+COBJ	    := $(SRCC:.c=.o)
+
+SRCXX	    := $(wildcard *.cpp)
+CXXOBJ      := $(SRCXX:.cpp=.o)
+
+OBJ	    := $(COBJ) $(CXXOBJ)
+
+$(TARGET):$(OBJ)
+	ar rcs $(TARGET) $(OBJ) 
+	cp ./xt_tcp.h ../../include/xt_tcp
+	cp ./xt_tcp_wrapper.h ../../include/xt_tcp
+
+$(COBJ):%.o:%.c 
+	$(CC)  $(INC_PATH) $(CFLAGS) $@ -c $<
+
+$(CXXOBJ):%.o:%.cpp 
+	$(CXX) $(INC_PATH) $(CFLAGS) $@ -c $<
+
+.PHONY:clean
+clean:
+	rm -f $(OBJ)  $(TARGET) $(LINKFILE)

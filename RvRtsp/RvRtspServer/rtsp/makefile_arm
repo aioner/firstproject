@@ -1,0 +1,34 @@
+CC          := arm-hisiv300-linux-uclibcgnueabi-gcc
+CXX         := arm-hisiv300-linux-uclibcgnueabi-g++
+
+INC_PATH    := -Imessages -Irtspcommon -Itransport -Iutils -I../include
+
+LIB_PATH    := -L../../../../bin/arm
+LIB	    := -lpthread -lm -lrvcommon
+
+MODULE_DEFINES :=-fPIC -shared -DLINUX -D_GNU_SOURCE
+CFLAGS	    := $(MODULE_DEFINES) -Wall -g -o  
+
+TARGET      := ../../../../bin/arm/librvrtsp_server.a
+
+SRCC	    := $(wildcard messages/*.c rtspcommon/*.c transport/*.c) \
+               $(wildcard utils/*.c)
+COBJ	    := $(SRCC:.c=.o)
+
+SRCXX	    := $(wildcard *.cpp)
+CXXOBJ      := $(SRCXX:.cpp=.o)
+
+OBJ	    := $(COBJ) $(CXXOBJ)
+
+$(TARGET):$(OBJ)
+	ar rcs $(TARGET) $(OBJ) 
+
+$(COBJ):%.o:%.c 
+	$(CC)  $(INC_PATH) $(CFLAGS) $@ -c $<
+
+$(CXXOBJ):%.o:%.cpp 
+	$(CXX) $(INC_PATH) $(CFLAGS) $@ -c $<
+
+.PHONY:clean
+clean:
+	rm -f $(OBJ)  # (TARGET) $(OBJ)

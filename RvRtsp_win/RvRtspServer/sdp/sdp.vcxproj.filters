@@ -1,0 +1,160 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Sources %28sdpparser%29">
+      <UniqueIdentifier>{fb303c57-7b0b-4a1c-b23a-33c72fd760ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{6776fae9-c6a3-41d2-ab19-d7d610b1bb43}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="rvsdpattr.c">
+      <Filter>Sources %28sdpparser%29</Filter>
+    </ClCompile>
+    <ClCompile Include="rvsdpbadsyntax.c">
+      <Filter>Sources %28sdpparser%29</Filter>
+    </ClCompile>
+    <ClCompile Include="rvsdpbandwidth.c">
+      <Filter>Sources %28sdpparser%29</Filter>
+    </ClCompile>
+    <ClCompile Include="rvsdpconnection.c">
+      <Filter>Sources %28sdpparser%29</Filter>
+    </ClCompile>
+    <ClCompile Include="rvsdpcrypto.c">
+      <Filter>Sources %28sdpparser%29</Filter>
+    </ClCompile>
+    <ClCompile Include="rvsdpemail.c">
+      <Filter>Sources %28sdpparser%29</Filter>
+    </ClCompile>
+    <ClCompile Include="rvsdpglobals.c">
+      <Filter>Sources %28sdpparser%29</Filter>
+    </ClCompile>
+    <ClCompile Include="rvsdpinit.c">
+      <Filter>Sources %28sdpparser%29</Filter>
+    </ClCompile>
+    <ClCompile Include="rvsdpkey.c">
+      <Filter>Sources %28sdpparser%29</Filter>
+    </ClCompile>
+    <ClCompile Include="rvsdpkeymgmt.c">
+      <Filter>Sources %28sdpparser%29</Filter>
+    </ClCompile>
+    <ClCompile Include="rvsdplist.c">
+      <Filter>Sources %28sdpparser%29</Filter>
+    </ClCompile>
+    <ClCompile Include="rvsdpmedia.c">
+      <Filter>Sources %28sdpparser%29</Filter>
+    </ClCompile>
+    <ClCompile Include="rvsdpmsg.c">
+      <Filter>Sources %28sdpparser%29</Filter>
+    </ClCompile>
+    <ClCompile Include="rvsdpmsgparse.c">
+      <Filter>Sources %28sdpparser%29</Filter>
+    </ClCompile>
+    <ClCompile Include="rvsdpmsgreparse.c">
+      <Filter>Sources %28sdpparser%29</Filter>
+    </ClCompile>
+    <ClCompile Include="rvsdporigin.c">
+      <Filter>Sources %28sdpparser%29</Filter>
+    </ClCompile>
+    <ClCompile Include="rvsdpphone.c">
+      <Filter>Sources %28sdpparser%29</Filter>
+    </ClCompile>
+    <ClCompile Include="rvsdpprsutils.c">
+      <Filter>Sources %28sdpparser%29</Filter>
+    </ClCompile>
+    <ClCompile Include="rvsdprtpmap.c">
+      <Filter>Sources %28sdpparser%29</Filter>
+    </ClCompile>
+    <ClCompile Include="rvsdpsesstime.c">
+      <Filter>Sources %28sdpparser%29</Filter>
+    </ClCompile>
+    <ClCompile Include="rvsdpstrings.c">
+      <Filter>Sources %28sdpparser%29</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="codecs\rvsdpcodecsenums.h">
+      <Filter>Sources %28sdpparser%29</Filter>
+    </ClInclude>
+    <ClInclude Include="rvsdp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rvsdpapiprivate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="codecs\rvsdpcodecparseutils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="codecs\rvsdpcodecs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="codecs\rvsdpcodecsconfig.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="codecs\rvsdpcodecsinternal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rvsdpconfig.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rvsdpdataprivate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rvsdpdatastruct.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rvsdpenc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rvsdpenums.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rvsdpglobals.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rvsdpglobalsinternal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rvsdpinit.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rvsdplist.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rvsdpmedia.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rvsdpmsg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rvsdpobjs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rvsdpprivate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rvsdpprsaux.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rvsdpprsutils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rvsdpstrings.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rvsdpsymb.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rvsdptypes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rvsdpversion.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="rvsdpVersion.rc" />
+  </ItemGroup>
+</Project>

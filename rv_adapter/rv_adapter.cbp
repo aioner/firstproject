@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="rv_adapter" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/rv_adapter" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="3" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Option createStaticLib="1" />
+				<Compiler>
+					<Add option="-g" />
+					<Add option="-DLINUX" />
+					<Add directory="../include/inc/ads" />
+					<Add directory="../include/inc/rtprtcp" />
+					<Add directory="/usr/local/include/boost-1_55" />
+					<Add directory="../include" />
+					<Add directory="../include/inc/common" />
+				</Compiler>
+				<Linker>
+					<Add library="../bin/librvcommon.so" />
+					<Add library="../bin/librv32rtp.so" />
+					<Add directory="/usr/local/lib" />
+				</Linker>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/rv_adapter" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="3" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Option createStaticLib="1" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-fexceptions" />
+		</Compiler>
+		<Unit filename="ReadMe.txt" />
+		<Unit filename="mem_check_on.h" />
+		<Unit filename="resource.h" />
+		<Unit filename="rv_adapter.cpp" />
+		<Unit filename="rv_adapter.h" />
+		<Unit filename="rv_adapter_config.h" />
+		<Unit filename="rv_adapter_convert.h" />
+		<Unit filename="rv_api.cpp" />
+		<Unit filename="rv_api_misc.cpp" />
+		<Unit filename="rv_api_rtcp.cpp" />
+		<Unit filename="rv_api_rtp.cpp" />
+		<Unit filename="rv_def.h" />
+		<Unit filename="rv_engine.cpp" />
+		<Unit filename="rv_engine.h" />
+		<Unit filename="rv_misc.cpp" />
+		<Unit filename="rv_rtcp.cpp" />
+		<Unit filename="rv_rtp.cpp" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

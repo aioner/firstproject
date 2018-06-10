@@ -1,0 +1,166 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{cedb6421-623d-4918-b7e5-0a717a29cc13}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;rc;def;r;odl;idl;hpj;bat</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{b4a1aa64-6756-4da4-bb4d-32111d9b2d3b}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="bitfield.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="payload.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rtcp.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RtcpProfileRfc3550.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rtp.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RtpDemux.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rtpProfilePlugin.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RtpProfileRfc3550.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rtputil.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rvkey.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rvnetaddress.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rvrtcpnatfw.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rvrtpaddresslist.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rvrtpbuffer.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rvrtpconfig.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rvrtpdoublekey.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rvrtpencryptiondata.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rvrtpencryptionplugin.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rvrtpheader.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rvrtplogger.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rvrtpnatfw.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rvrtpseli.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rvrtpstunfw.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="rv32rtp.rc">
+      <Filter>Source Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="bitfield.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="payload.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="resource1.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rtcp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RtcpProfileRfc3550.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RtcpTypes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rtp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rtpProfilePlugin.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rtputil.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rvkey.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rvnetaddress.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rvrtpaddresslist.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rvrtpbuffer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rvrtpconfig.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rvrtpdoublekey.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rvrtpencryptiondata.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rvrtpencryptionkeyplugin.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rvrtpencryptionmode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rvrtpencryptionplugin.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rvrtpheader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rvrtpinterface.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rvrtplogger.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rvrtpnatfw.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rvrtpseli.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rvrtpstunfw.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,405 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <title>内容1</title>
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+	<style type="text/css">
+         .style_table1_1
+         {
+             width: 280px;
+         }
+         .style_table1_2
+         {
+             width: 300px;
+         }
+         .style_table1_3
+         {
+             width: 280px;
+         }
+         .style_table_type
+         {
+             width:60;
+         }
+         .style_table_port
+         {
+             width:75;
+         }
+         .style_table_ch
+         {
+             width:50;
+         }
+         .style_text_type
+         {
+             width:50;
+         }
+         .style_text_port
+         {
+             width:65;
+         }
+         .style_text_ch
+         {
+             width:40;
+         }
+         .style_btn
+         {
+             width:80;
+             height:30;
+         }
+         /*#Text1
+         {
+              width: 200px;
+         }*/
+          .bgRight{width:100%; height:600px; margin:5px; border:1px solid #9B9B9B;}
+       </style>
+       <script type="text/javascript">
+          var send=0;
+          var rec=0;
+          var recxml = 0;
+          
+          function sendcontent(con)
+          {
+            send.open("POST","src",true);
+            send.onreadystatechange=processRequest;
+            send.setRequestHeader("Content-Type","text/xml;charset=UTF-8"); 
+            var buff=encodeURI(con);
+ 
+            send.send(con);
+          }
+          function getfile(con)
+          {
+            var buff=escape(con+"<");
+        
+            send.open("GET",buff,true);
+            send.onreadystatechange=processRequest;
+            send.setRequestHeader("Content-Type","text/xml;charset=UTF-8"); 
+            
+            send.send("");
+          }
+          function processRequest() {
+              if (send.readyState == 4) {
+                  rec = send.responseText;
+                  recxml = send.responseXML;
+                  document.getElementById("Text1").value = recxml.getElementsByTagName("link_center")[0].childNodes[0].nodeValue;
+                  document.getElementById("Text2").value = recxml.getElementsByTagName("chan_num")[0].childNodes[0].nodeValue;
+                  document.getElementById("Text3").value = recxml.getElementsByTagName("local_bind_ip")[0].childNodes[0].nodeValue;
+                  document.getElementById("Text4").value = recxml.getElementsByTagName("send_port")[0].childNodes[0].nodeValue;
+                  document.getElementById("Text5").value = recxml.getElementsByTagName("mul_ip")[0].childNodes[0].nodeValue;
+                  document.getElementById("Text6").value = recxml.getElementsByTagName("is_demux_s")[0].childNodes[0].nodeValue;
+                  document.getElementById("Text7").value = recxml.getElementsByTagName("xtmsg_listenport")[0].childNodes[0].nodeValue;
+                  document.getElementById("Text8").value = recxml.getElementsByTagName("rtsp_listenport")[0].childNodes[0].nodeValue;
+                  document.getElementById("Text9").value = recxml.getElementsByTagName("udp_listenport")[0].childNodes[0].nodeValue;
+                  document.getElementById("Text10").value = recxml.getElementsByTagName("is_std_rtp")[0].childNodes[0].nodeValue;
+                  document.getElementById("Text11").value = recxml.getElementsByTagName("is_regist")[0].childNodes[0].nodeValue;
+                  document.getElementById("Text12").value = recxml.getElementsByTagName("regist_ip")[0].childNodes[0].nodeValue;
+                  document.getElementById("Text13").value = recxml.getElementsByTagName("regist_port")[0].childNodes[0].nodeValue;
+                  document.getElementById("Text14").value = recxml.getElementsByTagName("is_sink_perch")[0].childNodes[0].nodeValue;
+                  document.getElementById("Text15").value = recxml.getElementsByTagName("replay_time_interval")[0].childNodes[0].nodeValue;
+                  document.getElementById("Text16").value = recxml.getElementsByTagName("break_monitor_time_interval")[0].childNodes[0].nodeValue;
+                  document.getElementById("Text17").value = recxml.getElementsByTagName("rtp_recv_port_num")[0].childNodes[0].nodeValue;
+                  document.getElementById("Text18").value = recxml.getElementsByTagName("rtp_recv_start_port")[0].childNodes[0].nodeValue;
+                  document.getElementById("Text19").value = recxml.getElementsByTagName("udp_session_bind_port")[0].childNodes[0].nodeValue;
+                  document.getElementById("Text20").value = recxml.getElementsByTagName("udp_session_heartbit_proid")[0].childNodes[0].nodeValue;
+                  document.getElementById("Text21").value = recxml.getElementsByTagName("udp_session_request_try_count")[0].childNodes[0].nodeValue;
+                  document.getElementById("Text22").value = recxml.getElementsByTagName("udp_session_request_one_timeout")[0].childNodes[0].nodeValue;
+                  document.getElementById("Text23").value = recxml.getElementsByTagName("tcp_session_bind_port")[0].childNodes[0].nodeValue;
+                  document.getElementById("Text24").value = recxml.getElementsByTagName("tcp_session_connect_timeout")[0].childNodes[0].nodeValue;
+                  document.getElementById("Text25").value = recxml.getElementsByTagName("tcp_session_login_timeout")[0].childNodes[0].nodeValue;
+                  document.getElementById("Text26").value = recxml.getElementsByTagName("tcp_session_play_timeout")[0].childNodes[0].nodeValue;
+                  document.getElementById("Text27").value = recxml.getElementsByTagName("tcp_session_stop_timeout")[0].childNodes[0].nodeValue;
+                  document.getElementById("Text28").value = recxml.getElementsByTagName("rtsp_session_connect_timeout")[0].childNodes[0].nodeValue;
+                  document.getElementById("Text29").value = recxml.getElementsByTagName("rtsp_session_describe_timeout")[0].childNodes[0].nodeValue;
+                  document.getElementById("Text30").value = recxml.getElementsByTagName("rtsp_session_setup_timeout")[0].childNodes[0].nodeValue;
+                  document.getElementById("Text31").value = recxml.getElementsByTagName("rtsp_session_play_timeout")[0].childNodes[0].nodeValue;
+                  document.getElementById("Text32").value = recxml.getElementsByTagName("rtsp_session_pause_timeout")[0].childNodes[0].nodeValue;
+                  document.getElementById("Text33").value = recxml.getElementsByTagName("rtsp_session_teardown_timeout")[0].childNodes[0].nodeValue;
+              } 
+          }
+       </script>
+  </head>
+  
+  <body id="mbody" bgcolor="#DBDBDB">
+   <script type="text/javascript">
+            send= window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
+            //sendcontent("get_dps_cfg") ;
+            var start = "Microsoft.XMLHTTP";
+            //sendcontent(start);
+       </script>
+       
+    <script type="text/javascript">
+        function Button2_onclick() {
+        sendcontent("get_dps_cfg");
+    }
+    function Button3_onclick() {
+        var sendxml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n";
+        sendxml+="<dps_cfg>\r\n";
+        sendxml += "<system>\r\n";
+        var node_value = document.getElementById("Text1").value;
+        sendxml += "<link_center>" + node_value + "</link_center>\r\n";
+        node_value = document.getElementById("Text2").value;
+        sendxml += "<chan_num>" + node_value + "</chan_num>\r\n";
+        node_value = document.getElementById("Text3").value;
+        sendxml += "<local_bind_ip>" + node_value + "</local_bind_ip>\r\n";
+        node_value = document.getElementById("Text4").value;
+        sendxml += "<send_port>" + node_value + "</send_port>\r\n";
+        node_value = document.getElementById("Text5").value;
+        sendxml += "<mul_ip>" + node_value + "</mul_ip>\r\n";
+        node_value = document.getElementById("Text6").value;
+        sendxml += "<is_demux_s>" + node_value + "</is_demux_s>\r\n";
+        node_value = document.getElementById("Text7").value;
+        sendxml += "<xtmsg_listenport>" + node_value + "</xtmsg_listenport>\r\n";
+        node_value = document.getElementById("Text8").value;
+        sendxml += "<rtsp_listenport>" + node_value + "</rtsp_listenport>\r\n";
+        node_value = document.getElementById("Text9").value;
+        sendxml += "<udp_listenport>" + node_value + "</udp_listenport>\r\n";
+        node_value = document.getElementById("Text10").value;
+        sendxml += "<is_std_rtp>" + node_value + "</is_std_rtp>\r\n";
+        node_value = document.getElementById("Text11").value;
+        sendxml += "<is_regist>" + node_value + "</is_regist>\r\n";
+        node_value = document.getElementById("Text12").value;
+        sendxml += "<regist_ip>" + node_value + "</regist_ip>\r\n";
+        node_value = document.getElementById("Text13").value;
+        sendxml += "<regist_port>" + node_value + "</regist_port>\r\n";
+        node_value = document.getElementById("Text14").value;
+        sendxml += "<is_sink_perch>" + node_value + "</is_sink_perch>\r\n";
+        node_value = document.getElementById("Text15").value;
+        sendxml += "<replay_time_interval>" + node_value + "</replay_time_interval>\r\n";
+        node_value = document.getElementById("Text16").value;
+        sendxml += "<break_monitor_time_interval>" + node_value + "</break_monitor_time_interval>\r\n";
+        sendxml+="</system>\r\n";
+        sendxml += "<access>\r\n";
+        node_value = document.getElementById("Text17").value;
+        sendxml += "<rtp_recv_port_num>" + node_value + "</rtp_recv_port_num>\r\n";
+        node_value = document.getElementById("Text18").value;
+        sendxml += "<rtp_recv_start_port>" + node_value + "</rtp_recv_start_port>\r\n";
+        node_value = document.getElementById("Text19").value;
+        sendxml += "<udp_session_bind_port>" + node_value + "</udp_session_bind_port>\r\n";
+        node_value = document.getElementById("Text20").value;
+        sendxml += "<udp_session_heartbit_proid>" + node_value + "</udp_session_heartbit_proid>\r\n";
+        node_value = document.getElementById("Text21").value;
+        sendxml += "<udp_session_request_try_count>" + node_value + "</udp_session_request_try_count>\r\n";
+        node_value = document.getElementById("Text22").value;
+        sendxml += "<udp_session_request_one_timeout>" + node_value + "</udp_session_request_one_timeout>\r\n";
+        node_value = document.getElementById("Text23").value;
+        sendxml += "<tcp_session_bind_port>" + node_value + "</tcp_session_bind_port>\r\n";
+        node_value = document.getElementById("Text24").value;
+        sendxml += "<tcp_session_connect_timeout>" + node_value + "</tcp_session_connect_timeout>\r\n";
+        node_value = document.getElementById("Text25").value;
+        sendxml += "<tcp_session_login_timeout>" + node_value + "</tcp_session_login_timeout>\r\n";
+        node_value = document.getElementById("Text26").value;
+        sendxml += "<tcp_session_play_timeout>" + node_value + "</tcp_session_play_timeout>\r\n";
+        node_value = document.getElementById("Text27").value;
+        sendxml += "<tcp_session_stop_timeout>" + node_value + "</tcp_session_stop_timeout>\r\n";
+        node_value = document.getElementById("Text28").value;
+        sendxml += "<rtsp_session_connect_timeout>" + node_value + "</rtsp_session_connect_timeout>\r\n";
+        node_value = document.getElementById("Text29").value;
+        sendxml += "<rtsp_session_describe_timeout>" + node_value + "</rtsp_session_describe_timeout>\r\n";
+        node_value = document.getElementById("Text30").value;
+        sendxml += "<rtsp_session_setup_timeout>" + node_value + "</rtsp_session_setup_timeout>\r\n";
+        node_value = document.getElementById("Text31").value;
+        sendxml += "<rtsp_session_play_timeout>" + node_value + "</rtsp_session_play_timeout>\r\n";
+        node_value = document.getElementById("Text32").value;
+        sendxml += "<rtsp_session_pause_timeout>" + node_value + "</rtsp_session_pause_timeout>\r\n";
+        node_value = document.getElementById("Text33").value;
+        sendxml += "<rtsp_session_teardown_timeout>" + node_value + "</rtsp_session_teardown_timeout>\r\n";
+        sendxml += "</access>\r\n";
+        sendxml += "<device_list>\r\n";
+        sendxml += "</device_list>\r\n";
+        sendxml+="</dps_cfg>\r\n";
+        sendcontent(sendxml);
+    }
+    function Button4_onclick() {
+        javascript: sendcontent("restart");
+    }
+    </script>
+     <DIV>
+        <center>
+            <table style="width:100%; height: 100%;" >
+                <tr>
+                    <td class="style_table1_1">
+                           中心类型:</td>
+                    <td class="style_table1_2">
+                        <input id="Text1" type="text"/></td>
+                    <td class="style_table1_3">
+                        rtp接收端口数量:</td>
+                    <td>
+                        <input id="Text17" type="text" /></td>
+                </tr>
+                <tr>
+                    <td class="style_table1_1">
+                                                通道数量:</td>
+                    <td class="style_table1_2">
+                        <input id="Text2" type="text" /></td>
+                    <td class="style_table1_3">
+                        rtp接收起始端口:</td>
+                    <td>
+                        <input id="Text18" type="text" /></td>
+                </tr>
+                <tr>
+                    <td class="style_table1_1">
+                                                本地绑定IP:</td>
+                    <td class="style_table1_2">
+                        <input id="Text3" type="text" /></td>
+                    <td class="style_table1_3">
+                        udp会话绑定端口:</td>
+                    <td>
+                        <input id="Text19" type="text" /></td>
+                </tr>
+                <tr>
+                    <td class="style_table1_1">
+                                                发送端口:</td>
+                    <td class="style_table1_2">
+                        <input id="Text4" type="text" /></td>
+                    <td class="style_table1_3">
+                        udp会话心跳周期:</td>
+                    <td>
+                        <input id="Text20" type="text" /></td>
+                </tr>
+                <tr>
+                    <td class="style_table1_1">
+                        组播IP:</td>
+                    <td class="style_table1_2">
+                        <input id="Text5" type="text" /></td>
+                    <td class="style_table1_3">
+                        udp会话尝试次数:</td>
+                    <td>
+                        <input id="Text21" type="text" /></td>
+                </tr>
+                <tr>
+                    <td class="style_table1_1">
+                        复用开关:</td>
+                    <td class="style_table1_2">
+                        <input id="Text6" type="text" /></td>
+                    <td class="style_table1_3">
+                        udp会话请求超时:</td>
+                    <td>
+                        <input id="Text22" type="text" /></td>
+                </tr>
+                <tr>
+                    <td class="style_table1_1">
+                        tcp消息监听端口:</td>
+                    <td class="style_table1_2">
+                        <input id="Text7" type="text" /></td>
+                    <td class="style_table1_3">
+                        tcp会话绑定端口:</td>
+                    <td>
+                        <input id="Text23" type="text" /></td>
+                </tr>
+                <tr>
+                    <td class="style_table1_1">
+                        rtsp监听端口:</td>
+                    <td class="style_table1_2">
+                        <input id="Text8" type="text" /></td>
+                    <td class="style_table1_3">
+                        tcp会话连接超时:</td>
+                    <td>
+                        <input id="Text24" type="text" /></td>
+                </tr>
+                <tr>
+                    <td class="style_table1_1">
+                        udp监听端口:</td>
+                    <td class="style_table1_2">
+                        <input id="Text9" type="text" /></td>
+                    <td class="style_table1_3">
+                        tcp会话登陆超时:</td>
+                    <td>
+                        <input id="Text25" type="text" /></td>
+                </tr>
+                <tr>
+                    <td class="style_table1_1">
+                        rtp标准流开关:</td>
+                    <td class="style_table1_2">
+                        <input id="Text10" type="text" /></td>
+                    <td class="style_table1_3">
+                        tcp会话点播超时:</td>
+                    <td>
+                        <input id="Text26" type="text" /></td>
+                </tr>
+                <tr>
+                    <td class="style_table1_1">
+                        注册开关:</td>
+                    <td class="style_table1_2">
+                        <input id="Text11" type="text" /></td>
+                    <td class="style_table1_3">
+                        tcp会话停止超时:</td>
+                    <td>
+                        <input id="Text27" type="text" /></td>
+                </tr>
+                <tr>
+                    <td class="style_table1_1">
+                        注册IP:</td>
+                    <td class="style_table1_2">
+                        <input id="Text12" type="text" /></td>
+                    <td class="style_table1_3">
+                        rtsp会话连接超时:</td>
+                    <td>
+                        <input id="Text28" type="text" /></td>
+                </tr>
+                <tr>
+                    <td class="style_table1_1">
+                        注册端口:</td>
+                    <td class="style_table1_2">
+                        <input id="Text13" type="text" /></td>
+                    <td class="style_table1_3">
+                        rtsp会话describe超时:</td>
+                    <td>
+                        <input id="Text29" type="text" /></td>
+                </tr>
+                <tr>
+                    <td class="style_table1_1">
+                        单通道转发开关:</td>
+                    <td class="style_table1_2">
+                        <input id="Text14" type="text" /></td>
+                    <td class="style_table1_3">
+                        rtsp会话setup超时:</td>
+                    <td>
+                        <input id="Text30" type="text" /></td>
+                </tr>
+                <tr>
+                    <td class="style_table1_1">
+                        重复点播间隔:</td>
+                    <td class="style_table1_2">
+                        <input id="Text15" type="text" /></td>
+                    <td class="style_table1_3">
+                        rtsp会话play超时:</td>
+                    <td>
+                        <input id="Text31" type="text" /></td>
+                </tr>
+                <tr>
+                    <td class="style_table1_1">
+                        断流检测间隔:</td>
+                    <td class="style_table1_2">
+                        <input id="Text16" type="text" /></td>
+                    <td class="style_table1_3">
+                        rtsp会话pause超时:</td>
+                    <td>
+                        <input id="Text32" type="text" /></td>
+                </tr>
+                <tr>
+                    <td class="style_table1_1">
+                        &nbsp;</td>
+                    <td class="style_table1_2">
+                        &nbsp;</td>
+                    <td class="style_table1_3">
+                        rtsp会话teardown超时:</td>
+                    <td>
+                        <input id="Text33" type="text" /></td>
+                </tr>
+            </table>
+        <table style="width:100%; height: 31px; margin-top: 5px;">
+            <tr>
+                <td>
+                    <input id="Button2" type="button" value="读取配置" class="style_btn"
+                        onclick="Button2_onclick()" /></td>
+                <td>
+                    <input id="Button3" type="button" value="写入配置" class="style_btn"
+                        onclick="Button3_onclick()" /></td>
+                <td>
+                    <input id="Button4" type="button" value="重启代理" class="style_btn"
+                        onclick="Button4_onclick()" /></td>
+            </tr>
+        </table>
+        &nbsp;</center>
+        </DIV>
+  </body>
+</html>

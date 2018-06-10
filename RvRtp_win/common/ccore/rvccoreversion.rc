@@ -1,0 +1,48 @@
+/////////////////////////////////////////////////////////////////////////////
+//
+// _SAMPLE_.RC : Defines the version resource for a user-built
+//  C/C++ Run-Time Library DLL (Dynamic Link Library).
+//
+/////////////////////////////////////////////////////////////////////////////
+#include "rvccoreversion.h"
+#include "winver.h"           // extract from windows header
+//#include "afxres.h"
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION RV_COMMON_CORE_VERSION_RC
+ PRODUCTVERSION RV_COMMON_CORE_VERSION_RC
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS VS_FF_DEBUG
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS VOS_NT_WINDOWS32
+ FILETYPE VFT_DLL
+ FILESUBTYPE VFT2_UNKNOWN
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904B0"
+        BEGIN
+            VALUE "CompanyName", "RADVISION\0"
+            VALUE "FileDescription", "RADVISION Common Core DLL\0"
+            VALUE "FileVersion", RV_COMMON_CORE_VERSION
+            VALUE "LegalCopyright", "Copyright © RADVISION 1996-2004\0"
+            VALUE "InternalName", "rvcommon\0"
+            VALUE "OriginalFilename", "rvcommon.dll\0"
+#ifdef _DEBUG
+            VALUE "Compilation", "debug\0"
+#else
+            VALUE "Compilation", "release\0"
+#endif
+            VALUE "ProductName", "RADVISION Common Core DLL\0"
+            VALUE "ProductVersion", RV_COMMON_CORE_VERSION
+
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END

@@ -1,0 +1,245 @@
+#ifndef STD_SIP_TASK_H__
+#define STD_SIP_TASK_H__
+#include "framework/task.h"
+#include "framework/event_context.h"
+#include "common_type.h"
+
+#define recv_sc_sip_sesseion_pro_thread 3
+
+typedef enum
+{
+    mode_offer=0,
+    mode_answer
+}sip_mode_t;
+
+typedef struct __struct_switchset_data_type_
+{
+    typedef __struct_switchset_data_type_ my_t;
+    typedef std::list<rtp_id_t> dst_rtp_id_container_t;
+    typedef dst_rtp_id_container_t::iterator dst_container_handle_t;
+
+    rtp_id_t src_rtp_id;
+    dst_rtp_id_container_t dst_rtp_ids;
+
+    __struct_switchset_data_type_()
+    {}
+    __struct_switchset_data_type_ (const __struct_switchset_data_type_& switchset)
+    {
+        src_rtp_id = switchset.src_rtp_id;
+        //dst_rtp_ids = switchset.dst_rtp_ids;
+        dst_rtp_ids.assign(switchset.dst_rtp_ids.begin(), switchset.dst_rtp_ids.end());
+    }
+}switchset_data_t,*ptr_switchset_data_t;
+
+#ifndef _USE_COMMON_CTRL_MSG_
+#include "std_sip_engine.h"
+
+class invite_task : public framework::task_base, public framework::event_context
+{
+public:
+    invite_task(const std_sip_session_t& session,const xt_sip_server_invite_handle_t handle,const sip_mode_t mode):
+      session_(session),mode_(mode)
+      {
+          invite_handle_ = ::xt_sip_server_invite_handle_clone(handle);
+      }
+
+      ~invite_task()
+      {
+          ::xt_sip_server_invite_handle_delete(invite_handle_);
+      }
+
+      uint32_t run();
+      void process_event() { signal(deferred, recv_sc_sip_sesseion_pro_thread); }
+private:
+    std_sip_session_t session_;
+    xt_sip_server_invite_handle_t invite_handle_;
+    sip_mode_t mode_;
+};
+
+class re_invite_task : public framework::task_base, public framework::event_context
+{
+public:
+    re_invite_task(const std_sip_session_t& session,const xt_sip_server_invite_handle_t handle,const sip_mode_t mode):
+      session_(session),mode_(mode)
+      {
+          invite_handle_ = ::xt_sip_server_invite_handle_clone(handle);
+      }
+
+      ~re_invite_task()
+      {
+          ::xt_sip_server_invite_handle_delete(invite_handle_);
+      }
+
+
+      uint32_t run();
+      void process_event() { signal(deferred, recv_sc_sip_sesseion_pro_thread); }
+private:
+    std_sip_session_t session_;
+    xt_sip_server_invite_handle_t invite_handle_;
+    sip_mode_t mode_;
+};
+
+class ack_with_sdp_task : public framework::task_base, public framework::event_context
+{
+public:
+    ack_with_sdp_task(const std::string& call_id, const std::string& sdp,const xt_sip_server_invite_handle_t handle):
+      call_id_(call_id),sdp_(sdp)
+      {
+          invite_handle_ = ::xt_sip_server_invite_handle_clone(handle);
+      }
+      ~ack_with_sdp_task()
+      {
+          ::xt_sip_server_invite_handle_delete(invite_handle_);
+      }
+
+      uint32_t run();
+      void process_event() { signal(deferred, recv_sc_sip_sesseion_pro_thread); }
+
+private:
+    std::string call_id_;
+    std::string sdp_;
+    xt_sip_server_invite_handle_t invite_handle_;
+};
+
+class switchset_task : public framework::task_base, public framework::event_context
+{
+public:
+    switchset_task(xt_sip_server_message_handle_t h,const switchset_data_t& switchset_data):
+      msg_handle_(NULL),switchset_data_(switchset_data)
+      {
+          msg_handle_ = ::xt_sip_server_invite_handle_clone(h);
+      }
+      ~switchset_task()
+      {
+          ::xt_sip_server_invite_handle_delete(msg_handle_);
+      }
+      uint32_t run();
+      void process_event() { signal(deferred, recv_sc_sip_sesseion_pro_thread); }
+
+private:
+    xt_sip_server_message_handle_t msg_handle_;
+    switchset_data_t switchset_data_;
+};
+
+class invite_bye_task : public framework::task_base, public framework::event_context
+{
+public:
+    invite_bye_task(const std::string& call_id,const xt_sip_invite_terminated_reason_t reason):
+      call_id_(call_id),reason_(reason){}
+      uint32_t run();
+      void process_event() { signal(deferred, recv_sc_sip_sesseion_pro_thread); }
+
+private:
+    std::string call_id_;
+    xt_sip_invite_terminated_reason_t reason_;
+};
+#else
+/////////////////////////////以下是通信库任务////////////////////////////
+
+#include "common_ctrl_msg.h"
+class invite_task_sip : public framework::task_base, public framework::event_context
+{
+public:
+    invite_task_sip(const char* ids, const char* sdp, const std_sip_session_t& session):
+      ids_(ids),sdp_(sdp),session_(session)
+      {
+
+      }
+
+      ~invite_task_sip()
+      {
+
+      }
+      uint32_t run();
+      void process_event() { signal(deferred, recv_sc_sip_sesseion_pro_thread); }
+private:
+    std::string ids_;
+    std::string sdp_;
+    std_sip_session_t session_;
+};
+
+class re_invite_task_sip : public framework::task_base, public framework::event_context
+{
+public:
+    re_invite_task_sip(const char* ids, const char* sdp, const char *call_id):
+      ids_(ids),sdp_(sdp),call_id_(call_id)
+      {
+
+      }
+
+      ~re_invite_task_sip()
+      {
+
+      }
+
+      uint32_t run();
+      void process_event() { signal(deferred, recv_sc_sip_sesseion_pro_thread); }
+private:
+    std::string ids_;
+    std::string sdp_;
+	std::string call_id_;
+    //std_sip_session_t session_;//由于re-invite会话不是一次新会话，所以不新创建会话对象
+};
+
+class ack_with_sdp_task_sip : public framework::task_base, public framework::event_context
+{
+public:
+    ack_with_sdp_task_sip(const std::string& call_id, const std::string& sdp):
+      call_id_(call_id),sdp_(sdp)
+      {}
+      ~ack_with_sdp_task_sip()
+      {}
+
+      uint32_t run();
+      void process_event() { signal(deferred, recv_sc_sip_sesseion_pro_thread); }
+
+private:
+    std::string call_id_;
+    std::string sdp_;
+};
+
+typedef struct __struct_switchset
+{
+    typedef __struct_switchset my_t;
+    typedef std::list<rtp_id_t> dst_rtp_id_container_t;
+    typedef dst_rtp_id_container_t::iterator dst_container_handle_t;
+
+    rtp_id_t src_rtp_id;
+    dst_rtp_id_container_t dst_rtp_ids;
+
+    __struct_switchset()
+    {
+    }
+    __struct_switchset (const __struct_switchset& switchset)
+    {
+        src_rtp_id = switchset.src_rtp_id;
+        dst_rtp_ids = switchset.dst_rtp_ids;
+    }
+}switchset_msg,*ptr_switchset_msg;
+
+class switchset_task_sip : public framework::task_base, public framework::event_context
+{
+public:
+    switchset_task_sip(const switchset_data_t& switchset_data):
+      switchset_data_(switchset_data){}
+      uint32_t run();
+      void process_event() { signal(deferred, recv_sc_sip_sesseion_pro_thread); }
+
+private:
+    switchset_data_t switchset_data_;
+};
+
+class invite_bye_task_sip : public framework::task_base, public framework::event_context
+{
+public:
+    invite_bye_task_sip(const std::string& call_id):
+      call_id_(call_id){}
+      uint32_t run();
+      void process_event() { signal(deferred, recv_sc_sip_sesseion_pro_thread); }
+
+private:
+    std::string call_id_;
+};
+#endif //#ifndef _USE_COMMON_CTRL_MSG_
+
+#endif //#ifndef STD_SIP_TASK_H__

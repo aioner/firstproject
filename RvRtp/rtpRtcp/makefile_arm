@@ -1,0 +1,35 @@
+CC          := arm-hisiv300-linux-uclibcgnueabi-gcc
+CXX         := arm-hisiv300-linux-uclibcgnueabi-gcc
+
+DIST_INC    := -I../inc/common
+IPCAM_INC   := -I../inc/rtprtcp
+INC_PATH    := $(DIST_INC)  $(IPCAM_INC)
+
+#MODULE_DEFINES :=-fPIC -shared -fvisibility=hidden -DLINUX -D_GNU_SOURCE -D_RV_LINUX_API_DEFAULT
+MODULE_DEFINES :=-fPIC -fvisibility=hidden -DLINUX -D_GNU_SOURCE -D_RV_LINUX_API_DEFAULT
+CFLAGS	    := $(MODULE_DEFINES)  -Wall -g -o 
+
+TARGET      := ../../../bin/arm/librv32rtp.a
+SRCC	    := $(wildcard *.c)
+COBJ	    := $(SRCC:.c=.o)
+SRCXX	    := $(wildcard *.cpp)
+CXXOBJ      := $(SRCXX:.cpp=.o)
+OBJ	    := $(COBJ) $(CXXOBJ)
+
+PUB_INC     := ../../../include/RvRtp/rtprtcp
+
+$(TARGET):$(OBJ)
+	ar rcs $(TARGET) $(OBJ)
+	rm -fR $(PUB_INC)
+	mkdir -p $(PUB_INC)
+	cp  ../inc/rtprtcp/*.h $(PUB_INC)	
+
+$(COBJ):%.o:%.c 
+	$(CC) $(INC_PATH) $(CFLAGS) $@ -c $<
+
+$(CXXOBJ):%.o:%.cpp 
+	$(CXX) $(INC_PATH) $(CFLAGS) $@ -c $<
+
+.PHONY:clean
+clean:
+	rm -f *~ *.o  #$(TARGET)

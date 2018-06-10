@@ -1,0 +1,1338 @@
+#include "std_sip_task.h"
+#include "XTEngine.h"
+#include "rtpid_mgr.h"
+
+#include "XTRouterLog.h"
+
+#ifndef _USE_COMMON_CTRL_MSG_
+//第一次invite创建针对源的接收与转发机制，生成双向sdp并返回双向sdp
+//第二次invite创建针对终端的接收与转发机制，如果是点播，保持终端recvonly到session推流结构，移除生成双向sdp的recvonly属性，返回发送sdp
+//如果是呼叫，拆分收到的终端双向sdp，保持终端sendonly部分到session接收结构，保持终端recvonly部分到session推流结构，返回双向sdp
+//收发机制创建时session结构中的recv_rtp_ids（接收rtpid保存结构）与send_rtp_ids（发送rtp保存结构）赋值（push_back），
+//在后来的会话过程中，将收到的终端和源的sdp，通过sdp的方向，遍历该结构中的rtpid给rtp_id_lst_管理结构中的sdp赋值，
+uint32_t invite_task::run()
+{
+    long oper_code = 0;
+    std::string ok_200_with_sdp;
+    int srcno = -1;
+    dev_handle_t dev_handle = -1;
+    do 
+    {
+        //创建接收机制与转发源，返回接收机制与转发源创建时返回组合sdp
+        oper_code = XTEngine::_()->sip_2_sip_create_free_transmit_channel(session_.call_id,session_.call_id,-1,0,0,false,ok_200_with_sdp,srcno,dev_handle);
+        if (oper_code < 0)
+        {
+            oper_code = -1;
+            break;
+        }
+
+        xt_sdp::parse_buffer_t pb_200_ok(ok_200_with_sdp.c_str(),ok_200_with_sdp.length());
+        xt_sdp::sdp_session_t xsdp_200_ok; 
+        try
+        {
+            xsdp_200_ok.parse(pb_200_ok);
+        }
+        catch(...)
+        {
+            oper_code = -2;
+            break;
+        }
+
+        //生成rtp id
+        xt_sdp::sdp_session_t::medium_container_t::iterator itr;
+        for(itr = xsdp_200_ok.media_.begin(); xsdp_200_ok.media_.end() != itr;++itr)
+        {
+            rtp_id_attr_t rtp_id_attr;
+            rtp_id_attr.rtp_id = RTP_ID_VALUE_NA;
+            rtp_id_attr.active = false;
+
+            if (itr->attribute_helper_.exists("recvonly")) //数据捕获
+            {
+                rtp_id_attr.direction = dir_recvonly;
+                rtp_id_attr.dev_handle = dev_handle;
+
+                if (0 == itr->name_.compare("video"))
+                {
+                    rtp_id_attr.m_name.assign("video");
+                }
+
+                if (0 == itr->name_.compare("audio"))
+                {
+                    rtp_id_attr.m_name.assign("audio");
+                }
+                // 为生成的sdp创建rtpid，用于标记匹配
+                rtp_id_attr.rtp_id = rtp_id_mr::instance()->create_rtpid(rtp_id_attr);
+            }
+            if (itr->attribute_helper_.exists("sendonly"))//转发源
+            {
+                rtp_id_attr.direction = dir_sendonly;
+                rtp_id_attr.srcno = srcno;
+                if (0 == itr->name_.compare("video"))
+                {
+                    rtp_id_attr.m_name.assign("video");
+                }
+
+                if (0 == itr->name_.compare("audio"))
+                {
+                    rtp_id_attr.m_name.assign("audio");
+                }
+                // 为生成的sdp创建rtpid，用于标记匹配
+                rtp_id_attr.rtp_id = rtp_id_mr::instance()->create_rtpid(rtp_id_attr);
+            }
+
+            if ( RTP_ID_VALUE_NA != rtp_id_attr.rtp_id)
+            {
+                if (itr->attribute_helper_.exists("rtpid"))
+                {
+                    itr->attribute_helper_.clear_attribute("rtpid");
+                }
+                std::ostringstream osvalue;
+                osvalue<<rtp_id_attr.rtp_id;
+                itr->attribute_helper_.add_attribute("rtpid",osvalue.str());
+
+                //处理交换生成双向sdp，用于数据捕获和推流是通过rtpid取出
+                if (dir_sendonly == rtp_id_attr.direction)//将转发源sdp保持到发送结构
+                {
+                    session_.send_rtp_ids.push_back(rtp_id_attr.rtp_id);
+
+                }
+
+                if (dir_recvonly == rtp_id_attr.direction)//将数据捕获sdp保持到接收结构
+                {
+                    session_.recv_rtp_ids.push_back(rtp_id_attr.rtp_id);
+
+                }
+
+                //更新session中收发sdp信息
+                oper_code = std_sip_engine::_()->update_session(session_);
+                if (oper_code < 0)
+                {
+                    oper_code = -3;
+                    break;
+                }
+            }
+        }		
+
+        //INVITE with sdp
+        if (mode_offer == mode_)
+        {
+            if (session_.sdp.empty())
+            {
+                oper_code = -4;
+                break;
+            }
+
+            //解析sdp根据方向属性反馈对应的sdp 
+            sdp_direction_t sdp_dir = std_sip_engine::_()->parse_sdp_direction(session_.sdp);
+
+            //通过sdp的方向分类判断
+            if ( dir_recvonly == sdp_dir)//点播，单向接收
+            {
+                //单向接收sdp返回单向发送sdp
+                xt_sdp::sdp_session_t::medium_container_t::iterator itr;
+                for(itr = xsdp_200_ok.media_.begin(); xsdp_200_ok.media_.end() != itr;)
+                {
+                    if (itr->attribute_helper_.exists("recvonly"))
+                    {
+                        xsdp_200_ok.media_.erase(itr++);
+                    }
+                    else
+                    {
+                        ++itr;
+                    }
+                }
+
+                std_sip_session_t::rtp_id_container_handle_t itr1 = session_.send_rtp_ids.begin();
+                for( ;session_.send_rtp_ids.end() != itr1;++itr1)
+                {
+                    //将终端意向recv_sdp赋值到推流结构，用于推流是通过rtpid取出
+                    oper_code = rtp_id_mr::_()->update_sdp_by_rtpid(*itr1,session_.sdp);
+                    if (oper_code < 0)
+                    {
+                        WRITE_LOG(DBLOGINFO,ll_error,"invite_task::run() upate_rtp_id_attr_by_sdp01 fail call_id[%s] rtp_id[%d]",session_.call_id.c_str(),*itr1);
+                        continue;
+                    }
+                }
+            }
+            else if (dir_sendrecv == sdp_dir) //呼叫，双向接发
+            {
+                std::string recv_sdp;
+                std::string send_sdp;
+                oper_code = XTEngine::_()->sip_transform_call_sdp_ex(recv_sdp,send_sdp,session_.sdp);
+                if (oper_code < 0)
+                {
+                    WRITE_LOG(DBLOGINFO,ll_error,"invite_task::run() sip_transform_call_sdp_ex fail call_id[%s]",session_.call_id.c_str());
+                    break;
+                }
+
+                //处理终端的双向sdp，用于数据捕获和推流是通过rtpid取出
+                std_sip_session_t::rtp_id_container_handle_t itr = session_.send_rtp_ids.begin();
+                for( ;session_.send_rtp_ids.end() != itr;++itr)
+                {
+                    //将收到的终端的recv_sdp保存到推流结构
+                    oper_code = rtp_id_mr::_()->update_sdp_by_rtpid(*itr,recv_sdp);
+                    if (oper_code < 0)
+                    {
+                        WRITE_LOG(DBLOGINFO,ll_error,"invite_task::run() upate_rtp_id_attr_by_sdp01 fail call_id[%s] rtp_id[%d]",session_.call_id.c_str(),*itr);
+                        continue;
+                    }
+                }
+
+                itr = session_.recv_rtp_ids.begin();
+                for( ;session_.recv_rtp_ids.end() != itr;++itr)
+                {
+                    //将收到的终端的send_sdp保存到接收结构
+                    oper_code = rtp_id_mr::_()->update_sdp_by_rtpid(*itr,send_sdp);
+                    if (oper_code < 0)
+                    {
+                        WRITE_LOG(DBLOGINFO,ll_error,"invite_task::run() upate_rtp_id_attr_by_sdp01 fail call_id[%s] rtp_id[%d]",session_.call_id.c_str(),*itr);
+                        continue;
+                    }
+                }
+            }
+            else
+            {
+                WRITE_LOG(DBLOGINFO,ll_error,"invite_task::sdp direction error. call_id:%s sdp:%s", session_.call_id.c_str(), session_.sdp.c_str());
+                oper_code = -5;
+                break;
+            }
+        }
+
+        //mode_offer and mode_answer with rtpid
+        try
+        {
+            std::ostringstream oss;
+            xsdp_200_ok.encode(oss);
+            ok_200_with_sdp.assign(oss.str());
+        }
+        catch(...)
+        {
+            oper_code = -4;
+            break;
+        }
+
+    } while (0);
+
+    xt_sip_status_t status = XT_SIP_STATUS_OK;
+    if (oper_code < 0)
+    {
+        WRITE_LOG(DBLOGINFO,ll_error,"invite_task::run() oprater fail call_id[%s] oper_code[%d]",session_.call_id.c_str(),oper_code);
+        //拒绝
+        status = ::xt_sip_server_invite_reject(invite_handle_,488);
+    }
+    else
+    {
+        WRITE_LOG(DBLOGINFO,ll_info,"call_id[%s] ok_200_with_sdp[%s]",session_.call_id.c_str(),ok_200_with_sdp.c_str());
+        //回应200 OK 带sdp
+        switch(mode_)
+        {
+        case mode_offer://invite with sdp//接受offer呼叫并响应answer操作
+            {
+                status = ::xt_sip_server_invite_provide_answer(invite_handle_,ok_200_with_sdp.c_str(),ok_200_with_sdp.length());
+                break;
+            }
+
+        case mode_answer://invite no sdp//接受request_offer呼叫并发起offer操作
+            {
+                status = ::xt_sip_server_invite_provide_offer(invite_handle_,ok_200_with_sdp.c_str(),ok_200_with_sdp.length());
+                break;
+            }
+        default:
+            break;
+        }
+    }
+
+    delete this;
+    return 0;
+}
+
+uint32_t re_invite_task::run()
+{
+    do 
+    {
+    } while (0);
+    delete this;
+    return 0;
+}
+
+uint32_t ack_with_sdp_task::run()
+{
+    do 
+    {
+        std_sip_session_t session;
+        long ret_code = std_sip_engine::_()->get_session(call_id_,session);
+        if (ret_code < 0)
+        {
+            WRITE_LOG(DBLOGINFO,ll_error,"ack_with_sdp_task::run() get_session fail call_id[%s]",call_id_.c_str());
+            break;
+        }
+
+        WRITE_LOG(DBLOGINFO,ll_info,"ack_with_sdp,sdp[%s] call_id[%s]",sdp_.c_str(), call_id_.c_str());
+
+        sdp_direction_t sdp_dir = std_sip_engine::_()->parse_sdp_direction(sdp_);
+        if (dir_sendrecv == sdp_dir)//呼叫，返回源发送和接收sdp
+        {
+            std::string recv_sdp;
+            std::string send_sdp;//源的发送sdp对交换来说就是接收sdp，推流时取出目标的接收sdp
+            ret_code = XTEngine::_()->sip_transform_call_sdp_ex(recv_sdp,send_sdp,sdp_);
+            if (ret_code < 0)
+            {
+                WRITE_LOG(DBLOGINFO,ll_error,"ack_with_sdp_task::run() sip_transform_call_sdp_ex fail call_id[%s]\n",call_id_.c_str());
+                break;
+            }
+
+            std_sip_session_t::rtp_id_container_handle_t itr = session.send_rtp_ids.begin();
+            for( ;session.send_rtp_ids.end() != itr;++itr)
+            {
+                ret_code = rtp_id_mr::_()->update_sdp_by_rtpid(*itr,recv_sdp);
+                if (ret_code < 0)
+                {
+                    WRITE_LOG(DBLOGINFO,ll_error,"ack_with_sdp_task::run() upate_rtp_id_attr_by_sdp01 fail call_id[%s] rtp_id[%d]\n",call_id_.c_str(),*itr);
+                    continue;
+                }
+            }
+
+            itr = session.recv_rtp_ids.begin();
+            for( ;session.recv_rtp_ids.end() != itr;++itr)
+            {
+                ret_code = rtp_id_mr::_()->update_sdp_by_rtpid(*itr,send_sdp);
+                if (ret_code < 0)
+                {
+                    WRITE_LOG(DBLOGINFO,ll_error,"ack_with_sdp_task::run() upate_rtp_id_attr_by_sdp02 fail call_id[%s] rtp_id[%d]\n",call_id_.c_str(),*itr);
+                    continue;
+                }
+            }
+        }
+        else if (dir_sendonly == sdp_dir)//点播，返回源发送sdp
+        {
+            std_sip_session_t::rtp_id_container_handle_t itr = session.recv_rtp_ids.begin();
+            for( ;session.recv_rtp_ids.end() != itr;++itr)
+            {
+                ret_code = rtp_id_mr::_()->update_sdp_by_rtpid(*itr,sdp_);
+                if (ret_code < 0)
+                {
+                    WRITE_LOG(DBLOGINFO,ll_error,"ack_with_sdp_task::run() upate_rtp_id_attr_by_sdp01 fail call_id[%s] rtp_id[%d]\n",call_id_.c_str(),*itr);
+                    continue;
+                }
+            }
+        }
+        else
+        {
+            WRITE_LOG(DBLOGINFO,ll_error,"ack_with_sdp_task::run() sdp format error call_id[%s]",call_id_.c_str());
+        } 
+
+    } while (0);
+
+    delete this;
+    return 0;
+}
+
+uint32_t switchset_task::run()
+{
+    long oper_code = 0;
+    std::string reason;
+    do
+    {
+        rtp_id_attr_t src_rtp_id_attr;//根据switchset中源的rtpid取出源的sdp用于组帧
+        oper_code = rtp_id_mr::_()->get_rtpid_attr(switchset_data_.src_rtp_id,src_rtp_id_attr);
+        if (oper_code < 0)
+        {
+            oper_code =-1;
+            reason.assign("get_rtp_id_attr fail!");
+            break;
+        }
+        if ( dir_recvonly != src_rtp_id_attr.direction)
+        {
+            oper_code = -2;
+            reason.assign("src rtpid direction not recvonly error!");
+            break;
+        }
+
+        //保存组帧sdp
+        dev_handle_t recv_dev_handle = src_rtp_id_attr.dev_handle;
+        std::string recv_sdp = src_rtp_id_attr.sdp;
+        std::size_t recv_sdp_len = src_rtp_id_attr.sdp.length();//通过该入口设置包含音频视频sdp到数据接收库
+        oper_code = XTEngine::_()->save_sdp_to_access(recv_dev_handle,recv_sdp.c_str(),recv_sdp_len);
+        if (oper_code < 0)
+        {
+            oper_code = -3;
+            reason.assign("save sdp to access lib fail!");
+            break;
+        }
+        WRITE_LOG(DBLOGINFO,ll_info,"switchset recv_sdp[%s]",recv_sdp.c_str());
+
+        long strmid = rtp_id_mr::_()->get_strmid(recv_dev_handle);
+        if (strmid < 0)
+        {
+            strmid = media_device::_()->get_strmid_by_dev_handle(recv_dev_handle); //获取空闲流标记id，音频视频为同一路流，配置支持128路流
+            if (strmid < 0)
+            {
+                oper_code = -5;
+                reason.assign("get_free_strmid fail!");
+                break;
+            }
+            rtp_id_mr::_()->set_strmid(recv_dev_handle, strmid);
+        }
+
+        ///////////////////////////////////////////////////////////////////////////////////
+        long pro_dst_ret = -1;//根据switchset中推流目标的rtpid取出推流目标的sdp，解析出sdp属性到推流机制
+        switchset_data_t::dst_container_handle_t itr = switchset_data_.dst_rtp_ids.begin();
+        for(;switchset_data_.dst_rtp_ids.end() != itr; ++itr)
+        {
+            rtp_id_attr_t dst_rtpid_attr;
+            pro_dst_ret = rtp_id_mr::_()->get_rtpid_attr(*itr,dst_rtpid_attr);
+            if (pro_dst_ret < 0)
+            {
+                pro_dst_ret =-6;
+                reason.assign("pro dst_rtp_ids get_rtp_id_attr fail!");
+                break;
+            }
+
+            if ( dir_recvonly == dst_rtpid_attr.direction)
+            {
+                reason.assign("dst rtpid direction error pro fail!");
+                pro_dst_ret =-7;
+                break;
+            }
+
+            int trans_srcno = dst_rtpid_attr.srcno;
+
+            //保存sdp到转发库
+            pro_dst_ret = XTEngine::_()->save_sdp_to_srv(trans_srcno,recv_sdp);
+            if (pro_dst_ret < 0)
+            {
+                pro_dst_ret=-10;
+                break;
+            }
+
+            int ret = XTEngine::_()->update_access_info_of_src(trans_srcno,strmid,recv_dev_handle);
+            if (ret < 0)
+            {
+                reason.assign("pro dst rtpid upate_src fail!");
+                pro_dst_ret = -11;
+                break;
+            }
+            pro_dst_ret = std_sip_engine::_()->add_send_dst(trans_srcno,*itr,dst_rtpid_attr.sdp);
+            if (pro_dst_ret < 0)
+            {
+                pro_dst_ret = -12;
+                reason.assign("add_send_dst fail!");
+                break;
+            }
+        }
+
+        if (pro_dst_ret < 0)
+        {
+            oper_code = -6;
+            break;
+        }
+
+        oper_code = 1;
+    } while (0);
+
+    if (oper_code < 0)
+    {
+        WRITE_LOG(DBLOGINFO,ll_error,"switchset fail reason[%s]",reason.c_str());
+        std_sip_engine::_()->response_optstatus_fail(reason.c_str());
+    }
+    else
+    {
+        std_sip_engine::_()->response_optstatus_ok();
+        std_sip_engine::_()->response_chanstatus("establish");
+    }
+
+    delete this;
+    return 0;
+}
+
+//terminate invite
+uint32_t invite_bye_task::run()
+{
+    long oper_code = 0;
+    std::string reason;
+    do
+    {
+        WRITE_LOG(DBLOGINFO,ll_info,"invite_bye call id[%s]",call_id_.c_str());
+        std_sip_session_t session;//通过会话id获取invite_bye会话对应invite会话结构，销毁转发源与停止数据捕获
+        oper_code = std_sip_engine::_()->get_session(call_id_,session);
+        if (oper_code < 0)
+        {
+            oper_code = -1;
+            reason.assign("pro bye get_session fail!");
+            break;
+        }
+
+        rtp_id_attr_t rtp_id_attr;
+        std_sip_session_t::rtp_id_container_handle_t itr = session.send_rtp_ids.begin();
+        for(;session.send_rtp_ids.end() != itr; ++itr)
+        {
+            oper_code = rtp_id_mr::_()->get_rtpid_attr(*itr,rtp_id_attr);
+            if (oper_code < 0)
+            {
+                oper_code = -2;
+                reason.assign("pro bye get_rtp_id_attr fail!");
+                break;
+            }
+
+            oper_code = XTEngine::_()->destroy_src(rtp_id_attr.srcno);
+            if (oper_code < 0 )
+            {
+                oper_code = -3;
+                reason.assign("pro bye destroy_src fail!");
+                break;
+            }
+        }
+
+        itr = session.recv_rtp_ids.begin();
+        for (; session.recv_rtp_ids.end() != itr; ++itr)
+        {
+            oper_code = rtp_id_mr::_()->get_rtpid_attr(*itr,rtp_id_attr);
+            if (oper_code < 0)
+            {
+                oper_code = -2;
+                reason.assign("pro bye get_rtp_id_attr fail!");
+                break;
+            }
+            oper_code = XTEngine::_()->rtp_close_recv(rtp_id_attr.dev_handle);
+        }
+
+    } while (0);
+
+    if (oper_code < 0)
+    {
+        WRITE_LOG(DBLOGINFO,ll_error,"invite_bye fail reason:%s",reason.c_str());
+        std_sip_engine::_()->response_optstatus_fail(reason.c_str());
+    }
+    else
+    {
+        std_sip_engine::_()->response_optstatus_ok();
+        std_sip_engine::_()->response_chanstatus("cleanup");
+    }
+    delete this;
+    return 0;
+}
+#else
+/////////////////////////////以下是通信库任务////////////////////////////
+
+//收到invite统一创建收发，并保存创建的rtpid，如果带sdp，管理rtpid与sdp到管理器
+uint32_t invite_task_sip::run()
+{
+    long oper_code = 0;
+    std::string ok_200_with_sdp;
+
+    int srcno = -1;
+    dev_handle_t dev_handle = -1;
+    do 
+    {
+		oper_code = XTEngine::_()->sip_2_sip_create_free_transmit_channel(session_.call_id,session_.call_id,
+			-1,0,0,common_ctrl_msg_mgr::_()->demux_s,ok_200_with_sdp,srcno,dev_handle);
+        if (oper_code < 0)
+        {
+            oper_code = -1;
+            break;
+        }
+
+        //首次生成的完整sdp并未保存到会话，而是分段保存并在接下来的会话中更新分段
+        xt_sdp::parse_buffer_t pb_200_ok(ok_200_with_sdp.c_str(),ok_200_with_sdp.length());
+        xt_sdp::sdp_session_t xsdp_200_ok; 
+        try
+        {
+            xsdp_200_ok.parse(pb_200_ok);
+        }
+        catch(...)
+        {
+            oper_code = -2;
+            break;
+        }
+
+        //生成rtpid标记创建接收和推送的rtp流
+        xt_sdp::sdp_session_t::medium_container_t::iterator itr;
+        for(itr = xsdp_200_ok.media_.begin(); xsdp_200_ok.media_.end() != itr;++itr)
+        {
+            rtp_id_attr_t rtp_id_attr;
+            rtp_id_attr.rtp_id = RTP_ID_VALUE_NA;
+            rtp_id_attr.active = false;
+
+            if (itr->attribute_helper_.exists("recvonly"))
+            {
+                rtp_id_attr.direction = dir_recvonly;
+                rtp_id_attr.dev_handle = dev_handle;
+
+                if (0 == itr->name_.compare("video"))
+                {
+                    rtp_id_attr.m_name.assign("video");
+                }
+
+                if (0 == itr->name_.compare("audio"))
+                {
+                    rtp_id_attr.m_name.assign("audio");
+                }
+                // create rtpid
+                rtp_id_attr.rtp_id = rtp_id_mr::instance()->create_rtpid(rtp_id_attr);
+            }
+            if (itr->attribute_helper_.exists("sendonly"))
+            {
+                rtp_id_attr.direction = dir_sendonly;
+                rtp_id_attr.srcno = srcno;
+                if (0 == itr->name_.compare("video"))
+                {
+                    rtp_id_attr.m_name.assign("video");
+                }
+
+                if (0 == itr->name_.compare("audio"))
+                {
+                    rtp_id_attr.m_name.assign("audio");
+                }
+                // create rtpid
+                rtp_id_attr.rtp_id = rtp_id_mr::instance()->create_rtpid(rtp_id_attr);
+            }
+
+            if ( RTP_ID_VALUE_NA != rtp_id_attr.rtp_id)
+            {
+                if (itr->attribute_helper_.exists("rtpid"))
+                {
+                    itr->attribute_helper_.clear_attribute("rtpid");
+                }
+                std::ostringstream osvalue;
+                osvalue<<rtp_id_attr.rtp_id;
+                itr->attribute_helper_.add_attribute("rtpid",osvalue.str());
+
+                //保存初始创建收发rtpid到会话收发结构
+                if (dir_sendonly == rtp_id_attr.direction)
+                {
+                    //保存发送rtpid到回话发送rtpids结构
+                    session_.send_rtpid.push_back(rtp_id_attr.rtp_id);
+
+                }
+
+                if (dir_recvonly == rtp_id_attr.direction)
+                {
+                    //保存接收rtpid到回话接收rtpids结构
+                    session_.recv_rtpid.push_back(rtp_id_attr.rtp_id);
+
+                }
+            }
+        }
+
+		try
+		{
+			std::ostringstream oss;
+			xsdp_200_ok.encode(oss);
+			ok_200_with_sdp.assign(oss.str());
+		}
+		catch(...)
+		{
+			oper_code = -5;
+			break;
+		}
+
+		//保存创建收发机制初始sdp
+		session_.sdp = ok_200_with_sdp;
+
+        WRITE_LOG(DBLOGINFO,ll_info,"Invite_sip ids[%s] call_id[%s] sdp[%s]", ids_.c_str(),
+            session_.call_id.c_str(), sdp_.c_str());
+
+        //根据invite会话发起方sdp意向，返回对应交换sdp
+        if (!sdp_.empty())
+        {
+            sdp_direction_t sdp_dir = common_ctrl_msg_mgr::_()->parse_sdp_direction(sdp_);
+            if ( dir_recvonly == sdp_dir)
+            {
+				//发起方意向recv，移除交换recv媒体属性，返回交换send媒体属性
+                xt_sdp::sdp_session_t::medium_container_t::iterator itr;
+                for(itr = xsdp_200_ok.media_.begin(); xsdp_200_ok.media_.end() != itr;)
+                {
+                    if (itr->attribute_helper_.exists("recvonly"))
+                    {
+                        xsdp_200_ok.media_.erase(itr++);
+                    }
+                    else
+                    {
+                        ++itr;
+                    }
+                }
+
+				//目标rtpid与对端接收sdp关联管理
+                std_sip_session_t::rtp_id_container_handle_t itr1 = session_.send_rtpid.begin();
+                for( ;session_.send_rtpid.end() != itr1;++itr1)
+                {
+					WRITE_LOG(DBLOGINFO,ll_info,"Invite with sdp recvonly ids[%s] call_id[%s] send_rtpid[%d]", 
+						ids_.c_str(), session_.call_id.c_str(), *itr1);
+                    oper_code = rtp_id_mr::_()->update_sdp_by_rtpid(*itr1,sdp_);
+                    if (oper_code < 0)
+                    {
+                        WRITE_LOG(DBLOGINFO,ll_error,"invite_task_sip::run() update_sdp_by_rtpid01 fail call_id[%s] rtp_id[%d]",ids_.c_str(),*itr1);
+                        continue;
+                    }
+                }
+            }
+            else if (dir_sendrecv == sdp_dir)
+            {
+                std::string recv_sdp;
+                std::string send_sdp;// 将双向sdp拆分为单向sdp
+                oper_code = XTEngine::_()->sip_transform_call_sdp_ex(recv_sdp,send_sdp,sdp_);
+                if (oper_code < 0)
+                {
+					oper_code = -3;
+                    WRITE_LOG(DBLOGINFO,ll_error,"invite_task_sip::run() sip_transform_call_sdp_ex fail call_id[%s]",ids_.c_str());
+                    break;
+                }
+
+                //目标rtpid与对端接收sdp关联管理
+                std_sip_session_t::rtp_id_container_handle_t itr = session_.send_rtpid.begin();
+                for( ;session_.send_rtpid.end() != itr;++itr)
+                {
+					WRITE_LOG(DBLOGINFO,ll_info,"Invite with sdp recv_ ids[%s] call_id[%s] send_rtpid[%d]", 
+						ids_.c_str(), session_.call_id.c_str(), *itr);
+                    oper_code = rtp_id_mr::_()->update_sdp_by_rtpid(*itr,recv_sdp);
+                    if (oper_code < 0)
+                    {
+                        WRITE_LOG(DBLOGINFO,ll_error,"invite_task_sip::run() update_sdp_by_rtpid02 fail call_id[%s] rtp_id[%d]",ids_.c_str(),*itr);
+                        continue;
+                    }
+                }
+
+                //源rtpid与对端发送sdp关联管理
+                itr = session_.recv_rtpid.begin();
+                for( ;session_.recv_rtpid.end() != itr;++itr)
+                {
+					WRITE_LOG(DBLOGINFO,ll_info,"Invite with sdp send_ ids[%s] call_id[%s] recv_rtpid[%d]", 
+						ids_.c_str(), session_.call_id.c_str(), *itr);
+                    oper_code = rtp_id_mr::_()->update_sdp_by_rtpid(*itr,send_sdp);
+                    if (oper_code < 0)
+                    {
+                        WRITE_LOG(DBLOGINFO,ll_error,"invite_task_sip::run() update_sdp_by_rtpid03 fail call_id[%s] rtp_id[%d]",ids_.c_str(),*itr);
+                        continue;
+                    }
+                }
+            }
+            else 
+            {
+                WRITE_LOG(DBLOGINFO,ll_error,"invite_task_sip::sdp direction error. call_id:%s sdp:%s", session_.call_id.c_str(), sdp_.c_str());
+                oper_code = -4;
+                break;
+            }
+        }
+
+        //mode_offer and mode_answer with rtpid
+        try
+        {
+            std::ostringstream oss;
+            xsdp_200_ok.encode(oss);
+            ok_200_with_sdp.assign(oss.str());
+        }
+        catch(...)
+        {
+            oper_code = -5;
+            break;
+        }
+
+		//保存应答200 ok sdp
+		session_.ok_200_with_sdp = ok_200_with_sdp;
+
+		//回话对象更新要回话管理器
+		oper_code = common_ctrl_msg_mgr::_()->update_session(session_);
+		if (oper_code < 0)
+		{
+			oper_code = -6;
+			break;
+		}
+
+    } while (0);
+
+    if (oper_code < 0)//如果发生错误拒绝会话，那么清理已创建接收机制
+    {
+		//销毁转发源
+		oper_code = XTEngine::_()->destroy_src(srcno);
+		if (oper_code < 0 )
+		{
+			oper_code = -8;
+		}
+		//释放接收端口
+		oper_code = XTEngine::_()->rtp_close_recv(dev_handle);
+		if (oper_code < 0)
+		{
+			oper_code = -9;
+		}
+		//注意：此处可能还要清除会话，执行bye的操作
+        std_sip_session_t::rtp_id_container_handle_t itr = session_.send_rtpid.begin();
+        for(;session_.send_rtpid.end() != itr; ++itr)
+        {
+			rtp_id_mr::_()->free_rtpid(*itr);
+        }
+
+        itr = session_.recv_rtpid.begin();
+        for (; session_.recv_rtpid.end() != itr; ++itr)
+        {
+			rtp_id_mr::_()->free_rtpid(*itr);
+        }
+        //会话管理器清理
+        common_ctrl_msg_mgr::_()->del_session(session_.call_id);
+
+        WRITE_LOG(DBLOGINFO,ll_error,"invite_task_sip::run() oprater fail call_id[%s] oper_code[%d]",session_.call_id.c_str(),oper_code);
+        common_ctrl_msg_mgr::_()->answer_Invite(session_.call_id.c_str(), 488, ok_200_with_sdp.c_str());
+    }
+    else
+    {
+        WRITE_LOG(DBLOGINFO,ll_info,"answerInvite_sip: call_id[%s] ok_200_with_sdp[%s]\n", session_.call_id.c_str(), ok_200_with_sdp.c_str());
+        common_ctrl_msg_mgr::_()->answer_Invite(session_.call_id.c_str(), 200, ok_200_with_sdp.c_str());
+    }
+
+    delete this;
+    return 0;
+}
+
+//如果带sdp根据sdp更新信息，否则返回上次200ok的sdp，后面的流程和invite一样（重复点播、呼叫）
+uint32_t re_invite_task_sip::run()
+{
+    long oper_code = 0;
+    std::string reason;
+    std::string ok_200_with_sdp;
+    std_sip_session_t old_session;//会话描述信息都在初始invite会话中
+
+    do 
+    {
+        oper_code = common_ctrl_msg_mgr::_()->get_session(call_id_,old_session);
+        if (oper_code < 0)
+        {
+            oper_code = -1;
+            reason.assign("re-invite pro bye get_session fail!");
+            break;
+        }
+		//初始invite会话产生的完全sdp
+        xt_sdp::parse_buffer_t pb_200_ok(old_session.sdp.c_str(),old_session.sdp.length());
+        xt_sdp::sdp_session_t xsdp_200_ok; 
+        try
+        {
+            xsdp_200_ok.parse(pb_200_ok);
+        }
+        catch(...)
+        {
+            oper_code = -2;
+            break;
+        }
+
+        WRITE_LOG(DBLOGINFO,ll_info,"re-Invite_sip ids[%s] call_id[%s] sdp[%s]", ids_.c_str(),
+            old_session.call_id.c_str(), sdp_.c_str());
+
+		//如果不带sdp，返回上次200 ok sdp
+        if (!sdp_.empty())
+        { 
+            sdp_direction_t sdp_dir = common_ctrl_msg_mgr::_()->parse_sdp_direction(sdp_);
+            if (dir_recvonly == sdp_dir)
+            {
+                xt_sdp::sdp_session_t::medium_container_t::iterator itr;
+                for(itr = xsdp_200_ok.media_.begin(); xsdp_200_ok.media_.end() != itr;)
+                {
+                    if (itr->attribute_helper_.exists("recvonly"))
+                    {
+                        xsdp_200_ok.media_.erase(itr++);
+                    }
+                    else
+                    {
+                        ++itr;
+                    }
+                }
+                std_sip_session_t::rtp_id_container_handle_t itr1 = old_session.send_rtpid.begin();
+                for( ;old_session.send_rtpid.end() != itr1;++itr1)
+                {
+					WRITE_LOG(DBLOGINFO,ll_info,"re-Invite with sdp recvonly ids[%s] call_id[%s] send_rtpid[%d]", 
+						ids_.c_str(), old_session.call_id.c_str(), *itr1);
+                    oper_code = rtp_id_mr::_()->update_sdp_by_rtpid(*itr1,sdp_);
+                    if (oper_code < 0)
+                    {
+                        WRITE_LOG(DBLOGINFO,ll_error,"re-invite_task_sip::run() upate_rtp_id_attr_by_sdp01 fail call_id[%s] rtp_id[%d]",ids_.c_str(),*itr1);
+                        continue;
+                    }
+                }
+            }
+			else if (dir_sendonly == sdp_dir)
+			{
+				xt_sdp::sdp_session_t::medium_container_t::iterator itr;
+				for(itr = xsdp_200_ok.media_.begin(); xsdp_200_ok.media_.end() != itr;)
+				{
+					if (itr->attribute_helper_.exists("sendonly"))
+					{
+						xsdp_200_ok.media_.erase(itr++);
+					}
+					else
+					{
+						++itr;
+					}
+				}
+				std_sip_session_t::rtp_id_container_handle_t itr1 = old_session.recv_rtpid.begin();
+				for( ;old_session.recv_rtpid.end() != itr1;++itr1)
+				{
+					WRITE_LOG(DBLOGINFO,ll_info,"re-Invite with sdp sendonly ids[%s] call_id[%s] recv_rtpid[%d]", 
+						ids_.c_str(), old_session.call_id.c_str(), *itr1);
+					oper_code = rtp_id_mr::_()->update_sdp_by_rtpid(*itr1,sdp_);
+					if (oper_code < 0)
+					{
+						WRITE_LOG(DBLOGINFO,ll_error,"re-invite_task_sip::run() upate_rtp_id_attr_by_sdp01 fail call_id[%s] rtp_id[%d]",ids_.c_str(),*itr1);
+						continue;
+					}
+				}
+			}
+            else if (dir_sendrecv == sdp_dir)
+            {
+                std::string recv_sdp;
+                std::string send_sdp;// 将双向sdp拆分为单向sdp
+                oper_code = XTEngine::_()->sip_transform_call_sdp_ex(recv_sdp,send_sdp,sdp_);
+                if (oper_code < 0)
+                {
+                    WRITE_LOG(DBLOGINFO,ll_error,"re-invite_task_sip::run() sip_transform_call_sdp_ex fail call_id[%s]",ids_.c_str());
+                    break;
+                }
+
+                std_sip_session_t::rtp_id_container_handle_t itr = old_session.send_rtpid.begin();
+                for( ;old_session.send_rtpid.end() != itr;++itr)
+                {
+					WRITE_LOG(DBLOGINFO,ll_info,"re-Invite with sdp recv_ ids[%s] call_id[%s] rtpid[%d]", 
+						ids_.c_str(), old_session.call_id.c_str(), *itr);
+                    oper_code = rtp_id_mr::_()->update_sdp_by_rtpid(*itr,recv_sdp);
+                    if (oper_code < 0)
+                    {
+                        WRITE_LOG(DBLOGINFO,ll_error,"re-invite_task_sip::run() upate_rtp_id_attr_by_sdp01 fail call_id[%s] rtp_id[%d]",ids_.c_str(),*itr);
+                        continue;
+                    }
+                }
+
+                for( itr = old_session.recv_rtpid.begin();old_session.recv_rtpid.end() != itr;++itr)
+                {
+					WRITE_LOG(DBLOGINFO,ll_info,"re-Invite with sdp send_ ids[%s] call_id[%s] rtpid[%d]", 
+						ids_.c_str(), old_session.call_id.c_str(), *itr);
+                    oper_code = rtp_id_mr::_()->update_sdp_by_rtpid(*itr,send_sdp);
+                    if (oper_code < 0)
+                    {
+                        WRITE_LOG(DBLOGINFO,ll_error,"re-invite_task_sip::run() upate_rtp_id_attr_by_sdp01 fail call_id[%s] rtp_id[%d]",ids_.c_str(),*itr);
+                        continue;
+                    }
+                }
+            }
+            else
+            {
+                WRITE_LOG(DBLOGINFO,ll_error,"re-invite_task_sip::sdp direction error. call_id:%s sdp:%s", call_id_.c_str(), sdp_.c_str());
+                oper_code = -4;
+                break;
+            }
+
+			try
+			{
+				std::ostringstream oss;
+				xsdp_200_ok.encode(oss);
+				ok_200_with_sdp.assign(oss.str());
+			}
+			catch(...)
+			{
+				oper_code = -5;
+				break;
+			}
+        }
+		else //如果不带sdp，那么返回初始invite会话回复200 ok sdp
+		{
+			ok_200_with_sdp = old_session.ok_200_with_sdp;
+		}
+
+        //回话对象更新要回话管理器
+        oper_code = common_ctrl_msg_mgr::_()->update_session(old_session);
+        if (oper_code < 0)
+        {
+            oper_code = -6;
+            break;
+        }
+
+    } while (0);
+
+
+    //媒体清理工作
+    if (oper_code >= 0)
+    {
+        //接收处理
+        rtp_id_attr_t rtp_id_attr;
+
+        std_sip_session_t::rtp_id_container_handle_t itr = old_session.recv_rtpid.begin();
+        for (; old_session.recv_rtpid.end() != itr; ++itr)
+        {
+            oper_code = rtp_id_mr::_()->get_rtpid_attr(*itr,rtp_id_attr);
+            if (oper_code < 0)
+            {
+                oper_code = -7;
+                reason.assign("pro bye get_rtp_id_attr fail!");
+                break;
+            }
+			//无论对端意向收发，交换创建的都是收发机制，如果未使用则保留
+			//不对strmid进行清理，strmid在创建收发机制时创建，并一直存在
+
+            //根据dev_handle关闭捕获数据数据，数据不会抛上来转发
+            /*dev_handle_t recv_dev_handle = rtp_id_attr.dev_handle;
+            long strmid = rtp_id_mr::_()->get_strmid(recv_dev_handle);
+
+            //oper_code = XTEngine::_()->stop_link_capture(recv_dev_handle, strmid);
+            if (oper_code < 0)
+            {
+                oper_code = -4;
+                XTEngine::_()->free_strmid(strmid);
+                reason.assign("stop_capture fail!");
+                break;
+            }*/
+        }
+
+        //发送清理
+        for(itr = old_session.send_rtpid.begin();old_session.send_rtpid.end() != itr; ++itr)
+        {
+            rtp_id_attr_t dst_rtpid_attr;
+            oper_code = rtp_id_mr::_()->get_rtpid_attr(*itr,dst_rtpid_attr);
+            if (oper_code < 0)
+            {
+                oper_code =-8;
+                reason.assign("pro dst_rtp_ids get_rtp_id_attr fail!");
+                break;
+            }
+
+            if ( dir_recvonly == dst_rtpid_attr.direction)//sendonly
+            {
+                reason.assign("dst rtpid direction error pro fail!");
+                oper_code =-9;
+                break;
+            }
+
+            int trans_srcno = dst_rtpid_attr.srcno;
+
+            //移除媒体源转发目的地址
+            oper_code = common_ctrl_msg_mgr::_()->del_send_dst(trans_srcno,*itr,dst_rtpid_attr.sdp);
+            if (oper_code < 0)
+            {
+                reason.assign("del_send_dst fail!");
+                break;
+            }
+        }
+    }
+
+    //如果调整成功，返回200 OK，否则返回488拒绝
+    if (oper_code < 0)
+    {
+        WRITE_LOG(DBLOGINFO,ll_error,"re-invite_task_sip::run() oprater fail call_id[%s] oper_code[%d]",old_session.call_id.c_str(),oper_code);
+        common_ctrl_msg_mgr::_()->answer_Invite(old_session.call_id.c_str(), 488, ok_200_with_sdp.c_str());
+    }
+    else
+    {
+        WRITE_LOG(DBLOGINFO,ll_info,"answer re-Invite_sip: call_id[%s] ok_200_with_sdp[%s]\n", old_session.call_id.c_str(), ok_200_with_sdp.c_str());
+        common_ctrl_msg_mgr::_()->answer_Invite(old_session.call_id.c_str(), 200, ok_200_with_sdp.c_str());
+    }
+
+    delete this;
+    return 0;
+}
+
+//根据带sdp，更新rtpid管理器中sdp
+uint32_t ack_with_sdp_task_sip::run()
+{
+    do 
+    {
+        std_sip_session_t session;
+        long ret_code = common_ctrl_msg_mgr::_()->get_session(call_id_,session);
+        if (ret_code < 0)
+        {
+            WRITE_LOG(DBLOGINFO,ll_error,"ack_with_sdp_task_sip::run() get_session fail call_id[%s]",call_id_.c_str());
+            break;
+        }
+
+        WRITE_LOG(DBLOGINFO,ll_info,"ack_with_sdp,call_id[%s] sdp[%s]",call_id_.c_str(),sdp_.c_str());
+
+		//根据对端sdp，更新sdp到会话rtpid关联管理器，与invite带sdp功能一样
+        sdp_direction_t sdp_dir = common_ctrl_msg_mgr::_()->parse_sdp_direction(sdp_);
+        if (dir_sendrecv == sdp_dir)
+        {
+            std::string recv_sdp;
+            std::string send_sdp;
+            ret_code = XTEngine::_()->sip_transform_call_sdp_ex(recv_sdp,send_sdp,sdp_);
+            if (ret_code < 0)
+            {
+                WRITE_LOG(DBLOGINFO,ll_error,"ack_with_sdp_task_sip::run() sip_transform_call_sdp_ex fail call_id[%s]\n",call_id_.c_str());
+                break;
+            }
+
+			//目标rtpid与对端接收sdp关联管理
+            std_sip_session_t::rtp_id_container_handle_t itr = session.send_rtpid.begin();
+            for( ;session.send_rtpid.end() != itr;++itr)
+            {
+				WRITE_LOG(DBLOGINFO,ll_info,"ack with sdp recv_ call_id[%s] send_rtpid[%d]", 
+					call_id_.c_str(), *itr);
+                ret_code = rtp_id_mr::_()->update_sdp_by_rtpid(*itr,recv_sdp);
+                if (ret_code < 0)
+                {
+                    WRITE_LOG(DBLOGINFO,ll_error,"ack_with_sdp_task_sip::run() update_sdp_by_rtpid01 fail call_id[%s] rtp_id[%d]\n",call_id_.c_str(),*itr);
+                    continue;
+                }
+            }
+
+			//源rtpid与对端发送sdp关联管理
+            itr = session.recv_rtpid.begin();
+            for( ;session.recv_rtpid.end() != itr;++itr)
+            {
+				WRITE_LOG(DBLOGINFO,ll_info,"ack with sdp send_ call_id[%s] recv_rtpid[%d]", 
+					call_id_.c_str(), *itr);
+                ret_code = rtp_id_mr::_()->update_sdp_by_rtpid(*itr,send_sdp);
+                if (ret_code < 0)
+                {
+                    WRITE_LOG(DBLOGINFO,ll_error,"ack_with_sdp_task_sip::run() update_sdp_by_rtpid02 fail call_id[%s] rtp_id[%d]\n",call_id_.c_str(),*itr);
+                    continue;
+                }
+            }
+        }
+        else if (dir_sendonly == sdp_dir)
+        {
+			//源rtpid与对端发送sdp关联管理
+            std_sip_session_t::rtp_id_container_handle_t itr = session.recv_rtpid.begin();
+            for( ;session.recv_rtpid.end() != itr;++itr)
+            {
+				WRITE_LOG(DBLOGINFO,ll_info,"ack with sdp sendonly call_id[%s] recv_rtpid[%d]", 
+					call_id_.c_str(), *itr);
+                ret_code = rtp_id_mr::_()->update_sdp_by_rtpid(*itr,sdp_);
+                if (ret_code < 0)
+                {
+                    WRITE_LOG(DBLOGINFO,ll_error,"ack_with_sdp_task_sip::run() update_sdp_by_rtpid03 fail call_id[%s] rtp_id[%d]\n",call_id_.c_str(),*itr);
+                    continue;
+                }
+            }
+        }
+		else if (dir_recvonly == sdp_dir)
+		{
+			//源rtpid与对端发送sdp关联管理
+			std_sip_session_t::rtp_id_container_handle_t itr = session.send_rtpid.begin();
+			for( ;session.send_rtpid.end() != itr;++itr)
+			{
+				WRITE_LOG(DBLOGINFO,ll_info,"ack with sdp recvonly call_id[%s] send_rtpid[%d]", 
+					call_id_.c_str(), *itr);
+				ret_code = rtp_id_mr::_()->update_sdp_by_rtpid(*itr,sdp_);
+				if (ret_code < 0)
+				{
+					WRITE_LOG(DBLOGINFO,ll_error,"ack_with_sdp_task_sip::run() update_sdp_by_rtpid04 fail call_id[%s] rtp_id[%d]\n",call_id_.c_str(),*itr);
+					continue;
+				}
+			}
+		}
+        else
+        {
+            WRITE_LOG(DBLOGINFO,ll_error,"ack_with_sdp_task_sip::run() sdp format error call_id[%s]",call_id_.c_str());
+        } 
+
+    } while (0);
+
+    delete this;
+    return 0;
+}
+
+//根据收到switchset消息中src的rtpid标记rtp流转发到dst中的rtpid标记rtp流
+uint32_t switchset_task_sip::run()
+{
+    long oper_code = 0;
+    std::string reason;
+    do
+    {
+		//根据消息中源rtpid取出组帧sdp，源只有一个，目标可以有多个
+        rtp_id_attr_t src_rtp_id_attr;
+        oper_code = rtp_id_mr::_()->get_rtpid_attr(switchset_data_.src_rtp_id,src_rtp_id_attr);
+        if (oper_code < 0)
+        {
+            oper_code =-1;
+            reason.assign("get_rtp_id_attr fail!");
+            break;
+        }
+        if ( dir_recvonly != src_rtp_id_attr.direction)//recvonly
+        {
+            oper_code = -2;
+            reason.assign("src rtpid direction not recvonly error!");
+            break;
+        }
+
+        //保存组帧sdp
+        dev_handle_t recv_dev_handle = src_rtp_id_attr.dev_handle;
+        std::string recv_sdp = src_rtp_id_attr.sdp;
+        std::size_t recv_sdp_len = src_rtp_id_attr.sdp.length();
+        oper_code = XTEngine::_()->save_sdp_to_access(recv_dev_handle,recv_sdp.c_str(),recv_sdp_len);
+        if (oper_code < 0)
+        {
+            oper_code = -3;
+            reason.assign("save sdp to access lib fail!");
+            break;
+        }
+        WRITE_LOG(DBLOGINFO,ll_info,"switchset src dir[%d] m_name[%s] rtpid[%d] sdp[%s]",
+			src_rtp_id_attr.direction,src_rtp_id_attr.m_name.c_str(),src_rtp_id_attr.rtp_id,src_rtp_id_attr.sdp.c_str());
+
+		//根据消息中目标rtpid取出转发sdp，一个源对应多个目标
+        long pro_dst_ret = 0;
+        switchset_data_t::dst_container_handle_t itr = switchset_data_.dst_rtp_ids.begin();
+        for(;switchset_data_.dst_rtp_ids.end() != itr; ++itr)
+        {
+            rtp_id_attr_t dst_rtpid_attr;
+            pro_dst_ret = rtp_id_mr::_()->get_rtpid_attr(*itr,dst_rtpid_attr);
+            if (pro_dst_ret < 0)
+            {
+                oper_code =-6;
+                reason.assign("pro dst_rtp_ids get_rtp_id_attr fail!");
+                break;
+            }
+
+            if ( dir_recvonly == dst_rtpid_attr.direction)//sendonly
+            {
+                reason.assign("dst rtpid direction error pro fail!");
+                oper_code =-7;
+                break;
+            }
+
+            int trans_srcno = dst_rtpid_attr.srcno;
+
+            //保存sdp到转发库
+            pro_dst_ret = XTEngine::_()->save_sdp_to_srv(trans_srcno,recv_sdp);
+            if (pro_dst_ret < 0)
+            {
+                oper_code=-8;
+                reason.assign("save_sdp_to_srv failed!");
+                break;
+            }
+
+            //根据handle从media_device中找出strmid
+            device_link_t dev_info;
+            long ret = media_device::instance()->find_link(recv_dev_handle, dev_info);
+            if (ret < 0)
+            {
+                oper_code=-9;
+                reason.assign("save_sdp_to_srv failed!");
+                break;
+            }
+
+            ret = XTEngine::_()->update_access_info_of_src(trans_srcno,dev_info.strmid,recv_dev_handle);
+            if (ret < 0)
+            {
+                reason.assign("pro dst rtpid update_src fail!");
+                oper_code = -10;
+                break;
+            }
+
+			//日志打印目标sdp
+			WRITE_LOG(DBLOGINFO,ll_info,"switchset dst dir[%d] m_name[%s] rtpid[%d] sdp[%s]",
+				dst_rtpid_attr.direction,dst_rtpid_attr.m_name.c_str(),dst_rtpid_attr.rtp_id,dst_rtpid_attr.sdp.c_str());
+
+            //加入媒体源转发目的地址
+            pro_dst_ret = common_ctrl_msg_mgr::_()->add_send_dst(trans_srcno,*itr,dst_rtpid_attr.sdp);
+            if (pro_dst_ret < 0)
+            {
+                reason.assign("add_send_dst fail!");
+                oper_code = -11;
+                break;
+            }
+        }
+
+        if (pro_dst_ret < 0)
+        {
+            oper_code = -7;
+            break;
+        }
+
+    } while (0);
+
+    //回复状态
+    if (oper_code < 0)
+    {
+        WRITE_LOG(DBLOGINFO,ll_error,"switchset fail reason[%s] oper_code[%d]",
+			reason.c_str(), oper_code);
+        common_ctrl_msg_mgr::_()->response_optstatus_fail(reason.c_str());
+    }
+    else
+    {
+        common_ctrl_msg_mgr::_()->response_optstatus_ok(); 
+        common_ctrl_msg_mgr::_()->response_chanstatus("establish");
+    }
+
+    delete this;
+    return 0;
+}
+
+//根据callid找到bye对应会话，处理停止点播工作
+uint32_t invite_bye_task_sip::run()
+{
+    long oper_code = 0;
+    std::string reason;
+    do
+    {
+        WRITE_LOG(DBLOGINFO,ll_info,"invite_bye call_id[%s]",call_id_.c_str());
+        std_sip_session_t session;
+        oper_code = common_ctrl_msg_mgr::_()->get_session(call_id_,session);
+        if (oper_code < 0)
+        {
+            oper_code = -1;
+            reason.assign("pro bye get_session fail!");
+            break;
+        }
+
+        rtp_id_attr_t rtp_id_attr;
+        std_sip_session_t::rtp_id_container_handle_t itr = session.send_rtpid.begin();
+        for(;session.send_rtpid.end() != itr; ++itr)
+        {
+            oper_code = rtp_id_mr::_()->get_rtpid_attr(*itr,rtp_id_attr);
+            if (oper_code < 0)
+            {
+                oper_code = -2;
+                reason.assign("pro bye get_rtp_id_attr fail!");
+                break;
+            }
+            //根据源id销毁转发源，删除相关回话与发送单元
+            oper_code = XTEngine::_()->destroy_src(rtp_id_attr.srcno);
+            if (oper_code < 0 )
+            {
+                oper_code = -3;
+                reason.assign("pro bye destroy_src fail!");
+                break;
+            }
+        }
+
+        itr = session.recv_rtpid.begin();
+        for (; session.recv_rtpid.end() != itr; ++itr)
+        {
+            oper_code = rtp_id_mr::_()->get_rtpid_attr(*itr,rtp_id_attr);
+            if (oper_code < 0)
+            {
+                oper_code = -2;
+                reason.assign("pro bye get_rtp_id_attr fail!");
+                break;
+            }
+            //根据dev_handle关闭捕获数据数据，数据不会抛上来转发
+            oper_code = XTEngine::_()->rtp_close_recv(rtp_id_attr.dev_handle);
+        }
+        //////////////////////////////////////////////////////////////////////
+        //$注意：如果交换重启或者bye之后中心未清理对应rtpid资源，rtpid对应不上导致转发失败
+        //rtpid管理器清理
+		rtp_dst_info_t dst_info;
+        itr = session.send_rtpid.begin();
+        for(;session.send_rtpid.end() != itr; ++itr)
+        {
+			rtp_id_mr::_()->del_rtp_dst_to_rtpid(*itr, dst_info);
+			rtp_id_mr::_()->free_rtpid(*itr);
+        }
+
+        itr = session.recv_rtpid.begin();
+        for (; session.recv_rtpid.end() != itr; ++itr)
+        {
+			rtp_id_mr::_()->free_rtpid(*itr);
+        }
+        //会话管理器清理
+        common_ctrl_msg_mgr::_()->del_session(call_id_);
+
+    } while (0);
+
+	//回复状态
+    if (oper_code < 0)
+    {
+        WRITE_LOG(DBLOGINFO,ll_error,"invite_bye_sip fail reason[%s] oper_code[%d]",reason.c_str(),oper_code);
+        common_ctrl_msg_mgr::_()->response_optstatus_fail(reason.c_str());
+    }
+    else
+    {
+        common_ctrl_msg_mgr::_()->response_optstatus_ok();
+        common_ctrl_msg_mgr::_()->response_chanstatus("cleanup");
+    }
+    delete this;
+    return 0;
+}
+#endif //##ifndef _USE_COMMON_CTRL_MSG_

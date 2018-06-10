@@ -1,0 +1,55 @@
+INCLUDES +=  -I.  -I../../third_library -I../../include -I../../include/xt_mp_caster \
+           -I../../include/rv_adapter  -I../../share -I../../third_library/xt_sip/include/ \
+		   -I../../third_library/xt_sdp/include/
+CPP_FLAGS += -Wall 
+AR_FLAGS += -r 
+
+CC = arm-hisiv300-linux-uclibcgnueabi-g++ $(INCLUDES)  -fvisibility=hidden -c -fPIC -g
+
+#AR = ar
+LD      = ld
+LDFLAGS := -fPIC -shared
+
+BIN :=../../bin/arm
+LIB_PATH := -L$(BIN) -L../../third_library/boost/lib/arm
+LIB  := -lpthread -lm -lxt_session_server -lxt_mp_caster  -ludp_session_server -ltcp_session_server \
+			-lxt_rtsp_server -lrvrtspserver -lrvsdp_rtspserver -lrvrtsp_server \
+			-lxt_xml -lrv_adapter -lrv32rtp -lrvcommon -ltghelper -lxt_tcp\
+			-lxt_sdp -lxt_sip -lresipares -lboost_thread-mt -lboost_filesystem-mt -lboost_system-mt -lboost_date_time-mt -lboost_atomic-mt
+
+TRARGET  := $(BIN)/libxt_media_server.so
+
+ALLOBJS := XTChan.o XTMediaServer.o  XTRtp.o XTSession.o XTSrc.o XTSingleSrc.o Log.o  RunInfoMgr.o xt_session_sip.o xt_regist_client.o
+
+$(TRARGET) : $(ALLOBJS)
+	echo $(ALLOBJS)
+	arm-hisiv300-linux-uclibcgnueabi-g++ $(LDFLAGS)  $(ALLOBJS) -o $@	$(LIB_PATH) $(LIB) 
+	#arm-hisiv300-linux-uclibcgnueabi-strip $(TRARGET)
+	cp h_xtmediaserver.h ../../include
+
+XTChan.o : XTChan.cpp XTChan.h
+	$(CC) -o $@ $< 
+XTMediaServer.o : XTMediaServer.cpp
+	$(CC) -o $@ $<
+XTRtp.o : XTRtp.cpp XTRtp.h
+	$(CC) -o $@ $<
+XTSession.o : XTSession.cpp XTSession.h
+	$(CC) -o $@ $<
+xt_regist_client.o : xt_regist_client.cpp xt_regist_client.h
+	$(CC) -o $@ $<
+XTSrc.o : XTSrc.cpp XTSrc.h
+	$(CC) -o $@ $<
+XTSingleSrc.o : XTSingleSrc.cpp XTSingleSrc.h
+	$(CC) -o $@ $<
+Log.o : Log.cpp Log.h
+	$(CC) -o $@ $<
+XTTcp.o : XTTcp.cpp XTTcp.h
+	$(CC) -o $@ $<
+RunInfoMgr.o : RunInfoMgr.cpp RunInfoMgr.h
+	$(CC) -o $@ $<
+xt_session_sip.o : xt_session_sip.cpp xt_session_sip.h
+	$(CC) -o $@ $<
+
+clean:
+	-$(RM) -f $(TRARGET) *.o *~ *.a
+

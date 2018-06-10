@@ -1,0 +1,129 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "rvcommon_rtspclient", "common\rvcommon.vcproj", "{ED879950-98E0-489A-82CC-37AA396657F7}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "rvrtsp_client", "rtsp\rvrtsp.vcproj", "{1F986301-436E-40B6-8617-89CFF87429AB}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "rvsdp_rtspclient", "sdp\sdp.vcproj", "{9D06BD8B-CE02-4D82-82AD-318BE0C270FC}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "rvrtspclient", "rtsp\client\rvrtspclient.vcproj", "{4C040689-5701-417F-B0C3-CE69BC9C1458}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Debug|x64 = Debug|x64
+		DebugDns|Win32 = DebugDns|Win32
+		DebugDns|x64 = DebugDns|x64
+		DebugIpv6DnsTls|Win32 = DebugIpv6DnsTls|Win32
+		DebugIpv6DnsTls|x64 = DebugIpv6DnsTls|x64
+		DebugTls|Win32 = DebugTls|Win32
+		DebugTls|x64 = DebugTls|x64
+		Release|Win32 = Release|Win32
+		Release|x64 = Release|x64
+		ReleaseDns|Win32 = ReleaseDns|Win32
+		ReleaseDns|x64 = ReleaseDns|x64
+		ReleaseTls|Win32 = ReleaseTls|Win32
+		ReleaseTls|x64 = ReleaseTls|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ED879950-98E0-489A-82CC-37AA396657F7}.Debug|Win32.ActiveCfg = Debug|Win32
+		{ED879950-98E0-489A-82CC-37AA396657F7}.Debug|Win32.Build.0 = Debug|Win32
+		{ED879950-98E0-489A-82CC-37AA396657F7}.Debug|x64.ActiveCfg = Debug|Win32
+		{ED879950-98E0-489A-82CC-37AA396657F7}.DebugDns|Win32.ActiveCfg = DebugDns|Win32
+		{ED879950-98E0-489A-82CC-37AA396657F7}.DebugDns|Win32.Build.0 = DebugDns|Win32
+		{ED879950-98E0-489A-82CC-37AA396657F7}.DebugDns|x64.ActiveCfg = DebugDns|Win32
+		{ED879950-98E0-489A-82CC-37AA396657F7}.DebugIpv6DnsTls|Win32.ActiveCfg = DebugIpv6DnsTls|Win32
+		{ED879950-98E0-489A-82CC-37AA396657F7}.DebugIpv6DnsTls|Win32.Build.0 = DebugIpv6DnsTls|Win32
+		{ED879950-98E0-489A-82CC-37AA396657F7}.DebugIpv6DnsTls|x64.ActiveCfg = DebugIpv6DnsTls|Win32
+		{ED879950-98E0-489A-82CC-37AA396657F7}.DebugTls|Win32.ActiveCfg = DebugTls|Win32
+		{ED879950-98E0-489A-82CC-37AA396657F7}.DebugTls|Win32.Build.0 = DebugTls|Win32
+		{ED879950-98E0-489A-82CC-37AA396657F7}.DebugTls|x64.ActiveCfg = DebugTls|Win32
+		{ED879950-98E0-489A-82CC-37AA396657F7}.Release|Win32.ActiveCfg = Release|Win32
+		{ED879950-98E0-489A-82CC-37AA396657F7}.Release|Win32.Build.0 = Release|Win32
+		{ED879950-98E0-489A-82CC-37AA396657F7}.Release|x64.ActiveCfg = Release|Win32
+		{ED879950-98E0-489A-82CC-37AA396657F7}.ReleaseDns|Win32.ActiveCfg = ReleaseDns|Win32
+		{ED879950-98E0-489A-82CC-37AA396657F7}.ReleaseDns|Win32.Build.0 = ReleaseDns|Win32
+		{ED879950-98E0-489A-82CC-37AA396657F7}.ReleaseDns|x64.ActiveCfg = ReleaseDns|Win32
+		{ED879950-98E0-489A-82CC-37AA396657F7}.ReleaseTls|Win32.ActiveCfg = ReleaseTls|Win32
+		{ED879950-98E0-489A-82CC-37AA396657F7}.ReleaseTls|Win32.Build.0 = ReleaseTls|Win32
+		{ED879950-98E0-489A-82CC-37AA396657F7}.ReleaseTls|x64.ActiveCfg = ReleaseTls|Win32
+		{1F986301-436E-40B6-8617-89CFF87429AB}.Debug|Win32.ActiveCfg = Debug|Win32
+		{1F986301-436E-40B6-8617-89CFF87429AB}.Debug|Win32.Build.0 = Debug|Win32
+		{1F986301-436E-40B6-8617-89CFF87429AB}.Debug|x64.ActiveCfg = Debug|x64
+		{1F986301-436E-40B6-8617-89CFF87429AB}.Debug|x64.Build.0 = Debug|x64
+		{1F986301-436E-40B6-8617-89CFF87429AB}.DebugDns|Win32.ActiveCfg = Debug|x64
+		{1F986301-436E-40B6-8617-89CFF87429AB}.DebugDns|x64.ActiveCfg = Debug|x64
+		{1F986301-436E-40B6-8617-89CFF87429AB}.DebugDns|x64.Build.0 = Debug|x64
+		{1F986301-436E-40B6-8617-89CFF87429AB}.DebugIpv6DnsTls|Win32.ActiveCfg = Debug|x64
+		{1F986301-436E-40B6-8617-89CFF87429AB}.DebugIpv6DnsTls|x64.ActiveCfg = Debug|x64
+		{1F986301-436E-40B6-8617-89CFF87429AB}.DebugIpv6DnsTls|x64.Build.0 = Debug|x64
+		{1F986301-436E-40B6-8617-89CFF87429AB}.DebugTls|Win32.ActiveCfg = Debug|x64
+		{1F986301-436E-40B6-8617-89CFF87429AB}.DebugTls|x64.ActiveCfg = Debug|x64
+		{1F986301-436E-40B6-8617-89CFF87429AB}.DebugTls|x64.Build.0 = Debug|x64
+		{1F986301-436E-40B6-8617-89CFF87429AB}.Release|Win32.ActiveCfg = Release|Win32
+		{1F986301-436E-40B6-8617-89CFF87429AB}.Release|Win32.Build.0 = Release|Win32
+		{1F986301-436E-40B6-8617-89CFF87429AB}.Release|x64.ActiveCfg = Release|x64
+		{1F986301-436E-40B6-8617-89CFF87429AB}.Release|x64.Build.0 = Release|x64
+		{1F986301-436E-40B6-8617-89CFF87429AB}.ReleaseDns|Win32.ActiveCfg = Release|x64
+		{1F986301-436E-40B6-8617-89CFF87429AB}.ReleaseDns|x64.ActiveCfg = Release|x64
+		{1F986301-436E-40B6-8617-89CFF87429AB}.ReleaseDns|x64.Build.0 = Release|x64
+		{1F986301-436E-40B6-8617-89CFF87429AB}.ReleaseTls|Win32.ActiveCfg = Release|x64
+		{1F986301-436E-40B6-8617-89CFF87429AB}.ReleaseTls|x64.ActiveCfg = Release|x64
+		{1F986301-436E-40B6-8617-89CFF87429AB}.ReleaseTls|x64.Build.0 = Release|x64
+		{9D06BD8B-CE02-4D82-82AD-318BE0C270FC}.Debug|Win32.ActiveCfg = Debug|Win32
+		{9D06BD8B-CE02-4D82-82AD-318BE0C270FC}.Debug|Win32.Build.0 = Debug|Win32
+		{9D06BD8B-CE02-4D82-82AD-318BE0C270FC}.Debug|x64.ActiveCfg = Debug|x64
+		{9D06BD8B-CE02-4D82-82AD-318BE0C270FC}.Debug|x64.Build.0 = Debug|x64
+		{9D06BD8B-CE02-4D82-82AD-318BE0C270FC}.DebugDns|Win32.ActiveCfg = DebugDns|Win32
+		{9D06BD8B-CE02-4D82-82AD-318BE0C270FC}.DebugDns|Win32.Build.0 = DebugDns|Win32
+		{9D06BD8B-CE02-4D82-82AD-318BE0C270FC}.DebugDns|x64.ActiveCfg = DebugDns|x64
+		{9D06BD8B-CE02-4D82-82AD-318BE0C270FC}.DebugDns|x64.Build.0 = DebugDns|x64
+		{9D06BD8B-CE02-4D82-82AD-318BE0C270FC}.DebugIpv6DnsTls|Win32.ActiveCfg = DebugIpv6DnsTls|Win32
+		{9D06BD8B-CE02-4D82-82AD-318BE0C270FC}.DebugIpv6DnsTls|Win32.Build.0 = DebugIpv6DnsTls|Win32
+		{9D06BD8B-CE02-4D82-82AD-318BE0C270FC}.DebugIpv6DnsTls|x64.ActiveCfg = DebugIpv6DnsTls|x64
+		{9D06BD8B-CE02-4D82-82AD-318BE0C270FC}.DebugIpv6DnsTls|x64.Build.0 = DebugIpv6DnsTls|x64
+		{9D06BD8B-CE02-4D82-82AD-318BE0C270FC}.DebugTls|Win32.ActiveCfg = DebugTls|Win32
+		{9D06BD8B-CE02-4D82-82AD-318BE0C270FC}.DebugTls|Win32.Build.0 = DebugTls|Win32
+		{9D06BD8B-CE02-4D82-82AD-318BE0C270FC}.DebugTls|x64.ActiveCfg = DebugTls|x64
+		{9D06BD8B-CE02-4D82-82AD-318BE0C270FC}.DebugTls|x64.Build.0 = DebugTls|x64
+		{9D06BD8B-CE02-4D82-82AD-318BE0C270FC}.Release|Win32.ActiveCfg = Release|Win32
+		{9D06BD8B-CE02-4D82-82AD-318BE0C270FC}.Release|Win32.Build.0 = Release|Win32
+		{9D06BD8B-CE02-4D82-82AD-318BE0C270FC}.Release|x64.ActiveCfg = Release|x64
+		{9D06BD8B-CE02-4D82-82AD-318BE0C270FC}.Release|x64.Build.0 = Release|x64
+		{9D06BD8B-CE02-4D82-82AD-318BE0C270FC}.ReleaseDns|Win32.ActiveCfg = ReleaseDns|Win32
+		{9D06BD8B-CE02-4D82-82AD-318BE0C270FC}.ReleaseDns|Win32.Build.0 = ReleaseDns|Win32
+		{9D06BD8B-CE02-4D82-82AD-318BE0C270FC}.ReleaseDns|x64.ActiveCfg = ReleaseDns|x64
+		{9D06BD8B-CE02-4D82-82AD-318BE0C270FC}.ReleaseDns|x64.Build.0 = ReleaseDns|x64
+		{9D06BD8B-CE02-4D82-82AD-318BE0C270FC}.ReleaseTls|Win32.ActiveCfg = ReleaseTls|Win32
+		{9D06BD8B-CE02-4D82-82AD-318BE0C270FC}.ReleaseTls|Win32.Build.0 = ReleaseTls|Win32
+		{9D06BD8B-CE02-4D82-82AD-318BE0C270FC}.ReleaseTls|x64.ActiveCfg = ReleaseTls|x64
+		{9D06BD8B-CE02-4D82-82AD-318BE0C270FC}.ReleaseTls|x64.Build.0 = ReleaseTls|x64
+		{4C040689-5701-417F-B0C3-CE69BC9C1458}.Debug|Win32.ActiveCfg = Debug|Win32
+		{4C040689-5701-417F-B0C3-CE69BC9C1458}.Debug|Win32.Build.0 = Debug|Win32
+		{4C040689-5701-417F-B0C3-CE69BC9C1458}.Debug|x64.ActiveCfg = Debug|x64
+		{4C040689-5701-417F-B0C3-CE69BC9C1458}.Debug|x64.Build.0 = Debug|x64
+		{4C040689-5701-417F-B0C3-CE69BC9C1458}.DebugDns|Win32.ActiveCfg = Debug|x64
+		{4C040689-5701-417F-B0C3-CE69BC9C1458}.DebugDns|x64.ActiveCfg = Debug|x64
+		{4C040689-5701-417F-B0C3-CE69BC9C1458}.DebugDns|x64.Build.0 = Debug|x64
+		{4C040689-5701-417F-B0C3-CE69BC9C1458}.DebugIpv6DnsTls|Win32.ActiveCfg = Debug|x64
+		{4C040689-5701-417F-B0C3-CE69BC9C1458}.DebugIpv6DnsTls|x64.ActiveCfg = Debug|x64
+		{4C040689-5701-417F-B0C3-CE69BC9C1458}.DebugIpv6DnsTls|x64.Build.0 = Debug|x64
+		{4C040689-5701-417F-B0C3-CE69BC9C1458}.DebugTls|Win32.ActiveCfg = Debug|x64
+		{4C040689-5701-417F-B0C3-CE69BC9C1458}.DebugTls|x64.ActiveCfg = Debug|x64
+		{4C040689-5701-417F-B0C3-CE69BC9C1458}.DebugTls|x64.Build.0 = Debug|x64
+		{4C040689-5701-417F-B0C3-CE69BC9C1458}.Release|Win32.ActiveCfg = Release|Win32
+		{4C040689-5701-417F-B0C3-CE69BC9C1458}.Release|Win32.Build.0 = Release|Win32
+		{4C040689-5701-417F-B0C3-CE69BC9C1458}.Release|x64.ActiveCfg = Release|x64
+		{4C040689-5701-417F-B0C3-CE69BC9C1458}.Release|x64.Build.0 = Release|x64
+		{4C040689-5701-417F-B0C3-CE69BC9C1458}.ReleaseDns|Win32.ActiveCfg = Release|x64
+		{4C040689-5701-417F-B0C3-CE69BC9C1458}.ReleaseDns|x64.ActiveCfg = Release|x64
+		{4C040689-5701-417F-B0C3-CE69BC9C1458}.ReleaseDns|x64.Build.0 = Release|x64
+		{4C040689-5701-417F-B0C3-CE69BC9C1458}.ReleaseTls|Win32.ActiveCfg = Release|x64
+		{4C040689-5701-417F-B0C3-CE69BC9C1458}.ReleaseTls|x64.ActiveCfg = Release|x64
+		{4C040689-5701-417F-B0C3-CE69BC9C1458}.ReleaseTls|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

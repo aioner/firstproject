@@ -1,0 +1,120 @@
+========================================================================
+    动态库：xt_mp_caster 项目生产历史记录
+========================================================================
+
+记录时间：2012.5.16 17:05
+版本：0.0.15
+更新人：汤戈
+更新描述：
+1、增加BC_MP的组播输出设置配置。
+2、增加Proxy_MP的组播接收设置配置。	
+
+
+记录时间：2012.5.5 9:15
+版本：0.0.14
+更新人：汤戈
+更新描述：
+1、修改mp_caster.cpp中函数caster::add_rtp_sink()的内部调用错误。
+	BROADCAST_MP/PROXY_MP分别有各自的映射add_rtp_sink函数。
+2、调整mp_caster_config.h中MP_MSSRC_TASK_LOCK_TM/MP_MSINK_TASK_LOCK_TM = 1。	
+	
+
+记录时间：2012.5.3 11:39
+版本：0.0.13
+更新人：汤戈
+更新描述：
+1、修改bc_mp的pump_frame_in()函数中rv_rtp_param参数设置过程，补充了sequenceNumber计数功能，配合
+rv_adapter 0.0.10解决发送RTP数据紊乱问题。
+2、修改mp_caster.cpp中针对proxy_mp的析构流程，补充了提前释放mssrc_rv_rtp的过程，确保proxy_mp能正常退出
+
+记录时间：2012.4.28 15:39
+版本：0.0.12
+更新人：汤戈
+更新描述：
+1、调整mp_caster_config.h中有关缓冲区的配置。
+	
+记录时间：2012.4.26 15:15
+版本：0.0.11
+更新人：汤戈
+更新描述：
+1、修正bc_mp.cpp中bc_mp::pump_frame_in()的内部合成时间戳错误，未考虑用户连续调用该接口导致计算时差为0。
+	修改后为至少有2700的时戳偏移。
+
+记录时间：2012.4.19 9:52
+版本：0.0.10
+更新人：汤戈
+更新描述：
+1、修正bc_mp.cpp中bc_mp::pump_frame_in()的内部合成时间戳错误，仅计算了时戳差值，未累计错误。
+
+记录时间：2012.4.13 14:16
+版本：0.0.9
+更新人：汤戈
+更新描述：
+1、修正mp_caster.cpp中caster::add_rtp_sink()入口条件判断限制，由原来仅限BROADCAST_MP扩展至
+	BROADCAST_MP和PROXY_MP
+
+
+记录时间：2012.4.12 9:41
+版本：0.0.8
+更新人：汤戈
+更新描述：
+1、mp.cpp中mp_pools::buildObjectPools()增加RV_RTP_MSSRC池构造
+2、mp.cpp中mp_pools::forceAllocObject()增加RV_RTP_MSSRC构造
+3、mp.cpp中mp_pools::forceAllocObject()修正PROXY_MP构造Bug, 原有错误的将其置为mssrc_rv_rtp
+
+记录时间：2012.4.11 14:58
+版本：0.0.7
+更新人：汤戈
+更新描述：
+1、增加获取当前库版本函数get_mp_caster_version()
+
+记录时间：2012.4.10 13:29
+版本：0.0.6
+更新人：汤戈
+更新描述：
+1、修改xt_mp_caster_def.h中有关公共头文件引用错误
+2、修改xt_mp_def.h中有关公共头文件引用错误
+
+
+记录时间：2012.4.7 01:30
+版本：0.0.5
+更新人：汤戈
+更新描述：
+1、修改mp_caster_config.h中有关fifo的配置定义，确保整个库的实用性
+
+
+记录时间：2012.4.6 13:36
+版本：0.0.4
+更新人：汤戈
+更新描述：
+1、增加proxy_mp组件，提供自接收的转发广播模式
+2、修改mp_caster.cpp中的caster::close_mp()函数，增加了等待mp资源引用计数的机制，
+   确保函数调用后mp资源正常退出。某些测试用例下，原有的做法会导致内存泄露
+
+记录时间：2012.4.5 9:49
+版本：0.0.3
+更新人：汤戈
+更新描述：
+1、增加mssrc_rv_rtp数据源类型，其中xt_mp_caster_def.h->mssrc_type增加类型项
+2、增加bc_mp根据关注数量决定是否允许媒体数据推入的功能，避免中没有分发目标时的盲目数据交换
+3、增加msink_rv_rtp::open函数中set_rtp_transmit_buffer_size()调用，参数设置值参考mp_caster_config.h中定义
+
+
+记录时间：2012.3.28 11:01
+版本：0.0.2
+更新人：汤戈
+更新描述：
+1、测试用例集tc_bc_mp解决BugList
+	a、修订caster_engine析构函数没有正确调用stop函数，导致内存泄露
+	b、修订caster::open函数没有中成功路径上为返回hmp参数赋值，导致调用失败
+	c、修订bc_mp::add_rtp_sink函数处理sink->open返回值时的错误，误将true当失败流程处理
+	d、xt_mp_caster_api.h中del_sink函数增加参数MP_IN mp_h hmp用于定位宿主列表
+	e、修订bc_mp::pump_frame_in函数中mrtp的分配机制，配合tghelper-0.0.9的any_byte_pool组件
+	   如采用原有的byte_pool将引起段操作错误。
+
+
+记录时间：2012.3.23 14:53
+版本：0.0.1
+更新人：汤戈
+更新描述：
+1、建立库框架和相关测试用例。

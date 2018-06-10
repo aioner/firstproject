@@ -1,0 +1,275 @@
+#ifndef STD_SIP_ENGINE_H__
+#define STD_SIP_ENGINE_H__
+
+#ifndef _USE_COMMON_CTRL_MSG_
+#include <boost/noncopyable.hpp>
+#include <boost/thread.hpp>
+#include <boost/thread/shared_mutex.hpp>
+#include "common_type.h"
+#include "xt_sip_api.h"
+#include "xt_sip_api_types.h"
+#ifdef _WIN32
+#pragma comment(lib,"xt_sip.lib")
+#endif //#ifdef _WIN32
+
+#include "sdp.h"
+#include "parse_buffer.h"
+
+typedef enum
+{
+    SIP_FOR_NA=-1,
+    SIP_FOR_TCP=0,
+    SIP_FOR_UDP=1,
+    SIP_FOR_TCP_UDP=2
+} sip_for_trans_protocol_t;
+
+typedef enum
+{
+    SIP_STATUS_OK=0,
+    SIP_STATUS_FAIL,
+    SIP_STATUS_PROTOCOL_ERR,
+    SIP_STATUS_USRE_IS_EMPTY,
+    SIP_STATUS_PWD_IS_EMPTY,
+    SIP_STATUS_DOMAIM_IS_EMPTY,
+    SIP_STATUS_CREATE_FAIL,
+    SIP_STATUS_PORT_IS_EMPTY,
+    SIP_STATUS_MALLOC_MEM_FAIL,
+    SIP_STATUS_TARGET_IS_EMPTY,
+}std_sip_status;
+
+typedef struct __struct_sip_cfg_info_type__
+{
+    //create cfg
+    uint32_t session_keep_alive_time_interval; //会话保活时间，单位：秒 [90, 180]秒 发送UPDATE
+    uint32_t registration_retry_time_interval; //注册重试时间
+    sip_for_trans_protocol_t protocol;   //传输协议 由sip_trans_protocol_t 进行"|"或运算得来有可能只使用tcp或udp与可能同时使用
+    uint32_t transport;  //sip 传输端口
+    uint16_t tls_port;  //传输层tls端口，填0表示不开启
+    uint16_t dtls_port;  //传输层dtls端口，填0表示不开启
+
+    //register cfg
+    uint32_t  expires;    //有两个意思 1、代理服务器过期时间 2、REGIST 刷新时间 [60, 3600]秒
+    uint32_t  link_keep_alive_time_interval; //链路保活时间 单位毫秒  发OPTION的时间 [25000, 90000]ms
+    uint32_t  regist_retry_time_interval; //REGIST 失败重试时间 [60,3600]s
+
+    uint32_t channle_type;                  //信道类型 此值由channel_t 或运算得到有可能是一种类型也可能是多种类型
+    uint32_t net_delay;                 //延时
+    uint32_t net_packetloss;            //丢包率
+    uint32_t net_mtu;                   //最大传输单元 默认：1500
+    uint32_t net_bandwidth;             //带宽
+    std::string main_domain;            //主域
+
+    typedef std::list<std::string> back_domain_t;
+    typedef back_domain_t::iterator back_domain_handle_t;
+    back_domain_t back_domains; //备域
+    std::string usre;
+    std::string pwd;
+}sip_cfg_info_t,*ptr_sip_cfg_info_t;
+
+typedef struct __struct_register_info_type__ 
+{
+    std::string target;
+    xt_sip_client_register_handle_t handle;
+
+    typedef __struct_register_info_type__ my_t;
+    __struct_register_info_type__():target(""),handle(XT_SIP_INVALID_HANDLE){};
+    bool operator==(const my_t& other)
+    {
+        return target == other.target;
+    }
+}register_info_t,*ptr_register_info_t;
+
+typedef enum
+{
+    SIP_INVITE=0,
+    SIP_REINVITE=1,
+}std_sip_session_type_t;
+
+typedef struct _struct_std_sip_session_type_
+{
+    std::string call_id;
+    std::string target;
+    std::string to; //通话对方的URI peerurl
+    std::string sdp;
+    uint32_t sdp_len;
+    xt_sip_client_register_handle_t reg_handle;
+    boost::posix_time::ptime creat_time;
+
+    typedef std::vector<rtp_id_t> rtp_id_container_t;
+    typedef rtp_id_container_t::iterator rtp_id_container_handle_t;
+    rtp_id_container_t send_rtp_ids;//保存会话中用于发送的sdp的rtpid
+    rtp_id_container_t recv_rtp_ids;//保存会话中用于接收的sdp的rtpid
+
+    typedef _struct_std_sip_session_type_ my_t;
+    my_t& operator=(const my_t& rf)
+    {
+        this->call_id = rf.call_id;
+        this->target = rf.target;
+        this->to = rf.to;
+        this->sdp = rf.sdp;
+        this->sdp_len = rf.sdp_len;
+        this->reg_handle = rf.reg_handle;
+        this->creat_time = rf.creat_time;
+        this->send_rtp_ids = rf.send_rtp_ids;
+        this->recv_rtp_ids = rf.recv_rtp_ids;
+        return *this;
+    }
+}std_sip_session_t,*ptr_std_sip_session_t;
+
+class std_sip_engine : boost::noncopyable
+{
+public:
+    static std_sip_engine* instance(){ return &self_;};
+    static std_sip_engine* _(){return &self_;};
+public:
+    int std_sip_start();
+    int std_sip_stop();
+
+    sdp_direction_t parse_sdp_direction(const std::string& sdp);
+
+    //sip 操作接口封装
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    void add_options(const char* target);
+    void del_options(const char* target);
+    void sip_client_register_request_refresh(const char* target);
+
+    //获取regist失败后重注册时间
+    inline const uint32_t get_regist_retry_time_interval() const
+    {
+        return cfg_info_.regist_retry_time_interval;
+    }
+
+    long parse_call_id_by_msg(const xt_sip_msg_handle_t msg,std::string& call_id);
+    long parse_from_by_msg(const xt_sip_msg_handle_t msg,std::string& from);
+    long parse_to_by_msg(const xt_sip_msg_handle_t msg,std::string& to);
+    long parse_content_body_by_msg(const xt_sip_msg_handle_t msg,std::string& ctx);
+
+    void response_optstatus_ok();
+    void response_optstatus_fail(const std::string& fail_case);
+    void response_chanstatus(char* ch_status);
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    //功能调度接口
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    long add_send_dst(const int srcno,const rtp_id_t rtpid,const std::string& dst_sdp);
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+private:
+    std_sip_status load_cfg();
+    std_sip_status start();
+    void stop();
+    std_sip_status regist();
+    void unregist();
+    void get_regist_target(std::list<std::string>& regist_target);
+
+protected:
+    std_sip_engine();
+    ~std_sip_engine();
+    static std_sip_engine self_;
+
+    //回调
+    //client 注册响应
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+public:
+    //uac注册响应的回调函数，success=0表示失败else成功
+    static void on_client_register_response(void *ctx, xt_sip_client_register_handle_t h, xt_sip_msg_handle_t msg, uint8_t success);
+
+    //uac注销响应的回调函数
+    static void on_client_register_removed(void *ctx, xt_sip_client_register_handle_t h, xt_sip_msg_handle_t msg);
+
+    //uac重复注册交互的回调函数，返回0表示立刻重新注册，返回<0表示不再重复注册，返回>0表示多少秒之后重新注册
+    static int on_client_register_request_retry(void *ctx, xt_sip_client_register_handle_t h, int retrysec, xt_sip_msg_handle_t msg);
+
+    //处理 server发过到的消息
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+public:
+    //收到INVITE 带 sdp
+    static void on_server_invite_offer(void *ctx, xt_sip_server_invite_handle_t h, xt_sip_msg_handle_t msg, const char *sdp, uint32_t len);
+
+    //收到INVITE 不带SDP
+    static void on_sip_server_invite_offer_required(void *ctx, xt_sip_server_invite_handle_t h, xt_sip_msg_handle_t msg);
+
+    //收到ACK 带 sdp
+    static void on_sip_server_invite_answer(void *ctx, xt_sip_server_invite_handle_t h, xt_sip_msg_handle_t msg, const char *sdp, uint32_t len);
+
+    //收到ACK 不带 sdp
+    static void on_server_invite_connected_confirmed(void *ctx, xt_sip_server_invite_handle_t h, xt_sip_msg_handle_t msg);
+
+    //收到BYE
+    static void on_sip_server_invite_terminated(void *ctx, xt_sip_server_invite_handle_t h, xt_sip_msg_handle_t msg, xt_sip_invite_terminated_reason_t reason);
+
+    //收到会话内的INFO
+    static void on_server_invite_info(void *ctx, xt_sip_server_invite_handle_t h, xt_sip_msg_handle_t msg);
+
+    //发送会话内的INFO操作结果
+    static void on_server_invite_info_response(void *ctx, xt_sip_server_invite_handle_t h, xt_sip_msg_handle_t msg, uint8_t success);
+
+    //收到会话内的MESSAGE
+    static void on_server_invite_message(void *ctx, xt_sip_server_invite_handle_t h, xt_sip_msg_handle_t msg);
+
+    //发送会话内的MESSAGE操作结果响应
+    static void on_server_invite_message_response(void *ctx, xt_sip_server_invite_handle_t h, xt_sip_msg_handle_t msg, uint8_t success);
+
+    //收到会话外的MESSAGE
+    static void on_server_message_arrived(void *ctx, xt_sip_server_message_handle_t h, xt_sip_msg_handle_t msg);
+
+    //OPTION失败响应
+    static int8_t on_xt_sip_heartbeat_not_pong_cb(void *ctx, const char *target,uint32_t count);
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    //注册信息管理
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //注册信息记录
+private:
+    boost::shared_mutex	 register_info_lst_mutex_;
+    typedef std::list<register_info_t> register_inf_container_t;
+    typedef register_inf_container_t::iterator register_inf_container_handel_t;
+    register_inf_container_t register_info_lst_;
+public:
+    void get_register_info(register_inf_container_t& register_info);
+    void add_regist_info(const register_info_t& inf);
+    void update_regist_info_handle(const std::string& target,const xt_sip_client_register_handle_t handle);
+    void del_regist_info(const std::string& target);
+    void del_regist_info(const register_info_t& inf);
+    xt_sip_client_register_handle_t get_register_handle(const char* target); 
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+private:
+    //配置信息
+    sip_cfg_info_t cfg_info_;
+    //sip 句柄
+    xt_sip_handle_t sip_hanle_;
+
+    //注销
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+private:
+    boost::recursive_mutex regist_removed_mutex_;//注销条件变量锁
+    boost::condition_variable_any regist_removed_condition_; //注消成功条件通知
+public:
+    //通知注消完成
+    void notify_regist_removed();
+    //等待注消完成
+    void wait_regist_removed(uint32_t outtime=10);
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    //会话管理
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+public:
+    typedef std::map<std::string,std_sip_session_t>  sip_session_mgr_container_t;
+    typedef std::map<std::string,std_sip_session_t>::iterator sip_session_mgr_container_handle_t;
+
+    void add_session(const std_sip_session_t& session);
+    void del_session(const std_sip_session_t& session);
+    void del_session(const std::string& call_id);
+    long get_session(const std::string& call_id,std_sip_session_t& session);
+    void add_send_rtp_id_to_session(const std::string& call_id,const rtp_id_t& rtp_id);
+    void add_recv_rtp_id_to_session(const std::string& call_id,const rtp_id_t& rtp_id);
+    long update_session(const std_sip_session_t& session);
+
+    std_sip_session_type_t get_session_type(const std::string& call_id);
+private:
+    boost::shared_mutex session_mgr_mutex_;
+    sip_session_mgr_container_t std_sip_session_mgr_lst;
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+};
+#endif//#ifndef _USE_COMMON_CTRL_MSG_
+#endif //#ifndef STD_SIP_ENGINE_H__

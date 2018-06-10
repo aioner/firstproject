@@ -1,0 +1,37 @@
+CC          := arm-hisiv300-linux-uclibcgnueabi-gcc
+CXX         := arm-hisiv300-linux-uclibcgnueabi-g++
+
+INC_PATH    := -I../../include  -I../RvRtsp/RvRtspServer/include -I../../third_library
+
+BIN         :=../../bin/arm
+LIB_PATH     := -L$(BIN) -L../../bin 
+LIB	        := -lpthread -lm -lrvrtspserver -lrvrtsp_server -lrvsdp_rtspserver -lrvcommon 
+
+MODULE_DEFINES :=-fPIC  -fvisibility=hidden -DLINUX -D_GNU_SOURCE -DXT_TCP_EXPORTS -DBOOST_ASIO_DISABLE_EPOLL -DOS_RAM
+CFLAGS	    := $(MODULE_DEFINES) -Wall -g -o  
+
+TARGET      := $(BIN)/libxt_rtsp_server.a
+
+SRCC	    := $(wildcard *.c)
+              
+COBJ	    := $(SRCC:.c=.o)
+
+SRCXX	    := $(wildcard *.cpp)
+CXXOBJ      := $(SRCXX:.cpp=.o)
+
+OBJ	    := $(COBJ) $(CXXOBJ)
+
+$(TARGET):$(OBJ)
+	ar rcs $(TARGET) $(OBJ) 
+
+	cp ./h_rtspserver.h ../../include
+
+$(COBJ):%.o:%.c 
+	$(CC)  $(INC_PATH) $(CFLAGS) $@ -c $<
+
+$(CXXOBJ):%.o:%.cpp 
+	$(CXX) $(INC_PATH) $(CFLAGS) $@ -c $<
+
+.PHONY:clean
+clean:
+	-$(RM) -f $(TARGET) *.a *.o *~ 

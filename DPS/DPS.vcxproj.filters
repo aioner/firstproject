@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="src">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="src\framework">
+      <UniqueIdentifier>{50401c5f-8e37-4dad-990c-cb77bd5f1abd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="res">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="app.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="dps_cfg_mgr.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="dps_ch_mgr.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="dps_cmd_ctrl.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="dps_core_dispatch.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="dps_data_send_mgr.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="dps_device_access_mgr.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="dps_jk_dispatch_mgr.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="dps_PTZ_ctrl_mgr.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="dps_stream_monitor.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="dps_task_pro.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="jk_task_pro.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\core.cpp">
+      <Filter>src\framework</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\event_context.cpp">
+      <Filter>src\framework</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\task.cpp">
+      <Filter>src\framework</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="dps_cfg_mgr.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="dps_ch_mgr.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="dps_cmd_ctrl.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="dps_common_type_def.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="dps_core_dispatch.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="dps_data_send_mgr.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="dps_device_access_mgr.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="dps_jk_dispatch_mgr.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="dps_PTZ_ctrl_mgr.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="dps_stream_monitor.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="dps_task_pro.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="jk_task_pro.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\allocators.h">
+      <Filter>src\framework</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\cli.h">
+      <Filter>src\framework</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\core.h">
+      <Filter>src\framework</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\event_context.h">
+      <Filter>src\framework</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\executor.h">
+      <Filter>src\framework</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\object_pool.h">
+      <Filter>src\framework</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\serial_executor.h">
+      <Filter>src\framework</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\sync_deque.h">
+      <Filter>src\framework</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\task.h">
+      <Filter>src\framework</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\thread_pool.h">
+      <Filter>src\framework</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\timer.h">
+      <Filter>src\framework</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>res</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="DPS.rc">
+      <Filter>res</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="dps_cfg.xml">
+      <Filter>res</Filter>
+    </Xml>
+  </ItemGroup>
+</Project>

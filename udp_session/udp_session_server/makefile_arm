@@ -1,0 +1,39 @@
+CC          := arm-hisiv300-linux-uclibcgnueabi-gcc
+CXX         := arm-hisiv300-linux-uclibcgnueabi-g++
+BIN         := ../../bin/arm
+INC_PATH    := -I../../third_library  -I../../share/xt_udp_session/common
+
+LIB_PATH    := -L$(BIN) #-L../../third_library/boost/lib/gcc_64
+LIB	        := -lpthread -lm #-lboost_thread -lboost_date_time -lboost_system
+
+MODULE_DEFINES :=-fPIC -fvisibility=hidden -DLINUX -D_GNU_SOURCE 
+CFLAGS	    := $(MODULE_DEFINES) -Wall -g -o  
+
+TARGET      := $(BIN)/libudp_session_server.a
+
+SRCC	    := $(wildcard *.c)
+              
+COBJ	    := $(SRCC:.c=.o)
+
+SRCXX	    := $(wildcard *.cpp ../../share/xt_udp_session/common/*.cpp)
+CXXOBJ      := $(SRCXX:.cpp=.o)
+
+OBJ	    := $(COBJ) $(CXXOBJ)
+
+$(TARGET):$(OBJ)
+	ar rcs $(TARGET) $(OBJ) 
+	cp  xt_udp_session_server.h ../../include
+
+$(COBJ):%.o:%.c 
+	$(CC)  $(INC_PATH) $(CFLAGS) $@ -c $<
+
+$(CXXOBJ):%.o:%.cpp 
+	$(CXX) $(INC_PATH) $(CFLAGS) $@ -c $< 
+
+.PHONY:clean
+clean:
+	rm -f $(OBJ)
+	rm -f $(TARGET)
+print:
+	@echo $(SRCXX) $(SRCC)
+

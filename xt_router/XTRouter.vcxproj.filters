@@ -1,0 +1,330 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="info_mgr">
+      <UniqueIdentifier>{9c5419dd-d6d7-4f25-87d7-f4375aafe9e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="mml">
+      <UniqueIdentifier>{c87b0520-b8f9-4454-9d77-8b9759011f88}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="jk_mgr">
+      <UniqueIdentifier>{c1d42f49-5817-47cb-9bf4-94058e7bdb33}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="access">
+      <UniqueIdentifier>{9a05287c-823e-4b27-81ca-50dfc88fce0a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="trans">
+      <UniqueIdentifier>{82a1fb83-a427-4753-a518-4ee0b06fd1a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tools">
+      <UniqueIdentifier>{c7502008-9db3-4eb0-9101-e5d989b3cb07}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tools\Ping">
+      <UniqueIdentifier>{da8bde58-0748-4cb9-b29b-66a6c7c75673}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tools\base64">
+      <UniqueIdentifier>{13b63240-0318-42b0-a6e9-a61232915cd9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="special_line">
+      <UniqueIdentifier>{795d2d98-812e-4a08-8a1a-dd5097528e85}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="functionex">
+      <UniqueIdentifier>{f371914e-1e2d-4bfa-897c-d828d13ecf34}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="functionex\snmp">
+      <UniqueIdentifier>{425c83d3-8a32-4f5c-95f2-432d7f348aaa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="break_monitor">
+      <UniqueIdentifier>{bded9314-976c-48dd-b6ca-e9435e69247a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="log">
+      <UniqueIdentifier>{3230b6be-efab-4e33-8989-027c56ce2fa7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="xmpp_client">
+      <UniqueIdentifier>{da904d28-0877-4636-bd25-b912c9cf7905}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="common">
+      <UniqueIdentifier>{e65e4fb1-453e-42a0-9fb4-8de1e92fbb94}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="framework">
+      <UniqueIdentifier>{0dfa8b07-a506-4939-9138-16f3b51ac81c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="framework\detail">
+      <UniqueIdentifier>{9f8aef98-d80f-4841-980f-8e8aec545bc8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cfg">
+      <UniqueIdentifier>{79366900-7a24-4fe4-9e6d-5fcf8384fe3c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="rtpid_mgr">
+      <UniqueIdentifier>{36bc9991-8349-4b40-b7cb-6cac39a75b57}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="gw_join_sip">
+      <UniqueIdentifier>{520506dd-c7a9-40ea-b9e1-ae47be1f5709}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="res_files">
+      <UniqueIdentifier>{a4807b2b-5530-4f44-8e23-85c60873aa0d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="state_monitor">
+      <UniqueIdentifier>{06193fc0-23c8-421a-ad64-de202508530e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="std_sip">
+      <UniqueIdentifier>{cc9b6be0-badb-4d80-8ffa-940f81051d45}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="web_srv">
+      <UniqueIdentifier>{96923e74-746b-4c81-bf1a-97c7fbc5ebec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="snmp">
+      <UniqueIdentifier>{a01afc7f-dec2-46c2-a67d-08453b57c373}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="common_ctrl_msg">
+      <UniqueIdentifier>{87a5ad79-e038-420f-8d4e-501d7c560e01}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="regist">
+      <UniqueIdentifier>{3adb9994-ef7f-4ce8-b3e7-82b81b0d6482}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="HistoryInfo.cpp">
+      <Filter>info_mgr</Filter>
+    </ClCompile>
+    <ClCompile Include="InfoMgr.cpp">
+      <Filter>info_mgr</Filter>
+    </ClCompile>
+    <ClCompile Include="RealInfo.cpp">
+      <Filter>info_mgr</Filter>
+    </ClCompile>
+    <ClCompile Include="mml\cmd_manager.cpp">
+      <Filter>mml</Filter>
+    </ClCompile>
+    <ClCompile Include="jk_rpc_sub_impl.cpp">
+      <Filter>jk_mgr</Filter>
+    </ClCompile>
+    <ClCompile Include="pri_jk_engine.cpp">
+      <Filter>jk_mgr</Filter>
+    </ClCompile>
+    <ClCompile Include="media_device.cpp">
+      <Filter>access</Filter>
+    </ClCompile>
+    <ClCompile Include="media_server.cpp">
+      <Filter>trans</Filter>
+    </ClCompile>
+    <ClCompile Include="..\include\xt_ping\icmp_ping.cpp">
+      <Filter>tools\Ping</Filter>
+    </ClCompile>
+    <ClCompile Include="..\include\base64\base64.cpp">
+      <Filter>tools\base64</Filter>
+    </ClCompile>
+    <ClCompile Include="SpecialLine.cpp">
+      <Filter>special_line</Filter>
+    </ClCompile>
+    <ClCompile Include="FuncEx.cpp">
+      <Filter>functionex</Filter>
+    </ClCompile>
+    <ClCompile Include="SlaveIPC.cpp">
+      <Filter>functionex\snmp</Filter>
+    </ClCompile>
+    <ClCompile Include="break_monitor.cpp">
+      <Filter>break_monitor</Filter>
+    </ClCompile>
+    <ClCompile Include="xmpp_client.cpp">
+      <Filter>xmpp_client</Filter>
+    </ClCompile>
+    <ClCompile Include="xmpp_task.cpp">
+      <Filter>xmpp_client</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\deadline_timer.cpp">
+      <Filter>framework</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\event_context.cpp">
+      <Filter>framework</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\task.cpp">
+      <Filter>framework</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\detail\service.cpp">
+      <Filter>framework\detail</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\detail\task_scheduler.cpp">
+      <Filter>framework\detail</Filter>
+    </ClCompile>
+    <ClCompile Include="Router_config.cpp">
+      <Filter>cfg</Filter>
+    </ClCompile>
+    <ClCompile Include="rtpid_mgr.cpp">
+      <Filter>rtpid_mgr</Filter>
+    </ClCompile>
+    <ClCompile Include="gw_join_sip_session_mgr.cpp">
+      <Filter>gw_join_sip</Filter>
+    </ClCompile>
+    <ClCompile Include="StateMonitor.cpp">
+      <Filter>state_monitor</Filter>
+    </ClCompile>
+    <ClCompile Include="sip_svr_engine.cpp">
+      <Filter>std_sip</Filter>
+    </ClCompile>
+    <ClCompile Include="sip_svr_task.cpp">
+      <Filter>std_sip</Filter>
+    </ClCompile>
+    <ClCompile Include="web_srv_mgr.cpp">
+      <Filter>web_srv</Filter>
+    </ClCompile>
+    <ClCompile Include="xt_regist_server.cpp">
+      <Filter>regist</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="router_task.cpp" />
+    <ClCompile Include="XTEngine.cpp" />
+    <ClCompile Include="XTRouter.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="HistoryInfo.h">
+      <Filter>info_mgr</Filter>
+    </ClInclude>
+    <ClInclude Include="InfoMgr.h">
+      <Filter>info_mgr</Filter>
+    </ClInclude>
+    <ClInclude Include="InfoTypeDef.h">
+      <Filter>info_mgr</Filter>
+    </ClInclude>
+    <ClInclude Include="RealInfo.h">
+      <Filter>info_mgr</Filter>
+    </ClInclude>
+    <ClInclude Include="mml\cmd_manager.h">
+      <Filter>mml</Filter>
+    </ClInclude>
+    <ClInclude Include="center_common_types.h">
+      <Filter>jk_mgr</Filter>
+    </ClInclude>
+    <ClInclude Include="JkMainClientRpcClient.h">
+      <Filter>jk_mgr</Filter>
+    </ClInclude>
+    <ClInclude Include="pri_jk_engine.h">
+      <Filter>jk_mgr</Filter>
+    </ClInclude>
+    <ClInclude Include="media_device.h">
+      <Filter>access</Filter>
+    </ClInclude>
+    <ClInclude Include="media_server.h">
+      <Filter>trans</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\xt_ping\icmp_header.hpp">
+      <Filter>tools\Ping</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\xt_ping\icmp_ping.h">
+      <Filter>tools\Ping</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\xt_ping\ipv4_header.hpp">
+      <Filter>tools\Ping</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\base64\base64.h">
+      <Filter>tools\base64</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\base64\macros.h">
+      <Filter>tools\base64</Filter>
+    </ClInclude>
+    <ClInclude Include="SpecialLine.h">
+      <Filter>special_line</Filter>
+    </ClInclude>
+    <ClInclude Include="FuncEx.h">
+      <Filter>functionex</Filter>
+    </ClInclude>
+    <ClInclude Include="SlaveIPC.h">
+      <Filter>functionex\snmp</Filter>
+    </ClInclude>
+    <ClInclude Include="break_monitor.h">
+      <Filter>break_monitor</Filter>
+    </ClInclude>
+    <ClInclude Include="XTRouterLog.h">
+      <Filter>log</Filter>
+    </ClInclude>
+    <ClInclude Include="xmpp_client.h">
+      <Filter>xmpp_client</Filter>
+    </ClInclude>
+    <ClInclude Include="xmpp_task.h">
+      <Filter>xmpp_client</Filter>
+    </ClInclude>
+    <ClInclude Include="xmpp_type_def.h">
+      <Filter>xmpp_client</Filter>
+    </ClInclude>
+    <ClInclude Include="common_type.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\config.h">
+      <Filter>framework</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\deadline_timer.h">
+      <Filter>framework</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\event_context.h">
+      <Filter>framework</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\task.h">
+      <Filter>framework</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\detail\boost_asio_service.h">
+      <Filter>framework\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\detail\boost_deadline_timer_impl.h">
+      <Filter>framework\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\detail\deadline_timer_service.h">
+      <Filter>framework\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\detail\event_context_service.h">
+      <Filter>framework\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\detail\service.h">
+      <Filter>framework\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\detail\singleton.h">
+      <Filter>framework\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\detail\task_scheduler.h">
+      <Filter>framework\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\detail\task_scheduler_service.h">
+      <Filter>framework\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\detail\task_thread.h">
+      <Filter>framework\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\detail\thread_creator.h">
+      <Filter>framework\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="Router_config.h">
+      <Filter>cfg</Filter>
+    </ClInclude>
+    <ClInclude Include="rtpid_mgr.h">
+      <Filter>rtpid_mgr</Filter>
+    </ClInclude>
+    <ClInclude Include="gw_join_sip_session_mgr.h">
+      <Filter>gw_join_sip</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>res_files</Filter>
+    </ClInclude>
+    <ClInclude Include="StateMonitor.h">
+      <Filter>state_monitor</Filter>
+    </ClInclude>
+    <ClInclude Include="sip_svr_engine.h">
+      <Filter>std_sip</Filter>
+    </ClInclude>
+    <ClInclude Include="sip_svr_task.h">
+      <Filter>std_sip</Filter>
+    </ClInclude>
+    <ClInclude Include="web_srv_mgr.h">
+      <Filter>web_srv</Filter>
+    </ClInclude>
+    <ClInclude Include="xt_regist_server.h">
+      <Filter>regist</Filter>
+    </ClInclude>
+    <ClInclude Include="router_task.h" />
+    <ClInclude Include="XTEngine.h" />
+    <ClInclude Include="XTRouter.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="XTRouter.rc">
+      <Filter>res_files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>

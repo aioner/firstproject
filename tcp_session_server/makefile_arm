@@ -1,0 +1,37 @@
+﻿CC          := arm-hisiv300-linux-uclibcgnueabi-gcc
+CXX         := arm-hisiv300-linux-uclibcgnueabi-g++
+
+INC_PATH    := -I../../include -I../../third_library
+
+BIN        :=../../bin/arm/
+LIB_PATH    := -L$(BIN)	 
+LIB	    := -lpthread -lm  -lxt_tcp
+
+MODULE_DEFINES :=-fPIC -fvisibility=hidden -std=c++0x -DLINUX -D_GNU_SOURCE -DTCP_SESSION_SERVER_EXPORTS
+CFLAGS	    := $(MODULE_DEFINES) -Wall -g -o  
+
+TARGET      := $(BIN)libtcp_session_server.a
+
+SRCC	    := $(wildcard *.c)
+              
+COBJ	    := $(SRCC:.c=.o)
+
+SRCXX	    := $(wildcard *.cpp)
+CXXOBJ      := $(SRCXX:.cpp=.o)
+
+OBJ	    := $(COBJ) $(CXXOBJ)
+
+$(TARGET):$(OBJ)
+	ar rcs $(TARGET) $(OBJ) 
+
+	cp ./tcp_session_server.h ../../include
+
+$(COBJ):%.o:%.c 
+	$(CC)  $(INC_PATH) $(CFLAGS) $@ -c $<
+
+$(CXXOBJ):%.o:%.cpp 
+	$(CXX) $(INC_PATH) $(CFLAGS) $@ -c $<
+
+.PHONY:clean
+clean:
+	rm -f $(OBJ)  $(TARGET)

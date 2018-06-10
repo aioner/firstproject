@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="transport">
+      <UniqueIdentifier>{88784b6a-567b-4aad-8b60-51c88ef48abc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="messages">
+      <UniqueIdentifier>{6c77c2d3-db51-4dde-b261-5fd004b5ba2a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="rtspcommon">
+      <UniqueIdentifier>{96c76f0e-41f8-41bd-9277-bc43b1afe2aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="utils">
+      <UniqueIdentifier>{d85cfc26-62b1-4958-bf57-6aae59d395a1}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="transport\RtspTransport.c">
+      <Filter>transport</Filter>
+    </ClCompile>
+    <ClCompile Include="messages\RtspFirstLine.c">
+      <Filter>messages</Filter>
+    </ClCompile>
+    <ClCompile Include="messages\RtspHeaders.c">
+      <Filter>messages</Filter>
+    </ClCompile>
+    <ClCompile Include="messages\RtspMessages.c">
+      <Filter>messages</Filter>
+    </ClCompile>
+    <ClCompile Include="messages\RvRtspMsg.c">
+      <Filter>messages</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\ra.c">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\rpool.c">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\RtspUtilsInternal.c">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\RvRtspUtils.c">
+      <Filter>utils</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="transport\RtspTransport.h">
+      <Filter>transport</Filter>
+    </ClInclude>
+    <ClInclude Include="messages\RtspFirstLine.h">
+      <Filter>messages</Filter>
+    </ClInclude>
+    <ClInclude Include="messages\RtspHeaders.h">
+      <Filter>messages</Filter>
+    </ClInclude>
+    <ClInclude Include="messages\RtspMessages.h">
+      <Filter>messages</Filter>
+    </ClInclude>
+    <ClInclude Include="messages\RtspMsgInternal.h">
+      <Filter>messages</Filter>
+    </ClInclude>
+    <ClInclude Include="messages\RvRtspFirstLineTypes.h">
+      <Filter>messages</Filter>
+    </ClInclude>
+    <ClInclude Include="messages\RvRtspHeaderTypes.h">
+      <Filter>messages</Filter>
+    </ClInclude>
+    <ClInclude Include="messages\RvRtspMessageTypes.h">
+      <Filter>messages</Filter>
+    </ClInclude>
+    <ClInclude Include="messages\RvRtspMsg.h">
+      <Filter>messages</Filter>
+    </ClInclude>
+    <ClInclude Include="rtspcommon\RtspObject.h">
+      <Filter>rtspcommon</Filter>
+    </ClInclude>
+    <ClInclude Include="rtspcommon\RvRtspCommonTypes.h">
+      <Filter>rtspcommon</Filter>
+    </ClInclude>
+    <ClInclude Include="rtspcommon\RvRtspUsrConfig.h">
+      <Filter>rtspcommon</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\copybits.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\ra.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\rpool.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\RtspUtilsInternal.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\RvRtspUtils.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

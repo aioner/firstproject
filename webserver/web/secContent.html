@@ -1,0 +1,518 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <title>内容2</title>
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<style type="text/css">
+         .style_table1_1
+         {
+             width: 280px;
+         }
+         .style_table1_2
+         {
+             width: 300px;
+         }
+         .style_table1_3
+         {
+             width: 280px;
+         }
+         .style_table_type
+         {
+             width:60;
+         }
+         .style_table_port
+         {
+             width:75;
+         }
+         .style_table_ch
+         {
+             width:50;
+         }
+         .style_text_type
+         {
+             width:50;
+         }
+         .style_text_port
+         {
+             width:65;
+         }
+         .style_text_ch
+         {
+             width:40;
+         }
+         .style_btn
+         {
+             width:80;
+             height:30;
+         }
+         /*#Text1
+         {
+              width: 200px;
+         }*/
+       </style>
+       <script type="text/javascript">
+          var send=0;
+          var rec=0;
+          var recxml = 0;
+          
+          function sendcontent(con)
+          {
+            send.open("POST","src",true);
+            send.onreadystatechange=processRequest;
+            send.setRequestHeader("Content-Type","text/xml;charset=UTF-8"); 
+            var buff=encodeURI(con);
+ 
+            send.send(con);
+          }
+          function getfile(con)
+          {
+            var buff=escape(con+"<");
+        
+            send.open("GET",buff,true);
+            send.onreadystatechange=processRequest;
+            send.setRequestHeader("Content-Type","text/xml;charset=UTF-8"); 
+            
+            send.send("");
+          }
+          function processRequest() {
+              if (send.readyState == 4) {
+                  rec = send.responseText;
+                  recxml = send.responseXML;
+ 
+                  var devnode  = recxml.getElementsByTagName("dev");
+ 
+                  var devsub = 34;
+                  var textstr = "Text";
+                  var i = 0;
+                  for (i = 0; i < devnode.length; i++) {
+                      document.getElementById(textstr + devsub.toString()).value = recxml.getElementsByTagName("dev")[i].getAttribute("transmit_ch");
+                      devsub++;
+                      document.getElementById(textstr + devsub.toString()).value = recxml.getElementsByTagName("dev")[i].getAttribute("type");
+                      devsub++;
+                      document.getElementById(textstr + devsub.toString()).value = recxml.getElementsByTagName("dev")[i].getAttribute("ip");
+                      devsub++;
+                      document.getElementById(textstr + devsub.toString()).value = recxml.getElementsByTagName("dev")[i].getAttribute("port");
+                      devsub++;
+                      document.getElementById(textstr + devsub.toString()).value = recxml.getElementsByTagName("dev")[i].getAttribute("ch");
+                      devsub++;
+                      document.getElementById(textstr + devsub.toString()).value = recxml.getElementsByTagName("dev")[i].getAttribute("stream_type");
+                      devsub++;
+                      document.getElementById(textstr + devsub.toString()).value = recxml.getElementsByTagName("dev")[i].getAttribute("link_type");
+                      devsub++;
+                      document.getElementById(textstr + devsub.toString()).value = recxml.getElementsByTagName("dev")[i].getAttribute("usr");
+                      devsub++;
+                      document.getElementById(textstr + devsub.toString()).value = recxml.getElementsByTagName("dev")[i].getAttribute("password");
+                      devsub++;
+                  }
+              } 
+          }
+       </script>
+  </head>
+  
+ <body id="mbody" bgcolor="#DBDBDB"> 
+       <script type="text/javascript">
+            send= window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
+            //sendcontent("get_dps_cfg") ;
+            var start = "Microsoft.XMLHTTP";
+            //sendcontent(start);
+       </script>
+       
+    <script type="text/javascript">
+        function Button2_onclick() {
+        sendcontent("get_dps_cfg");
+    }
+    function Button3_onclick() {
+        var sendxml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n";
+        sendxml+="<dps_cfg>\r\n";
+        sendxml += "<system>\r\n";
+        sendxml+="</system>\r\n";
+        sendxml += "<access>\r\n";
+        sendxml += "</access>\r\n";
+        sendxml += "<device_list>\r\n";
+        var i = 0;
+        var textstr = "Text";
+        var textsub = 34;
+        for (i = 0; i < 16; i++) {
+            var attr_value1 = document.getElementById(textstr + textsub.toString()).value;
+            textsub++;
+            var attr_value2 = document.getElementById(textstr + textsub.toString()).value;
+            textsub++;
+            var attr_value3 = document.getElementById(textstr + textsub.toString()).value;
+            textsub++;
+            var attr_value4 = document.getElementById(textstr + textsub.toString()).value;
+            textsub++;
+            var attr_value5 = document.getElementById(textstr + textsub.toString()).value;
+            textsub++;
+            var attr_value6 = document.getElementById(textstr + textsub.toString()).value;
+            textsub++;
+            var attr_value7 = document.getElementById(textstr + textsub.toString()).value;
+            textsub++;
+            var attr_value8 = document.getElementById(textstr + textsub.toString()).value;
+            textsub++;
+            var attr_value9 = document.getElementById(textstr + textsub.toString()).value;
+            textsub++;
+ 
+            sendxml += "<dev transmit_ch=\"" + 
+            attr_value1 + "\" type=\"" + attr_value2 + "\" ip=\"" + attr_value3 + "\" port=\"" +
+            attr_value4 + "\" ch=\"" + attr_value5 + "\" stream_type=\"" + attr_value6 + "\" link_type=\"" +
+            attr_value7 + "\" usr=\"" + attr_value8 + "\" password=\"" + attr_value9 + "\"/>\r\n";
+        }
+        sendxml += "</device_list>\r\n";
+        sendxml+="</dps_cfg>\r\n";
+        sendcontent(sendxml);
+    }
+    function Button4_onclick() {
+        javascript: sendcontent("restart");
+    }
+    </script>
+       <DIV>
+        <center>
+            <table style="width:100%; margin-top: 10px;" frame="border" >
+                <tr>
+                    <td>
+                        transmit_ch</td>
+                    <td class="style_table_type">
+                        type</td>
+                    <td>
+                        ip</td>
+                    <td class="style_table_port">
+                        port</td>
+                    <td class="style_table_ch">
+                        ch</td>
+                    <td>
+                        stream_type</td>
+                    <td>
+                        link_type</td>
+                    <td>
+                        usr</td>
+                    <td>
+                        password</td>
+                </tr>
+                <tr>
+                    <td>
+                        <input id="Text34" type="text" /></td>
+                    <td class="style_table_type">
+                        <input id="Text35" type="text" class="style_text_type"/></td>
+                    <td>
+                        <input id="Text36" type="text" /></td>
+                    <td class="style_table_port">
+                        <input id="Text37" type="text" class="style_text_port"/></td>
+                    <td class="style_table_ch">
+                        <input id="Text38" type="text" class="style_text_ch"/></td>
+                    <td>
+                        <input id="Text39" type="text" /></td>
+                    <td>
+                        <input id="Text40" type="text" /></td>
+                    <td>
+                        <input id="Text41" type="text" /></td>
+                    <td>
+                        <input id="Text42" type="text" /></td>
+                </tr>
+                <tr>
+                    <td>
+                        <input id="Text43" type="text" /></td>
+                    <td class="style_table_type">
+                        <input id="Text44" type="text" class="style_text_type"/></td>
+                    <td>
+                        <input id="Text45" type="text" /></td>
+                    <td class="style_table_port">
+                        <input id="Text46" type="text" class="style_text_port"/></td>
+                    <td class="style_table_ch">
+                        <input id="Text47" type="text" class="style_text_ch"/></td>
+                    <td>
+                        <input id="Text48" type="text" /></td>
+                    <td>
+                        <input id="Text49" type="text" /></td>
+                    <td>
+                        <input id="Text50" type="text" /></td>
+                    <td>
+                        <input id="Text51" type="text" /></td>
+                </tr>
+                <tr>
+                    <td>
+                        <input id="Text52" type="text" /></td>
+                    <td class="style_table_type">
+                        <input id="Text53" type="text" class="style_text_type"/></td>
+                    <td>
+                        <input id="Text54" type="text" /></td>
+                    <td class="style_table_port">
+                        <input id="Text55" type="text" class="style_text_port"/></td>
+                    <td class="style_table_ch">
+                        <input id="Text56" type="text" class="style_text_ch"/></td>
+                    <td>
+                        <input id="Text57" type="text" /></td>
+                    <td>
+                        <input id="Text58" type="text" /></td>
+                    <td>
+                        <input id="Text59" type="text" /></td>
+                    <td>
+                        <input id="Text60" type="text" /></td>
+                </tr>
+                <tr>
+                    <td>
+                        <input id="Text61" type="text" /></td>
+                    <td class="style_table_type">
+                        <input id="Text62" type="text" class="style_text_type"/></td>
+                    <td>
+                        <input id="Text63" type="text" /></td>
+                    <td class="style_table_port">
+                        <input id="Text64" type="text" class="style_text_port"/></td>
+                    <td class="style_table_ch">
+                        <input id="Text65" type="text" class="style_text_ch"/></td>
+                    <td>
+                        <input id="Text66" type="text" /></td>
+                    <td>
+                        <input id="Text67" type="text" /></td>
+                    <td>
+                        <input id="Text68" type="text" /></td>
+                    <td>
+                        <input id="Text69" type="text" /></td>
+                </tr>
+                 <tr>
+                    <td>
+                        <input id="Text70" type="text" /></td>
+                    <td class="style_table_type">
+                        <input id="Text71" type="text" class="style_text_type"/></td>
+                    <td>
+                        <input id="Text72" type="text" /></td>
+                    <td class="style_table_port">
+                        <input id="Text73" type="text" class="style_text_port"/></td>
+                    <td class="style_table_ch">
+                        <input id="Text74" type="text" class="style_text_ch"/></td>
+                    <td>
+                        <input id="Text75" type="text" /></td>
+                    <td>
+                        <input id="Text76" type="text" /></td>
+                    <td>
+                        <input id="Text77" type="text" /></td>
+                    <td>
+                        <input id="Text78" type="text" /></td>
+                </tr> <tr>
+                    <td>
+                        <input id="Text79" type="text" /></td>
+                    <td class="style_table_type">
+                        <input id="Text80" type="text" class="style_text_type"/></td>
+                    <td>
+                        <input id="Text81" type="text" /></td>
+                    <td class="style_table_port">
+                        <input id="Text82" type="text" class="style_text_port"/></td>
+                    <td class="style_table_ch">
+                        <input id="Text83" type="text" class="style_text_ch"/></td>
+                    <td>
+                        <input id="Text84" type="text" /></td>
+                    <td>
+                        <input id="Text85" type="text" /></td>
+                    <td>
+                        <input id="Text86" type="text" /></td>
+                    <td>
+                        <input id="Text87" type="text" /></td>
+                </tr> <tr>
+                    <td>
+                        <input id="Text88" type="text" /></td>
+                    <td class="style_table_type">
+                        <input id="Text89" type="text" class="style_text_type"/></td>
+                    <td>
+                        <input id="Text90" type="text" /></td>
+                    <td class="style_table_port">
+                        <input id="Text91" type="text" class="style_text_port"/></td>
+                    <td class="style_table_ch">
+                        <input id="Text92" type="text" class="style_text_ch"/></td>
+                    <td>
+                        <input id="Text93" type="text" /></td>
+                    <td>
+                        <input id="Text94" type="text" /></td>
+                    <td>
+                        <input id="Text95" type="text" /></td>
+                    <td>
+                        <input id="Text96" type="text" /></td>
+                </tr> <tr>
+                    <td>
+                        <input id="Text97" type="text" /></td>
+                    <td class="style_table_type">
+                        <input id="Text98" type="text" class="style_text_type"/></td>
+                    <td>
+                        <input id="Text99" type="text" /></td>
+                    <td class="style_table_port">
+                        <input id="Text100" type="text" class="style_text_port"/></td>
+                    <td class="style_table_ch">
+                        <input id="Text101" type="text" class="style_text_ch"/></td>
+                    <td>
+                        <input id="Text102" type="text" /></td>
+                    <td>
+                        <input id="Text103" type="text" /></td>
+                    <td>
+                        <input id="Text104" type="text" /></td>
+                    <td>
+                        <input id="Text105" type="text" /></td>
+                </tr> <tr>
+                    <td>
+                        <input id="Text106" type="text" /></td>
+                    <td class="style_table_type">
+                        <input id="Text107" type="text" class="style_text_type"/></td>
+                    <td>
+                        <input id="Text108" type="text" /></td>
+                    <td class="style_table_port">
+                        <input id="Text109" type="text" class="style_text_port"/></td>
+                    <td class="style_table_ch">
+                        <input id="Text110" type="text" class="style_text_ch"/></td>
+                    <td>
+                        <input id="Text111" type="text" /></td>
+                    <td>
+                        <input id="Text112" type="text" /></td>
+                    <td>
+                        <input id="Text113" type="text" /></td>
+                    <td>
+                        <input id="Text114" type="text" /></td>
+                </tr> <tr>
+                    <td>
+                        <input id="Text115" type="text" /></td>
+                    <td class="style_table_type">
+                        <input id="Text116" type="text" class="style_text_type"/></td>
+                    <td>
+                        <input id="Text117" type="text" /></td>
+                    <td class="style_table_port">
+                        <input id="Text118" type="text" class="style_text_port"/></td>
+                    <td class="style_table_ch">
+                        <input id="Text119" type="text" class="style_text_ch"/></td>
+                    <td>
+                        <input id="Text120" type="text" /></td>
+                    <td>
+                        <input id="Text121" type="text" /></td>
+                    <td>
+                        <input id="Text122" type="text" /></td>
+                    <td>
+                        <input id="Text123" type="text" /></td>
+                </tr> <tr>
+                    <td>
+                        <input id="Text124" type="text" /></td>
+                    <td class="style_table_type">
+                        <input id="Text125" type="text" class="style_text_type"/></td>
+                    <td>
+                        <input id="Text126" type="text" /></td>
+                    <td class="style_table_port">
+                        <input id="Text127" type="text" class="style_text_port"/></td>
+                    <td class="style_table_ch">
+                        <input id="Text128" type="text" class="style_text_ch"/></td>
+                    <td>
+                        <input id="Text129" type="text" /></td>
+                    <td>
+                        <input id="Text130" type="text" /></td>
+                    <td>
+                        <input id="Text131" type="text" /></td>
+                    <td>
+                        <input id="Text132" type="text" /></td>
+                </tr> <tr>
+                    <td>
+                        <input id="Text133" type="text" /></td>
+                    <td class="style_table_type">
+                        <input id="Text134" type="text" class="style_text_type"/></td>
+                    <td>
+                        <input id="Text135" type="text" /></td>
+                    <td class="style_table_port">
+                        <input id="Text136" type="text" class="style_text_port"/></td>
+                    <td class="style_table_ch">
+                        <input id="Text137" type="text" class="style_text_ch"/></td>
+                    <td>
+                        <input id="Text138" type="text" /></td>
+                    <td>
+                        <input id="Text139" type="text" /></td>
+                    <td>
+                        <input id="Text140" type="text" /></td>
+                    <td>
+                        <input id="Text141" type="text" /></td>
+                </tr> <tr>
+                    <td>
+                        <input id="Text142" type="text" /></td>
+                    <td class="style_table_type">
+                        <input id="Text143" type="text" class="style_text_type"/></td>
+                    <td>
+                        <input id="Text144" type="text" /></td>
+                    <td class="style_table_port">
+                        <input id="Text145" type="text" class="style_text_port"/></td>
+                    <td class="style_table_ch">
+                        <input id="Text146" type="text" class="style_text_ch"/></td>
+                    <td>
+                        <input id="Text147" type="text" /></td>
+                    <td>
+                        <input id="Text148" type="text" /></td>
+                    <td>
+                        <input id="Text149" type="text" /></td>
+                    <td>
+                        <input id="Text150" type="text" /></td>
+                </tr> <tr>
+                    <td>
+                        <input id="Text151" type="text" /></td>
+                    <td class="style_table_type">
+                        <input id="Text152" type="text" class="style_text_type"/></td>
+                    <td>
+                        <input id="Text153" type="text" /></td>
+                    <td class="style_table_port">
+                        <input id="Text154" type="text" class="style_text_port"/></td>
+                    <td class="style_table_ch">
+                        <input id="Text155" type="text" class="style_text_ch"/></td>
+                    <td>
+                        <input id="Text156" type="text" /></td>
+                    <td>
+                        <input id="Text157" type="text" /></td>
+                    <td>
+                        <input id="Text158" type="text" /></td>
+                    <td>
+                        <input id="Text159" type="text" /></td>
+                </tr> <tr>
+                    <td>
+                        <input id="Text160" type="text" /></td>
+                    <td class="style_table_type">
+                        <input id="Text161" type="text" class="style_text_type"/></td>
+                    <td>
+                        <input id="Text162" type="text" /></td>
+                    <td class="style_table_port">
+                        <input id="Text163" type="text" class="style_text_port"/></td>
+                    <td class="style_table_ch">
+                        <input id="Text164" type="text" class="style_text_ch"/></td>
+                    <td>
+                        <input id="Text165" type="text" /></td>
+                    <td>
+                        <input id="Text166" type="text" /></td>
+                    <td>
+                        <input id="Text167" type="text" /></td>
+                    <td>
+                        <input id="Text168" type="text" /></td>
+                </tr> <tr>
+                    <td>
+                        <input id="Text169" type="text" /></td>
+                    <td class="style_table_type">
+                        <input id="Text170" type="text" class="style_text_type"/></td>
+                    <td>
+                        <input id="Text171" type="text" /></td>
+                    <td class="style_table_port">
+                        <input id="Text172" type="text" class="style_text_port"/></td>
+                    <td class="style_table_ch">
+                        <input id="Text173" type="text" class="style_text_ch"/></td>
+                    <td>
+                        <input id="Text174" type="text" /></td>
+                    <td>
+                        <input id="Text175" type="text" /></td>
+                    <td>
+                        <input id="Text176" type="text" /></td>
+                    <td>
+                        <input id="Text177" type="text" /></td>
+                </tr>
+            </table>
+        <table style="width:100%; height: 31px; margin-top: 5px;">
+            <tr>
+                <td>
+                    <input id="Button2" type="button" value="读取配置" class="style_btn"
+                        onclick="Button2_onclick()" /></td>
+                <td>
+                    <input id="Button3" type="button" value="写入配置" class="style_btn"
+                        onclick="Button3_onclick()" /></td>
+                <td>
+                    <input id="Button4" type="button" value="重启代理" class="style_btn"
+                        onclick="Button4_onclick()" /></td>
+            </tr>
+        </table>
+        &nbsp;</center>
+        </DIV>
+    </body>
+</html>

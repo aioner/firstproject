@@ -1,0 +1,62 @@
+include ../profile
+BIN        :=../../pub/$(TARGET_DIR)
+TARGET     :=$(BIN)/dll/trans_server/libxt_mp_caster.so
+TARG       :=$(RELEASE_DIR)/$(notdir $(TARGET))
+
+STRIPCMD:=$(STRIP) $(TARG)
+ifeq ($(STRIP),)
+STRIPCMD:=
+endif
+
+DIST_INC    := -I../ -I../rv_adapter -I../include -I../xt_xml -I$(AV_CHECK_SN_INC) -I$(BOOST_INC)
+
+INC_PATH    := $(DIST_INC)
+
+DIST_LIB    := -L$(BIN) -L$(BOOST_LIB)
+LIB_PATH    := $(DIST_LIB) 
+LIB	    := -lxt_xml -lpthread -lm -lz -lrv_adapter -ltghelper $(AV_CHECK_SN_LIB)  -lboost_thread$(BOOST_MT) -lboost_filesystem$(BOOST_MT) -lboost_system$(BOOST_MT) -lboost_date_time$(BOOST_MT) -lboost_atomic$(BOOST_MT)
+MODULE_DEFINES :=-fPIC -shared  -fvisibility=hidden -DLINUX -D_GNU_SOURCE -DUSE_POST_TASK
+#CFLAGS	    := $(MODULE_DEFINES) -std=c++0x -Wall -o 
+CFLAGS	    := $(COMPILE_OPTIONS) $(MODULE_DEFINES) -std=c++0x -Wall -g -o 
+
+
+SRCC	    := $(wildcard *.c)
+COBJ	    := $(SRCC:.c=.o)
+SRCXX	    := $(wildcard *.cpp)
+CXXOBJ      := $(SRCXX:.cpp=.o)
+OBJ	    := $(COBJ) $(CXXOBJ)
+
+#PUB_INC		:= ../../include/xt_mp_caster
+
+.PHONY:release build $(TARG) clean
+
+release:$(RELEASE_DIR)/. $(TARG)
+	@###
+
+build:
+%/.:
+	mkdir -m 777 -p $*
+
+$(TARG):$(addprefix $(RELEASE_DIR)/,$(OBJ))
+#	ar rcs $(TARGET) $(OBJ)
+	@echo CXX -o $@ *.o 
+	$(CXX) $(INC_PATH) $(LIB_PATH) $(CFLAGS) $@ $^ $(LIB)
+#rm -fR $(PUB_INC)
+#	mkdir -p $(PUB_INC)
+	$(STRIPCMD)
+	@cp $(TARG) $(TARGET)
+#	@cp xt_mp_caster_api.h $(PUB_INC) 
+#	@cp xt_mp_caster_def.h $(PUB_INC)
+#	@cp ../../share/xt_mp_def.h $(PUB_INC)
+
+$(RELEASE_DIR)/%.o:%.c 
+	$(CC) $(INC_PATH) $(CFLAGS) $@ -c $<
+
+$(RELEASE_DIR)/%.o:%.cpp 
+	$(CXX) $(INC_PATH) $(CFLAGS) $@ -c $<
+
+clean:
+	rm -rf $(RELEASE_DIR) #$(TARGET)
+print:
+	@echo $(SRCXX)
+	@echo $(BOOST_INC)

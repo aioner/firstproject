@@ -1,0 +1,18 @@
+0xd98517 01/20/16 11:41:40 SDP         : INFO  - Common Core version 1.5.27 (Release)
+0xd98517 01/20/16 11:41:40 SDP         : INFO  - OS=Generic Linux
+0xd98517 01/20/16 11:41:40 SDP         : INFO  - Compiler=GNU-CygWin 2.7
+0xd98517 01/20/16 11:41:40 SDP         : INFO  - Architecture=Little Endian, 32bit
+0xd98517 01/20/16 11:41:40 SDP         : INFO  - TIME: Timestamp=Linux, Clock=Linux, Tm=Posix
+0xd98517 01/20/16 11:41:40 SDP         : INFO  - THREADS: Semaphore=Posix, Lock=Posix, Mutex=Posix, Thread=Posix
+0xd98517 01/20/16 11:41:40 SDP         : INFO  - MEMORY: OsMem=Malloc
+0xd98517 01/20/16 11:41:40 SDP         : INFO  - NETWORK: Host=Posix, Select=epoll, Socket=BSD, PortRange=Fast, DNS=Ares, TLS=None
+0xd98517 01/20/16 11:41:40 SDP         : INFO  - ANSI: 64Ascii=Standard, Assert=Ansi, StdIo=Ansi, LogListener=File&Term
+0xd98517 01/20/16 11:41:40 SDP         : INFO  - CHECKS: NULL=on, Range=on, Other=on
+0xd98517 01/20/16 11:41:40 SDP         : INFO  - USR_CONFIG: EnableIpv6Tos=no, UseFakedIpv6TClass=no, IpsecEnabled=no
+0x739f28 01/20/16 11:41:36 SDP         : INFO  - USR_CONFIG: DnsUsesHosts=no, DnsUsesCaching=yes, DnsCacheSanity=no
+0x739f28 01/20/16 11:41:36 SDP         : INFO  - USR_CONFIG: UsePosixTimestamps=yes, UseRdtscTimestamps=yes, SelectKqueueGroups=no
+0x739f28 01/20/16 11:41:36 SDP         : INFO  - USR_CONFIG: EhdHostFile=none, QueueType=standard
+0x739f28 01/20/16 11:41:36 SDP         : INFO  - SDP manager was constructed successfully - 3.0.0.5
+0x739f28 01/20/16 11:41:36 SDP         : INFO  - 		RV_SDP_CHECK_BAD_SYNTAX is not set
+0x739f28 01/20/16 11:41:36 SDP         : INFO  - 		RV_SDP_ADS_IS_USED is not set
+0x739f28 01/20/16 11:41:36 SDP         : INFO  - 		RV_SDP_USE_MACROS is set

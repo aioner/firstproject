@@ -1,0 +1,168 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="unpacker">
+      <UniqueIdentifier>{4c1e8ac0-a744-4325-983b-11d52c96f95a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="session">
+      <UniqueIdentifier>{a5fb4a35-5e68-4a45-8087-0961e69453d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="link_impl">
+      <UniqueIdentifier>{150b47a5-6c35-4af7-ab28-a5b23556739f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="thread">
+      <UniqueIdentifier>{14b6f8b2-0f19-431e-9d15-27e883e8dde1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="helper">
+      <UniqueIdentifier>{07e37428-7512-4758-b5a8-a242afe26221}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="media_link">
+      <UniqueIdentifier>{3cbc5dc1-73db-4be9-8e8b-68154e95bb5d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="rtp_unpack.h">
+      <Filter>unpacker</Filter>
+    </ClInclude>
+    <ClInclude Include="rtp_unpack_aac.h">
+      <Filter>unpacker</Filter>
+    </ClInclude>
+    <ClInclude Include="rtp_unpack_h264.h">
+      <Filter>unpacker</Filter>
+    </ClInclude>
+    <ClInclude Include="rtp_unpack_h265.h">
+      <Filter>unpacker</Filter>
+    </ClInclude>
+    <ClInclude Include="rtp_unpack_impl.h">
+      <Filter>unpacker</Filter>
+    </ClInclude>
+    <ClInclude Include="custom_session_impl.h">
+      <Filter>session</Filter>
+    </ClInclude>
+    <ClInclude Include="media_session.h">
+      <Filter>session</Filter>
+    </ClInclude>
+    <ClInclude Include="rtsp_session_impl.h">
+      <Filter>session</Filter>
+    </ClInclude>
+    <ClInclude Include="tcp_session_impl.h">
+      <Filter>session</Filter>
+    </ClInclude>
+    <ClInclude Include="udp_session_impl.h">
+      <Filter>session</Filter>
+    </ClInclude>
+    <ClInclude Include="rtsp_link_impl.h">
+      <Filter>link_impl</Filter>
+    </ClInclude>
+    <ClInclude Include="tcp_link_impl.h">
+      <Filter>link_impl</Filter>
+    </ClInclude>
+    <ClInclude Include="udp_link_impl.h">
+      <Filter>link_impl</Filter>
+    </ClInclude>
+    <ClInclude Include="compat.h">
+      <Filter>thread</Filter>
+    </ClInclude>
+    <ClInclude Include="novtable.h">
+      <Filter>thread</Filter>
+    </ClInclude>
+    <ClInclude Include="spinlock.h">
+      <Filter>thread</Filter>
+    </ClInclude>
+    <ClInclude Include="thread.h">
+      <Filter>thread</Filter>
+    </ClInclude>
+    <ClInclude Include="thread_timer.h">
+      <Filter>thread</Filter>
+    </ClInclude>
+    <ClInclude Include="msec_timer.h">
+      <Filter>helper</Filter>
+    </ClInclude>
+    <ClInclude Include="msec_timer_mgr.h">
+      <Filter>helper</Filter>
+    </ClInclude>
+    <ClInclude Include="ports_mgr.h">
+      <Filter>helper</Filter>
+    </ClInclude>
+    <ClInclude Include="ports_mgr_helper.h">
+      <Filter>helper</Filter>
+    </ClInclude>
+    <ClInclude Include="ports_mgr_impl.h">
+      <Filter>helper</Filter>
+    </ClInclude>
+    <ClInclude Include="v4_addr.h">
+      <Filter>helper</Filter>
+    </ClInclude>
+    <ClInclude Include="media_link.h">
+      <Filter>media_link</Filter>
+    </ClInclude>
+    <ClInclude Include="media_link_impl.h">
+      <Filter>media_link</Filter>
+    </ClInclude>
+    <ClInclude Include="push_link_impl.h">
+      <Filter>media_link</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="rtp_sink.h" />
+    <ClInclude Include="rtp_sink_impl.h" />
+    <ClInclude Include="sdp_parser.h" />
+    <ClInclude Include="xt_media_client.h" />
+    <ClInclude Include="xt_media_client_types.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="rtp_unpack_aac.cpp">
+      <Filter>unpacker</Filter>
+    </ClCompile>
+    <ClCompile Include="rtp_unpack_h264.cpp">
+      <Filter>unpacker</Filter>
+    </ClCompile>
+    <ClCompile Include="rtp_unpack_h265.cpp">
+      <Filter>unpacker</Filter>
+    </ClCompile>
+    <ClCompile Include="rtp_unpack_impl.cpp">
+      <Filter>unpacker</Filter>
+    </ClCompile>
+    <ClCompile Include="custom_session_impl.cpp">
+      <Filter>session</Filter>
+    </ClCompile>
+    <ClCompile Include="rtsp_session_impl.cpp">
+      <Filter>session</Filter>
+    </ClCompile>
+    <ClCompile Include="tcp_session_impl.cpp">
+      <Filter>session</Filter>
+    </ClCompile>
+    <ClCompile Include="udp_session_impl.cpp">
+      <Filter>session</Filter>
+    </ClCompile>
+    <ClCompile Include="rtsp_link_impl.cpp">
+      <Filter>link_impl</Filter>
+    </ClCompile>
+    <ClCompile Include="tcp_link_impl.cpp">
+      <Filter>link_impl</Filter>
+    </ClCompile>
+    <ClCompile Include="udp_link_impl.cpp">
+      <Filter>link_impl</Filter>
+    </ClCompile>
+    <ClCompile Include="thread.cpp">
+      <Filter>thread</Filter>
+    </ClCompile>
+    <ClCompile Include="thread_timer.cpp">
+      <Filter>thread</Filter>
+    </ClCompile>
+    <ClCompile Include="media_link.cpp">
+      <Filter>media_link</Filter>
+    </ClCompile>
+    <ClCompile Include="media_link_impl.cpp">
+      <Filter>media_link</Filter>
+    </ClCompile>
+    <ClCompile Include="push_link_impl.cpp">
+      <Filter>media_link</Filter>
+    </ClCompile>
+    <ClCompile Include="rtp_sink_impl.cpp" />
+    <ClCompile Include="sdp_parser.cpp" />
+    <ClCompile Include="xt_media_client.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="xt_media_client.rc" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,487 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: rvcommon - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\DOCUME~1\renfei\LOCALS~1\Temp\RSP325.tmp" with contents
+[
+kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib ws2_32.lib /nologo /dll /incremental:yes /pdb:"..\binaries\windows\Debug\lib/rvcommon.pdb" /debug /machine:I386 /out:"..\binaries\windows\debug\bin/rvcommon.dll" /implib:"..\binaries\windows\Debug\lib/rvcommon.lib" /pdbtype:sept 
+"\流媒体传输\资料\RtspClient_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspClient_Windows_Source_2.0.0.3\binaries\windows\Debug\obj\rvcbase.obj"
+"\流媒体传输\资料\RtspClient_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspClient_Windows_Source_2.0.0.3\binaries\windows\Debug\obj\rvevent.obj"
+"\流媒体传输\资料\RtspClient_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspClient_Windows_Source_2.0.0.3\binaries\windows\Debug\obj\rvglobals.obj"
+"\流媒体传输\资料\RtspClient_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspClient_Windows_Source_2.0.0.3\binaries\windows\Debug\obj\rvqueue.obj"
+"\流媒体传输\资料\RtspClient_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspClient_Windows_Source_2.0.0.3\binaries\windows\Debug\obj\rvsmq.obj"
+"\流媒体传输\资料\RtspClient_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspClient_Windows_Source_2.0.0.3\binaries\windows\Debug\obj\rvtimer.obj"
+"\流媒体传输\资料\RtspClient_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspClient_Windows_Source_2.0.0.3\binaries\windows\Debug\obj\rvtimerengine.obj"
+"\流媒体传输\资料\RtspClient_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspClient_Windows_Source_2.0.0.3\binaries\windows\Debug\obj\rv64bits.obj"
+"\流媒体传输\资料\RtspClient_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspClient_Windows_Source_2.0.0.3\binaries\windows\Debug\obj\rvaddress.obj"
+"\流媒体传输\资料\RtspClient_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspClient_Windows_Source_2.0.0.3\binaries\windows\Debug\obj\rvansi.obj"
+"\流媒体传输\资料\RtspClient_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspClient_Windows_Source_2.0.0.3\binaries\windows\Debug\obj\rvbase64.obj"
+"\流媒体传输\资料\RtspClient_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspClient_Windows_Source_2.0.0.3\binaries\windows\Debug\obj\rvema.obj"
+"\流媒体传输\资料\RtspClient_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspClient_Windows_Source_2.0.0.3\binaries\windows\Debug\obj\rvhashu.obj"
+"\流媒体传输\资料\RtspClient_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspClient_Windows_Source_2.0.0.3\binaries\windows\Debug\obj\rvnet2host.obj"
+"\流媒体传输\资料\RtspClient_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspClient_Windows_Source_2.0.0.3\binaries\windows\Debug\obj\rvntptime.obj"
+"\流媒体传输\资料\RtspClient_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspClient_Windows_Source_2.0.0.3\binaries\windows\Debug\obj\rvobjlist.obj"
+"\流媒体传输\资料\RtspClient_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspClient_Windows_Source_2.0.0.3\binaries\windows\Debug\obj\rvobjpool.obj"
+"\流媒体传输\资料\RtspClient_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspClient_Windows_Source_2.0.0.3\binaries\windows\Debug\obj\rvpqueue.obj"
+"\流媒体传输\资料\RtspClient_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspClient_Windows_Source_2.0.0.3\binaries\windows\Debug\obj\rvra.obj"
+"\流媒体传输\资料\RtspClient_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspClient_Windows_Source_2.0.0.3\binaries\windows\Debug\obj\rvrandomgenerator.obj"
+"\流媒体传输\资料\RtspClient_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspClient_Windows_Source_2.0.0.3\binaries\windows\Debug\obj\rvresource.obj"
+"\流媒体传输\资料\RtspClient_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspClient_Windows_Source_2.0.0.3\binaries\windows\Debug\obj\rvsqrt.obj"
+"\流媒体传输\资料\RtspClient_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspClient_Windows_Source_2.0.0.3\binaries\windows\Debug\obj\rvstrutils.obj"
+"\流媒体传输\资料\RtspClient_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspClient_Windows_Source_2.0.0.3\binaries\windows\Debug\obj\rvtime.obj"
+"\流媒体传输\资料\RtspClient_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspClient_Windows_Source_2.0.0.3\binaries\windows\Debug\obj\rvosmem.obj"
+"\流媒体传输\资料\RtspClient_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspClient_Windows_Source_2.0.0.3\binaries\windows\Debug\obj\rvpoolmem.obj"
+"\流媒体传输\资料\RtspClient_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspClient_Windows_Source_2.0.0.3\binaries\windows\Debug\obj\rvhost.obj"
+"\流媒体传输\资料\RtspClient_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspClient_Windows_Source_2.0.0.3\binaries\windows\Debug\obj\rvportrange.obj"
+"\流媒体传输\资料\RtspClient_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspClient_Windows_Source_2.0.0.3\binaries\windows\Debug\obj\rvselect.obj"
+"\流媒体传输\资料\RtspClient_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspClient_Windows_Source_2.0.0.3\binaries\windows\Debug\obj\rvsocket.obj"
+"\流媒体传输\资料\RtspClient_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspClient_Windows_Source_2.0.0.3\binaries\windows\Debug\obj\rvtls.obj"
+"\流媒体传输\资料\RtspClient_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspClient_Windows_Source_2.0.0.3\binaries\windows\Debug\obj\rv64ascii.obj"
+"\流媒体传输\资料\RtspClient_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspClient_Windows_Source_2.0.0.3\binaries\windows\Debug\obj\rvccore.obj"
+"\流媒体传输\资料\RtspClient_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspClient_Windows_Source_2.0.0.3\binaries\windows\Debug\obj\rvccoreglobals.obj"
+"\流媒体传输\资料\RtspClient_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspClient_Windows_Source_2.0.0.3\binaries\windows\Debug\obj\rvclock.obj"
+"\流媒体传输\资料\RtspClient_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspClient_Windows_Source_2.0.0.3\binaries\windows\Debug\obj\rvlock.obj"
+"\流媒体传输\资料\RtspClient_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspClient_Windows_Source_2.0.0.3\binaries\windows\Debug\obj\rvlog.obj"
+"\流媒体传输\资料\RtspClient_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspClient_Windows_Source_2.0.0.3\binaries\windows\Debug\obj\rvloglistener.obj"
+"\流媒体传输\资料\RtspClient_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspClient_Windows_Source_2.0.0.3\binaries\windows\Debug\obj\rvmemory.obj"
+"\流媒体传输\资料\RtspClient_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspClient_Windows_Source_2.0.0.3\binaries\windows\Debug\obj\rvmutex.obj"
+"\流媒体传输\资料\RtspClient_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspClient_Windows_Source_2.0.0.3\binaries\windows\Debug\obj\rvsemaphore.obj"
+"\流媒体传输\资料\RtspClient_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspClient_Windows_Source_2.0.0.3\binaries\windows\Debug\obj\rvstdio.obj"
+"\流媒体传输\资料\RtspClient_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspClient_Windows_Source_2.0.0.3\binaries\windows\Debug\obj\rvthread.obj"
+"\流媒体传输\资料\RtspClient_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspClient_Windows_Source_2.0.0.3\binaries\windows\Debug\obj\rvthreadtls.obj"
+"\流媒体传输\资料\RtspClient_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspClient_Windows_Source_2.0.0.3\binaries\windows\Debug\obj\rvtimestamp.obj"
+"\流媒体传输\资料\RtspClient_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspClient_Windows_Source_2.0.0.3\binaries\windows\Debug\obj\rvtm.obj"
+"\流媒体传输\资料\RtspClient_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspClient_Windows_Source_2.0.0.3\binaries\windows\Debug\obj\ares__read_line.obj"
+"\流媒体传输\资料\RtspClient_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspClient_Windows_Source_2.0.0.3\binaries\windows\Debug\obj\ares_expand_name.obj"
+"\流媒体传输\资料\RtspClient_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspClient_Windows_Source_2.0.0.3\binaries\windows\Debug\obj\ares_init.obj"
+"\流媒体传输\资料\RtspClient_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspClient_Windows_Source_2.0.0.3\binaries\windows\Debug\obj\ares_process.obj"
+"\流媒体传输\资料\RtspClient_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspClient_Windows_Source_2.0.0.3\binaries\windows\Debug\obj\ares_query.obj"
+"\流媒体传输\资料\RtspClient_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspClient_Windows_Source_2.0.0.3\binaries\windows\Debug\obj\rvares.obj"
+"\流媒体传输\资料\RtspClient_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspClient_Windows_Source_2.0.0.3\binaries\windows\Debug\obj\rvarescache.obj"
+"\流媒体传输\资料\RtspClient_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspClient_Windows_Source_2.0.0.3\binaries\windows\Debug\obj\rvehd.obj"
+"\流媒体传输\资料\RtspClient_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspClient_Windows_Source_2.0.0.3\binaries\windows\Debug\obj\rvoscomp.obj"
+"\流媒体传输\资料\RtspClient_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspClient_Windows_Source_2.0.0.3\binaries\windows\Debug\obj\rvadclock.obj"
+"\流媒体传输\资料\RtspClient_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspClient_Windows_Source_2.0.0.3\binaries\windows\Debug\obj\rvadlock.obj"
+"\流媒体传输\资料\RtspClient_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspClient_Windows_Source_2.0.0.3\binaries\windows\Debug\obj\rvadmutex.obj"
+"\流媒体传输\资料\RtspClient_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspClient_Windows_Source_2.0.0.3\binaries\windows\Debug\obj\rvadsema4.obj"
+"\流媒体传输\资料\RtspClient_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspClient_Windows_Source_2.0.0.3\binaries\windows\Debug\obj\rvadthread.obj"
+"\流媒体传输\资料\RtspClient_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspClient_Windows_Source_2.0.0.3\binaries\windows\Debug\obj\rvadtstamp.obj"
+"\流媒体传输\资料\RtspClient_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspClient_Windows_Source_2.0.0.3\binaries\windows\Debug\obj\rvalloc.obj"
+"\流媒体传输\资料\RtspClient_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspClient_Windows_Source_2.0.0.3\binaries\windows\Debug\obj\rvptrvector.obj"
+"\流媒体传输\资料\RtspClient_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspClient_Windows_Source_2.0.0.3\binaries\windows\Debug\obj\rvccoreversion.res"
+]
+Creating command line "link.exe @C:\DOCUME~1\renfei\LOCALS~1\Temp\RSP325.tmp"
+<h3>Output Window</h3>
+Linking...
+rvcbase.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvevent.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvglobals.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvqueue.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvsmq.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvtimer.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvtimerengine.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rv64bits.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvaddress.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvansi.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvbase64.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvema.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvhashu.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvnet2host.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvntptime.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvobjlist.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvobjpool.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvpqueue.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvra.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvrandomgenerator.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvresource.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvsqrt.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvstrutils.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvtime.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvosmem.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvpoolmem.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvhost.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvportrange.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvselect.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvsocket.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvtls.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rv64ascii.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvccore.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvccoreglobals.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvclock.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvlock.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvlog.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvloglistener.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvmemory.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvmutex.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvsemaphore.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvstdio.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvthread.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvthreadtls.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvtimestamp.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvtm.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+ares__read_line.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+ares_expand_name.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+ares_init.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+ares_process.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+ares_query.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvares.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvarescache.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvehd.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvoscomp.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvadclock.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvadlock.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvadsema4.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvadtstamp.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvalloc.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvptrvector.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvcbase.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvevent.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvglobals.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvqueue.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvsmq.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvtimer.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvtimerengine.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rv64bits.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvaddress.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvansi.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvbase64.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvema.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvhashu.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvnet2host.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvntptime.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvobjlist.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvobjpool.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvpqueue.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvra.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvrandomgenerator.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvresource.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvsqrt.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvstrutils.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvtime.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvosmem.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvpoolmem.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvhost.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvportrange.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvselect.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvsocket.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvtls.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rv64ascii.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvccore.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvccoreglobals.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvclock.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvlock.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvlog.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvloglistener.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvmemory.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvmutex.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvsemaphore.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvstdio.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvthread.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvthreadtls.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvtimestamp.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvtm.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+ares__read_line.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+ares_expand_name.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+ares_init.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+ares_process.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+ares_query.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvares.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvarescache.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvehd.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvoscomp.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvadclock.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvadlock.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvadsema4.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvadtstamp.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvalloc.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+rvptrvector.obj : warning LNK4044: unrecognized option "manifestdependency:type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.30729.1' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'"; ignored
+   Creating library ..\binaries\windows\Debug\lib/rvcommon.lib and object ..\binaries\windows\Debug\lib/rvcommon.exp
+rvptrvector.obj : error LNK2001: unresolved external symbol __forceCRTManifestCUR
+rvadlock.obj : error LNK2001: unresolved external symbol __forceCRTManifestCUR
+rvadsema4.obj : error LNK2001: unresolved external symbol __forceCRTManifestCUR
+rvadtstamp.obj : error LNK2001: unresolved external symbol __forceCRTManifestCUR
+rvalloc.obj : error LNK2001: unresolved external symbol __forceCRTManifestCUR
+rvarescache.obj : error LNK2001: unresolved external symbol __forceCRTManifestCUR
+rvehd.obj : error LNK2001: unresolved external symbol __forceCRTManifestCUR
+rvoscomp.obj : error LNK2001: unresolved external symbol __forceCRTManifestCUR
+rvadclock.obj : error LNK2001: unresolved external symbol __forceCRTManifestCUR
+ares_init.obj : error LNK2001: unresolved external symbol __forceCRTManifestCUR
+ares_process.obj : error LNK2001: unresolved external symbol __forceCRTManifestCUR
+ares_query.obj : error LNK2001: unresolved external symbol __forceCRTManifestCUR
+rvares.obj : error LNK2001: unresolved external symbol __forceCRTManifestCUR
+rvtimestamp.obj : error LNK2001: unresolved external symbol __forceCRTManifestCUR
+rvtm.obj : error LNK2001: unresolved external symbol __forceCRTManifestCUR
+ares__read_line.obj : error LNK2001: unresolved external symbol __forceCRTManifestCUR
+ares_expand_name.obj : error LNK2001: unresolved external symbol __forceCRTManifestCUR
+rvsemaphore.obj : error LNK2001: unresolved external symbol __forceCRTManifestCUR
+rvstdio.obj : error LNK2001: unresolved external symbol __forceCRTManifestCUR
+rvthread.obj : error LNK2001: unresolved external symbol __forceCRTManifestCUR
+rvthreadtls.obj : error LNK2001: unresolved external symbol __forceCRTManifestCUR
+rvlog.obj : error LNK2001: unresolved external symbol __forceCRTManifestCUR
+rvloglistener.obj : error LNK2001: unresolved external symbol __forceCRTManifestCUR
+rvmemory.obj : error LNK2001: unresolved external symbol __forceCRTManifestCUR
+rvmutex.obj : error LNK2001: unresolved external symbol __forceCRTManifestCUR
+rvccore.obj : error LNK2001: unresolved external symbol __forceCRTManifestCUR
+rvccoreglobals.obj : error LNK2001: unresolved external symbol __forceCRTManifestCUR
+rvclock.obj : error LNK2001: unresolved external symbol __forceCRTManifestCUR
+rvlock.obj : error LNK2001: unresolved external symbol __forceCRTManifestCUR
+rvselect.obj : error LNK2001: unresolved external symbol __forceCRTManifestCUR
+rvsocket.obj : error LNK2001: unresolved external symbol __forceCRTManifestCUR
+rvtls.obj : error LNK2001: unresolved external symbol __forceCRTManifestCUR
+rv64ascii.obj : error LNK2001: unresolved external symbol __forceCRTManifestCUR
+rvosmem.obj : error LNK2001: unresolved external symbol __forceCRTManifestCUR
+rvpoolmem.obj : error LNK2001: unresolved external symbol __forceCRTManifestCUR
+rvhost.obj : error LNK2001: unresolved external symbol __forceCRTManifestCUR
+rvportrange.obj : error LNK2001: unresolved external symbol __forceCRTManifestCUR
+rvresource.obj : error LNK2001: unresolved external symbol __forceCRTManifestCUR
+rvsqrt.obj : error LNK2001: unresolved external symbol __forceCRTManifestCUR
+rvstrutils.obj : error LNK2001: unresolved external symbol __forceCRTManifestCUR
+rvtime.obj : error LNK2001: unresolved external symbol __forceCRTManifestCUR
+rvobjpool.obj : error LNK2001: unresolved external symbol __forceCRTManifestCUR
+rvpqueue.obj : error LNK2001: unresolved external symbol __forceCRTManifestCUR
+rvra.obj : error LNK2001: unresolved external symbol __forceCRTManifestCUR
+rvrandomgenerator.obj : error LNK2001: unresolved external symbol __forceCRTManifestCUR
+rvhashu.obj : error LNK2001: unresolved external symbol __forceCRTManifestCUR
+rvnet2host.obj : error LNK2001: unresolved external symbol __forceCRTManifestCUR
+rvntptime.obj : error LNK2001: unresolved external symbol __forceCRTManifestCUR
+rvobjlist.obj : error LNK2001: unresolved external symbol __forceCRTManifestCUR
+rvaddress.obj : error LNK2001: unresolved external symbol __forceCRTManifestCUR
+rvansi.obj : error LNK2001: unresolved external symbol __forceCRTManifestCUR
+rvbase64.obj : error LNK2001: unresolved external symbol __forceCRTManifestCUR
+rvema.obj : error LNK2001: unresolved external symbol __forceCRTManifestCUR
+rvsmq.obj : error LNK2001: unresolved external symbol __forceCRTManifestCUR
+rvtimer.obj : error LNK2001: unresolved external symbol __forceCRTManifestCUR
+rvtimerengine.obj : error LNK2001: unresolved external symbol __forceCRTManifestCUR
+rv64bits.obj : error LNK2001: unresolved external symbol __forceCRTManifestCUR
+rvcbase.obj : error LNK2001: unresolved external symbol __forceCRTManifestCUR
+rvevent.obj : error LNK2001: unresolved external symbol __forceCRTManifestCUR
+rvglobals.obj : error LNK2001: unresolved external symbol __forceCRTManifestCUR
+rvqueue.obj : error LNK2001: unresolved external symbol __forceCRTManifestCUR
+rvadtstamp.obj : error LNK2001: unresolved external symbol @_RTC_CheckStackVars@8
+rvalloc.obj : error LNK2001: unresolved external symbol @_RTC_CheckStackVars@8
+rvptrvector.obj : error LNK2001: unresolved external symbol @_RTC_CheckStackVars@8
+rvares.obj : error LNK2001: unresolved external symbol @_RTC_CheckStackVars@8
+rvarescache.obj : error LNK2001: unresolved external symbol @_RTC_CheckStackVars@8
+rvoscomp.obj : error LNK2001: unresolved external symbol @_RTC_CheckStackVars@8
+rvadclock.obj : error LNK2001: unresolved external symbol @_RTC_CheckStackVars@8
+rvmemory.obj : error LNK2001: unresolved external symbol @_RTC_CheckStackVars@8
+rvtm.obj : error LNK2001: unresolved external symbol @_RTC_CheckStackVars@8
+ares_init.obj : error LNK2001: unresolved external symbol @_RTC_CheckStackVars@8
+ares_process.obj : error LNK2001: unresolved external symbol @_RTC_CheckStackVars@8
+rvccore.obj : error LNK2001: unresolved external symbol @_RTC_CheckStackVars@8
+rvclock.obj : error LNK2001: unresolved external symbol @_RTC_CheckStackVars@8
+rvlog.obj : error LNK2001: unresolved external symbol @_RTC_CheckStackVars@8
+rvloglistener.obj : error LNK2001: unresolved external symbol @_RTC_CheckStackVars@8
+rvhost.obj : error LNK2001: unresolved external symbol @_RTC_CheckStackVars@8
+rvportrange.obj : error LNK2001: unresolved external symbol @_RTC_CheckStackVars@8
+rvselect.obj : error LNK2001: unresolved external symbol @_RTC_CheckStackVars@8
+rvsocket.obj : error LNK2001: unresolved external symbol @_RTC_CheckStackVars@8
+rvema.obj : error LNK2001: unresolved external symbol @_RTC_CheckStackVars@8
+rvobjpool.obj : error LNK2001: unresolved external symbol @_RTC_CheckStackVars@8
+rvra.obj : error LNK2001: unresolved external symbol @_RTC_CheckStackVars@8
+rvrandomgenerator.obj : error LNK2001: unresolved external symbol @_RTC_CheckStackVars@8
+rvcbase.obj : error LNK2001: unresolved external symbol @_RTC_CheckStackVars@8
+rvtimer.obj : error LNK2001: unresolved external symbol @_RTC_CheckStackVars@8
+rvaddress.obj : error LNK2001: unresolved external symbol @_RTC_CheckStackVars@8
+rvbase64.obj : error LNK2001: unresolved external symbol @_RTC_CheckStackVars@8
+rvptrvector.obj : error LNK2001: unresolved external symbol __RTC_CheckEsp
+rvadlock.obj : error LNK2001: unresolved external symbol __RTC_CheckEsp
+rvadsema4.obj : error LNK2001: unresolved external symbol __RTC_CheckEsp
+rvadtstamp.obj : error LNK2001: unresolved external symbol __RTC_CheckEsp
+rvalloc.obj : error LNK2001: unresolved external symbol __RTC_CheckEsp
+rvares.obj : error LNK2001: unresolved external symbol __RTC_CheckEsp
+rvarescache.obj : error LNK2001: unresolved external symbol __RTC_CheckEsp
+rvoscomp.obj : error LNK2001: unresolved external symbol __RTC_CheckEsp
+rvadclock.obj : error LNK2001: unresolved external symbol __RTC_CheckEsp
+ares_expand_name.obj : error LNK2001: unresolved external symbol __RTC_CheckEsp
+ares_init.obj : error LNK2001: unresolved external symbol __RTC_CheckEsp
+ares_process.obj : error LNK2001: unresolved external symbol __RTC_CheckEsp
+ares_query.obj : error LNK2001: unresolved external symbol __RTC_CheckEsp
+rvthread.obj : error LNK2001: unresolved external symbol __RTC_CheckEsp
+rvtimestamp.obj : error LNK2001: unresolved external symbol __RTC_CheckEsp
+rvtm.obj : error LNK2001: unresolved external symbol __RTC_CheckEsp
+ares__read_line.obj : error LNK2001: unresolved external symbol __RTC_CheckEsp
+rvmemory.obj : error LNK2001: unresolved external symbol __RTC_CheckEsp
+rvmutex.obj : error LNK2001: unresolved external symbol __RTC_CheckEsp
+rvsemaphore.obj : error LNK2001: unresolved external symbol __RTC_CheckEsp
+rvstdio.obj : error LNK2001: unresolved external symbol __RTC_CheckEsp
+rvclock.obj : error LNK2001: unresolved external symbol __RTC_CheckEsp
+rvlock.obj : error LNK2001: unresolved external symbol __RTC_CheckEsp
+rvlog.obj : error LNK2001: unresolved external symbol __RTC_CheckEsp
+rvloglistener.obj : error LNK2001: unresolved external symbol __RTC_CheckEsp
+rvselect.obj : error LNK2001: unresolved external symbol __RTC_CheckEsp
+rvsocket.obj : error LNK2001: unresolved external symbol __RTC_CheckEsp
+rv64ascii.obj : error LNK2001: unresolved external symbol __RTC_CheckEsp
+rvccore.obj : error LNK2001: unresolved external symbol __RTC_CheckEsp
+rvtime.obj : error LNK2001: unresolved external symbol __RTC_CheckEsp
+rvosmem.obj : error LNK2001: unresolved external symbol __RTC_CheckEsp
+rvhost.obj : error LNK2001: unresolved external symbol __RTC_CheckEsp
+rvportrange.obj : error LNK2001: unresolved external symbol __RTC_CheckEsp
+rvobjpool.obj : error LNK2001: unresolved external symbol __RTC_CheckEsp
+rvpqueue.obj : error LNK2001: unresolved external symbol __RTC_CheckEsp
+rvra.obj : error LNK2001: unresolved external symbol __RTC_CheckEsp
+rvrandomgenerator.obj : error LNK2001: unresolved external symbol __RTC_CheckEsp
+rvema.obj : error LNK2001: unresolved external symbol __RTC_CheckEsp
+rvnet2host.obj : error LNK2001: unresolved external symbol __RTC_CheckEsp
+rvntptime.obj : error LNK2001: unresolved external symbol __RTC_CheckEsp
+rvobjlist.obj : error LNK2001: unresolved external symbol __RTC_CheckEsp
+rvtimer.obj : error LNK2001: unresolved external symbol __RTC_CheckEsp
+rvtimerengine.obj : error LNK2001: unresolved external symbol __RTC_CheckEsp
+rvaddress.obj : error LNK2001: unresolved external symbol __RTC_CheckEsp
+rvbase64.obj : error LNK2001: unresolved external symbol __RTC_CheckEsp
+rvcbase.obj : error LNK2001: unresolved external symbol __RTC_CheckEsp
+rvevent.obj : error LNK2001: unresolved external symbol __RTC_CheckEsp
+rvglobals.obj : error LNK2001: unresolved external symbol __RTC_CheckEsp
+rvqueue.obj : error LNK2001: unresolved external symbol __RTC_CheckEsp
+rvptrvector.obj : error LNK2001: unresolved external symbol __RTC_Shutdown
+rvadlock.obj : error LNK2001: unresolved external symbol __RTC_Shutdown
+rvadsema4.obj : error LNK2001: unresolved external symbol __RTC_Shutdown
+rvadtstamp.obj : error LNK2001: unresolved external symbol __RTC_Shutdown
+rvalloc.obj : error LNK2001: unresolved external symbol __RTC_Shutdown
+rvarescache.obj : error LNK2001: unresolved external symbol __RTC_Shutdown
+rvehd.obj : error LNK2001: unresolved external symbol __RTC_Shutdown
+rvoscomp.obj : error LNK2001: unresolved external symbol __RTC_Shutdown
+rvadclock.obj : error LNK2001: unresolved external symbol __RTC_Shutdown
+ares_init.obj : error LNK2001: unresolved external symbol __RTC_Shutdown
+ares_process.obj : error LNK2001: unresolved external symbol __RTC_Shutdown
+ares_query.obj : error LNK2001: unresolved external symbol __RTC_Shutdown
+rvares.obj : error LNK2001: unresolved external symbol __RTC_Shutdown
+rvtimestamp.obj : error LNK2001: unresolved external symbol __RTC_Shutdown
+rvtm.obj : error LNK2001: unresolved external symbol __RTC_Shutdown
+ares__read_line.obj : error LNK2001: unresolved external symbol __RTC_Shutdown
+ares_expand_name.obj : error LNK2001: unresolved external symbol __RTC_Shutdown
+rvmutex.obj : error LNK2001: unresolved external symbol __RTC_Shutdown
+rvsemaphore.obj : error LNK2001: unresolved external symbol __RTC_Shutdown
+rvstdio.obj : error LNK2001: unresolved external symbol __RTC_Shutdown
+rvthread.obj : error LNK2001: unresolved external symbol __RTC_Shutdown
+rvlock.obj : error LNK2001: unresolved external symbol __RTC_Shutdown
+rvlog.obj : error LNK2001: unresolved external symbol __RTC_Shutdown
+rvloglistener.obj : error LNK2001: unresolved external symbol __RTC_Shutdown
+rvmemory.obj : error LNK2001: unresolved external symbol __RTC_Shutdown
+rv64ascii.obj : error LNK2001: unresolved external symbol __RTC_Shutdown
+rvccore.obj : error LNK2001: unresolved external symbol __RTC_Shutdown
+rvccoreglobals.obj : error LNK2001: unresolved external symbol __RTC_Shutdown
+rvclock.obj : error LNK2001: unresolved external symbol __RTC_Shutdown
+rvportrange.obj : error LNK2001: unresolved external symbol __RTC_Shutdown
+rvselect.obj : error LNK2001: unresolved external symbol __RTC_Shutdown
+rvsocket.obj : error LNK2001: unresolved external symbol __RTC_Shutdown
+rvtls.obj : error LNK2001: unresolved external symbol __RTC_Shutdown
+rvrandomgenerator.obj : error LNK2001: unresolved external symbol __RTC_Shutdown
+rvtime.obj : error LNK2001: unresolved external symbol __RTC_Shutdown
+rvosmem.obj : error LNK2001: unresolved external symbol __RTC_Shutdown
+rvhost.obj : error LNK2001: unresolved external symbol __RTC_Shutdown
+rvobjlist.obj : error LNK2001: unresolved external symbol __RTC_Shutdown
+rvobjpool.obj : error LNK2001: unresolved external symbol __RTC_Shutdown
+rvpqueue.obj : error LNK2001: unresolved external symbol __RTC_Shutdown
+rvra.obj : error LNK2001: unresolved external symbol __RTC_Shutdown
+rvema.obj : error LNK2001: unresolved external symbol __RTC_Shutdown
+rvhashu.obj : error LNK2001: unresolved external symbol __RTC_Shutdown
+rvnet2host.obj : error LNK2001: unresolved external symbol __RTC_Shutdown
+rvntptime.obj : error LNK2001: unresolved external symbol __RTC_Shutdown
+rvtimer.obj : error LNK2001: unresolved external symbol __RTC_Shutdown
+rvtimerengine.obj : error LNK2001: unresolved external symbol __RTC_Shutdown
+rvaddress.obj : error LNK2001: unresolved external symbol __RTC_Shutdown
+rvbase64.obj : error LNK2001: unresolved external symbol __RTC_Shutdown
+rvcbase.obj : error LNK2001: unresolved external symbol __RTC_Shutdown
+rvevent.obj : error LNK2001: unresolved external symbol __RTC_Shutdown
+rvglobals.obj : error LNK2001: unresolved external symbol __RTC_Shutdown
+rvqueue.obj : error LNK2001: unresolved external symbol __RTC_Shutdown
+rvptrvector.obj : error LNK2001: unresolved external symbol __RTC_InitBase
+rvadlock.obj : error LNK2001: unresolved external symbol __RTC_InitBase
+rvadsema4.obj : error LNK2001: unresolved external symbol __RTC_InitBase
+rvadtstamp.obj : error LNK2001: unresolved external symbol __RTC_InitBase
+rvalloc.obj : error LNK2001: unresolved external symbol __RTC_InitBase
+rvarescache.obj : error LNK2001: unresolved external symbol __RTC_InitBase
+rvehd.obj : error LNK2001: unresolved external symbol __RTC_InitBase
+rvoscomp.obj : error LNK2001: unresolved external symbol __RTC_InitBase
+rvadclock.obj : error LNK2001: unresolved external symbol __RTC_InitBase
+ares_init.obj : error LNK2001: unresolved external symbol __RTC_InitBase
+ares_process.obj : error LNK2001: unresolved external symbol __RTC_InitBase
+ares_query.obj : error LNK2001: unresolved external symbol __RTC_InitBase
+rvares.obj : error LNK2001: unresolved external symbol __RTC_InitBase
+rvtimestamp.obj : error LNK2001: unresolved external symbol __RTC_InitBase
+rvtm.obj : error LNK2001: unresolved external symbol __RTC_InitBase
+ares__read_line.obj : error LNK2001: unresolved external symbol __RTC_InitBase
+ares_expand_name.obj : error LNK2001: unresolved external symbol __RTC_InitBase
+rvmutex.obj : error LNK2001: unresolved external symbol __RTC_InitBase
+rvsemaphore.obj : error LNK2001: unresolved external symbol __RTC_InitBase
+rvstdio.obj : error LNK2001: unresolved external symbol __RTC_InitBase
+rvthread.obj : error LNK2001: unresolved external symbol __RTC_InitBase
+rvlock.obj : error LNK2001: unresolved external symbol __RTC_InitBase
+rvlog.obj : error LNK2001: unresolved external symbol __RTC_InitBase
+rvloglistener.obj : error LNK2001: unresolved external symbol __RTC_InitBase
+rvmemory.obj : error LNK2001: unresolved external symbol __RTC_InitBase
+rv64ascii.obj : error LNK2001: unresolved external symbol __RTC_InitBase
+rvccore.obj : error LNK2001: unresolved external symbol __RTC_InitBase
+rvccoreglobals.obj : error LNK2001: unresolved external symbol __RTC_InitBase
+rvclock.obj : error LNK2001: unresolved external symbol __RTC_InitBase
+rvportrange.obj : error LNK2001: unresolved external symbol __RTC_InitBase
+rvselect.obj : error LNK2001: unresolved external symbol __RTC_InitBase
+rvsocket.obj : error LNK2001: unresolved external symbol __RTC_InitBase
+rvtls.obj : error LNK2001: unresolved external symbol __RTC_InitBase
+rvrandomgenerator.obj : error LNK2001: unresolved external symbol __RTC_InitBase
+rvtime.obj : error LNK2001: unresolved external symbol __RTC_InitBase
+rvosmem.obj : error LNK2001: unresolved external symbol __RTC_InitBase
+rvhost.obj : error LNK2001: unresolved external symbol __RTC_InitBase
+rvobjlist.obj : error LNK2001: unresolved external symbol __RTC_InitBase
+rvobjpool.obj : error LNK2001: unresolved external symbol __RTC_InitBase
+rvpqueue.obj : error LNK2001: unresolved external symbol __RTC_InitBase
+rvra.obj : error LNK2001: unresolved external symbol __RTC_InitBase
+rvema.obj : error LNK2001: unresolved external symbol __RTC_InitBase
+rvhashu.obj : error LNK2001: unresolved external symbol __RTC_InitBase
+rvnet2host.obj : error LNK2001: unresolved external symbol __RTC_InitBase
+rvntptime.obj : error LNK2001: unresolved external symbol __RTC_InitBase
+rvtimer.obj : error LNK2001: unresolved external symbol __RTC_InitBase
+rvtimerengine.obj : error LNK2001: unresolved external symbol __RTC_InitBase
+rvaddress.obj : error LNK2001: unresolved external symbol __RTC_InitBase
+rvbase64.obj : error LNK2001: unresolved external symbol __RTC_InitBase
+rvcbase.obj : error LNK2001: unresolved external symbol __RTC_InitBase
+rvevent.obj : error LNK2001: unresolved external symbol __RTC_InitBase
+rvglobals.obj : error LNK2001: unresolved external symbol __RTC_InitBase
+rvqueue.obj : error LNK2001: unresolved external symbol __RTC_InitBase
+rvptrvector.obj : error LNK2001: unresolved external symbol __imp___wassert
+rvevent.obj : error LNK2001: unresolved external symbol __imp___wassert
+rvselect.obj : error LNK2001: unresolved external symbol __imp___wassert
+rvarescache.obj : error LNK2001: unresolved external symbol __imp___wassert
+rvalloc.obj : error LNK2001: unresolved external symbol __imp___wassert
+ares_process.obj : error LNK2001: unresolved external symbol ___security_cookie
+rvares.obj : error LNK2001: unresolved external symbol ___security_cookie
+rvarescache.obj : error LNK2001: unresolved external symbol ___security_cookie
+rvccore.obj : error LNK2001: unresolved external symbol ___security_cookie
+rvloglistener.obj : error LNK2001: unresolved external symbol ___security_cookie
+rvmemory.obj : error LNK2001: unresolved external symbol ___security_cookie
+ares_init.obj : error LNK2001: unresolved external symbol ___security_cookie
+rvaddress.obj : error LNK2001: unresolved external symbol ___security_cookie
+rvhost.obj : error LNK2001: unresolved external symbol ___security_cookie
+rvselect.obj : error LNK2001: unresolved external symbol ___security_cookie
+rvsocket.obj : error LNK2001: unresolved external symbol ___security_cookie
+ares_process.obj : error LNK2001: unresolved external symbol @__security_check_cookie@4
+rvares.obj : error LNK2001: unresolved external symbol @__security_check_cookie@4
+rvarescache.obj : error LNK2001: unresolved external symbol @__security_check_cookie@4
+rvccore.obj : error LNK2001: unresolved external symbol @__security_check_cookie@4
+rvloglistener.obj : error LNK2001: unresolved external symbol @__security_check_cookie@4
+rvmemory.obj : error LNK2001: unresolved external symbol @__security_check_cookie@4
+ares_init.obj : error LNK2001: unresolved external symbol @__security_check_cookie@4
+rvaddress.obj : error LNK2001: unresolved external symbol @__security_check_cookie@4
+rvhost.obj : error LNK2001: unresolved external symbol @__security_check_cookie@4
+rvselect.obj : error LNK2001: unresolved external symbol @__security_check_cookie@4
+rvsocket.obj : error LNK2001: unresolved external symbol @__security_check_cookie@4
+rvbase64.obj : error LNK2001: unresolved external symbol __RTC_UninitUse
+rvloglistener.obj : error LNK2001: unresolved external symbol __imp____iob_func
+rvtm.obj : error LNK2001: unresolved external symbol __imp___mktime64
+rvtm.obj : error LNK2001: unresolved external symbol __imp___gmtime64
+rvtm.obj : error LNK2001: unresolved external symbol __imp___localtime64
+..\binaries\windows\debug\bin/rvcommon.dll : fatal error LNK1120: 13 unresolved externals
+执行 link.exe 时出错.
+
+
+
+<h3>Results</h3>
+RvRtspClientSample.exe - 1 error(s), 0 warning(s)
+</pre>
+</body>
+</html>

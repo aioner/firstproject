@@ -1,0 +1,35 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "sdp", "sdp.vcproj", "{1B637CC3-0A23-4C88-A071-60EE7F7B369B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		DebugDns|Win32 = DebugDns|Win32
+		DebugIpv6DnsTls|Win32 = DebugIpv6DnsTls|Win32
+		DebugTls|Win32 = DebugTls|Win32
+		Release|Win32 = Release|Win32
+		ReleaseDns|Win32 = ReleaseDns|Win32
+		ReleaseTls|Win32 = ReleaseTls|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1B637CC3-0A23-4C88-A071-60EE7F7B369B}.Debug|Win32.ActiveCfg = Debug|Win32
+		{1B637CC3-0A23-4C88-A071-60EE7F7B369B}.Debug|Win32.Build.0 = Debug|Win32
+		{1B637CC3-0A23-4C88-A071-60EE7F7B369B}.DebugDns|Win32.ActiveCfg = DebugDns|Win32
+		{1B637CC3-0A23-4C88-A071-60EE7F7B369B}.DebugDns|Win32.Build.0 = DebugDns|Win32
+		{1B637CC3-0A23-4C88-A071-60EE7F7B369B}.DebugIpv6DnsTls|Win32.ActiveCfg = DebugIpv6DnsTls|Win32
+		{1B637CC3-0A23-4C88-A071-60EE7F7B369B}.DebugIpv6DnsTls|Win32.Build.0 = DebugIpv6DnsTls|Win32
+		{1B637CC3-0A23-4C88-A071-60EE7F7B369B}.DebugTls|Win32.ActiveCfg = DebugTls|Win32
+		{1B637CC3-0A23-4C88-A071-60EE7F7B369B}.DebugTls|Win32.Build.0 = DebugTls|Win32
+		{1B637CC3-0A23-4C88-A071-60EE7F7B369B}.Release|Win32.ActiveCfg = Release|Win32
+		{1B637CC3-0A23-4C88-A071-60EE7F7B369B}.Release|Win32.Build.0 = Release|Win32
+		{1B637CC3-0A23-4C88-A071-60EE7F7B369B}.ReleaseDns|Win32.ActiveCfg = ReleaseDns|Win32
+		{1B637CC3-0A23-4C88-A071-60EE7F7B369B}.ReleaseDns|Win32.Build.0 = ReleaseDns|Win32
+		{1B637CC3-0A23-4C88-A071-60EE7F7B369B}.ReleaseTls|Win32.ActiveCfg = ReleaseTls|Win32
+		{1B637CC3-0A23-4C88-A071-60EE7F7B369B}.ReleaseTls|Win32.Build.0 = ReleaseTls|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

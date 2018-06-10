@@ -1,0 +1,601 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Base Files">
+      <UniqueIdentifier>{70f7c4c5-9638-4b66-9bd2-503089245919}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utils Files">
+      <UniqueIdentifier>{5f1b6f5e-af00-4cae-8989-c066889e8e33}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Configuration Files">
+      <UniqueIdentifier>{8f17f730-4ed3-478a-a9dd-786ebafa85b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ares">
+      <UniqueIdentifier>{d050afb3-bb87-4493-bed4-2c56e927666e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Adapters">
+      <UniqueIdentifier>{cd0a366c-8c20-456e-ad6f-c85d379c858f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ipsec">
+      <UniqueIdentifier>{b2a8b2ef-1c4b-4176-83a4-84d9186a4515}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{a3d20143-0dbf-4c5c-a1ee-4119d92ca0fa}</UniqueIdentifier>
+      <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
+    </Filter>
+    <Filter Include="CEUtils Files">
+      <UniqueIdentifier>{bf982718-982a-4585-bf9c-2933f9dfeaaa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core Files">
+      <UniqueIdentifier>{4d8af6a7-b557-40f2-a609-72fd86000fcc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core Files\memdrivers">
+      <UniqueIdentifier>{35ae46a6-5f34-402f-b3d8-e58b8819a10a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core Files\netdrivers">
+      <UniqueIdentifier>{c6051c4e-ddbd-465d-84ba-a763e79caa77}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="cbase\rvcbase.c">
+      <Filter>Base Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cbase\rvevent.c">
+      <Filter>Base Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cbase\rvglobals.c">
+      <Filter>Base Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cbase\rvqueue.c">
+      <Filter>Base Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cbase\rvsmq.c">
+      <Filter>Base Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cbase\rvtimer.c">
+      <Filter>Base Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cbase\rvtimerengine.c">
+      <Filter>Base Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cutils\rv64bits.c">
+      <Filter>Utils Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cutils\rvaddress.c">
+      <Filter>Utils Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cutils\rvansi.c">
+      <Filter>Utils Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cutils\rvbase64.c">
+      <Filter>Utils Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cutils\rvema.c">
+      <Filter>Utils Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cutils\rvhashu.c">
+      <Filter>Utils Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cutils\rvnet2host.c">
+      <Filter>Utils Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cutils\rvntptime.c">
+      <Filter>Utils Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cutils\rvobjlist.c">
+      <Filter>Utils Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cutils\rvobjpool.c">
+      <Filter>Utils Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cutils\rvpqueue.c">
+      <Filter>Utils Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cutils\rvra.c">
+      <Filter>Utils Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cutils\rvrandomgenerator.c">
+      <Filter>Utils Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cutils\rvresource.c">
+      <Filter>Utils Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cutils\rvsqrt.c">
+      <Filter>Utils Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cutils\rvstrutils.c">
+      <Filter>Utils Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cutils\rvtime.c">
+      <Filter>Utils Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ares\ares__read_line.c">
+      <Filter>Ares</Filter>
+    </ClCompile>
+    <ClCompile Include="ares\ares_expand_name.c">
+      <Filter>Ares</Filter>
+    </ClCompile>
+    <ClCompile Include="ares\ares_init.c">
+      <Filter>Ares</Filter>
+    </ClCompile>
+    <ClCompile Include="ares\ares_process.c">
+      <Filter>Ares</Filter>
+    </ClCompile>
+    <ClCompile Include="ares\ares_query.c">
+      <Filter>Ares</Filter>
+    </ClCompile>
+    <ClCompile Include="ares\rvares.c">
+      <Filter>Ares</Filter>
+    </ClCompile>
+    <ClCompile Include="ares\rvarescache.c">
+      <Filter>Ares</Filter>
+    </ClCompile>
+    <ClCompile Include="ares\rvarescachep.c">
+      <Filter>Ares</Filter>
+    </ClCompile>
+    <ClCompile Include="ares\rvehd.c">
+      <Filter>Ares</Filter>
+    </ClCompile>
+    <ClCompile Include="ares\rvoscomp.c">
+      <Filter>Ares</Filter>
+    </ClCompile>
+    <ClCompile Include="adapters\windows\rvadclock.c">
+      <Filter>Adapters</Filter>
+    </ClCompile>
+    <ClCompile Include="adapters\windows\rvadlock.c">
+      <Filter>Adapters</Filter>
+    </ClCompile>
+    <ClCompile Include="adapters\windows\rvadmutex.c">
+      <Filter>Adapters</Filter>
+    </ClCompile>
+    <ClCompile Include="adapters\windows\rvadsema4.c">
+      <Filter>Adapters</Filter>
+    </ClCompile>
+    <ClCompile Include="adapters\windows\rvadthread.c">
+      <Filter>Adapters</Filter>
+    </ClCompile>
+    <ClCompile Include="adapters\windows\rvadtstamp.c">
+      <Filter>Adapters</Filter>
+    </ClCompile>
+    <ClCompile Include="adapters\windows\rvwindscp.cpp">
+      <Filter>Adapters</Filter>
+    </ClCompile>
+    <ClCompile Include="ipsec\rvimsipsec.c">
+      <Filter>ipsec</Filter>
+    </ClCompile>
+    <ClCompile Include="ipsec\rvwindowsipsec.c">
+      <Filter>ipsec</Filter>
+    </ClCompile>
+    <ClCompile Include="ceutils\rvalloc.c">
+      <Filter>CEUtils Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ceutils\rvptrvector.c">
+      <Filter>CEUtils Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ccore\rv2waylock.c">
+      <Filter>Core Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ccore\rv64ascii.c">
+      <Filter>Core Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ccore\rvccore.c">
+      <Filter>Core Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ccore\rvccoreglobals.c">
+      <Filter>Core Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ccore\rvclock.c">
+      <Filter>Core Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ccore\rvcondvar.c">
+      <Filter>Core Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ccore\rvlock.c">
+      <Filter>Core Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ccore\rvlog.c">
+      <Filter>Core Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ccore\rvloglistener.c">
+      <Filter>Core Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ccore\rvmemory.c">
+      <Filter>Core Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ccore\rvmutex.c">
+      <Filter>Core Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ccore\rvnotify.c">
+      <Filter>Core Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ccore\rvsemaphore.c">
+      <Filter>Core Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ccore\rvstdio.c">
+      <Filter>Core Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ccore\rvthread.c">
+      <Filter>Core Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ccore\rvthreadtls.c">
+      <Filter>Core Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ccore\rvtimestamp.c">
+      <Filter>Core Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ccore\rvtm.c">
+      <Filter>Core Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ccore\memdrivers\rvosmem.c">
+      <Filter>Core Files\memdrivers</Filter>
+    </ClCompile>
+    <ClCompile Include="ccore\memdrivers\rvpoolmem.c">
+      <Filter>Core Files\memdrivers</Filter>
+    </ClCompile>
+    <ClCompile Include="ccore\netdrivers\rvhost.c">
+      <Filter>Core Files\netdrivers</Filter>
+    </ClCompile>
+    <ClCompile Include="ccore\netdrivers\rvif.c">
+      <Filter>Core Files\netdrivers</Filter>
+    </ClCompile>
+    <ClCompile Include="ccore\netdrivers\rvifmonitor.c">
+      <Filter>Core Files\netdrivers</Filter>
+    </ClCompile>
+    <ClCompile Include="ccore\netdrivers\rvportrange.c">
+      <Filter>Core Files\netdrivers</Filter>
+    </ClCompile>
+    <ClCompile Include="ccore\netdrivers\rvselect.c">
+      <Filter>Core Files\netdrivers</Filter>
+    </ClCompile>
+    <ClCompile Include="ccore\netdrivers\rvsocket.c">
+      <Filter>Core Files\netdrivers</Filter>
+    </ClCompile>
+    <ClCompile Include="ccore\netdrivers\rvtls.c">
+      <Filter>Core Files\netdrivers</Filter>
+    </ClCompile>
+    <ClCompile Include="ccore\netdrivers\rvtlstransport.c">
+      <Filter>Core Files\netdrivers</Filter>
+    </ClCompile>
+    <ClCompile Include="ccore\netdrivers\rvtransport.c">
+      <Filter>Core Files\netdrivers</Filter>
+    </ClCompile>
+    <ClCompile Include="ccore\netdrivers\rvtransportsocket.c">
+      <Filter>Core Files\netdrivers</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="cbase\rvcbase.h">
+      <Filter>Base Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cbase\rvcbaseconfig.h">
+      <Filter>Base Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cbase\rvcbasedefs.h">
+      <Filter>Base Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ccore\rvcommoncorepublic.h">
+      <Filter>Base Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cbase\rvevent.h">
+      <Filter>Base Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cbase\rvglobalindexes.h">
+      <Filter>Base Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cbase\rvglobals.h">
+      <Filter>Base Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cbase\rvqueue.h">
+      <Filter>Base Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cbase\rvsmq.h">
+      <Filter>Base Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cbase\rvtimer.h">
+      <Filter>Base Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cbase\rvtimerengine.h">
+      <Filter>Base Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cutils\rv64bits.h">
+      <Filter>Utils Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cutils\rvaddress.h">
+      <Filter>Utils Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cutils\rvansi.h">
+      <Filter>Utils Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cutils\rvbase64.h">
+      <Filter>Utils Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cutils\rvema.h">
+      <Filter>Utils Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cutils\rverror.h">
+      <Filter>Utils Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cutils\rvhashu.h">
+      <Filter>Utils Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cutils\rvnet2host.h">
+      <Filter>Utils Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cutils\rvntptime.h">
+      <Filter>Utils Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cutils\rvobjlist.h">
+      <Filter>Utils Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cutils\rvobjpool.h">
+      <Filter>Utils Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cutils\rvpqueue.h">
+      <Filter>Utils Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cutils\rvra.h">
+      <Filter>Utils Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cutils\rvrandomgenerator.h">
+      <Filter>Utils Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cutils\rvresource.h">
+      <Filter>Utils Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cutils\rvsqrt.h">
+      <Filter>Utils Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cutils\rvstrutils.h">
+      <Filter>Utils Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cutils\rvtime.h">
+      <Filter>Utils Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cutils\rvtypes.h">
+      <Filter>Utils Files</Filter>
+    </ClInclude>
+    <ClInclude Include="config\arch\rvarchconfig.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="config\arch\rvarchdefs.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="config\rvcflags.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="config\rvconfig.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="config\rvdependencies.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="config\rvinterfacesdefs.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="config\tool\rvmsvc.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="config\os\rvosconfig.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="config\os\rvosdefs.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="config\tool\rvtoolconfig.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="config\tool\rvtooldefs.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="config\rvusrconfig.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="config\os\rvwin32.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ares\ares.h">
+      <Filter>Ares</Filter>
+    </ClInclude>
+    <ClInclude Include="ares\ares_dns.h">
+      <Filter>Ares</Filter>
+    </ClInclude>
+    <ClInclude Include="ares\ares_private.h">
+      <Filter>Ares</Filter>
+    </ClInclude>
+    <ClInclude Include="ares\rvares.h">
+      <Filter>Ares</Filter>
+    </ClInclude>
+    <ClInclude Include="ares\rvarescache.h">
+      <Filter>Ares</Filter>
+    </ClInclude>
+    <ClInclude Include="ares\rvarescached.h">
+      <Filter>Ares</Filter>
+    </ClInclude>
+    <ClInclude Include="ares\rvarescachep.h">
+      <Filter>Ares</Filter>
+    </ClInclude>
+    <ClInclude Include="ares\rvehd.h">
+      <Filter>Ares</Filter>
+    </ClInclude>
+    <ClInclude Include="ares\rvoscomp.h">
+      <Filter>Ares</Filter>
+    </ClInclude>
+    <ClInclude Include="adapters\rvadclock.h">
+      <Filter>Adapters</Filter>
+    </ClInclude>
+    <ClInclude Include="adapters\rvadlock.h">
+      <Filter>Adapters</Filter>
+    </ClInclude>
+    <ClInclude Include="adapters\windows\rvadlock_t.h">
+      <Filter>Adapters</Filter>
+    </ClInclude>
+    <ClInclude Include="adapters\rvadmutex.h">
+      <Filter>Adapters</Filter>
+    </ClInclude>
+    <ClInclude Include="adapters\windows\rvadmutex_t.h">
+      <Filter>Adapters</Filter>
+    </ClInclude>
+    <ClInclude Include="adapters\rvadsema4.h">
+      <Filter>Adapters</Filter>
+    </ClInclude>
+    <ClInclude Include="adapters\windows\rvadsema4_t.h">
+      <Filter>Adapters</Filter>
+    </ClInclude>
+    <ClInclude Include="adapters\rvadthread.h">
+      <Filter>Adapters</Filter>
+    </ClInclude>
+    <ClInclude Include="adapters\windows\rvadthread_t.h">
+      <Filter>Adapters</Filter>
+    </ClInclude>
+    <ClInclude Include="adapters\rvadtstamp.h">
+      <Filter>Adapters</Filter>
+    </ClInclude>
+    <ClInclude Include="ipsec\rvimsipsec.h">
+      <Filter>ipsec</Filter>
+    </ClInclude>
+    <ClInclude Include="ipsec\rvimsipsecprivate.h">
+      <Filter>ipsec</Filter>
+    </ClInclude>
+    <ClInclude Include="ipsec\rvimsipsecpublic.h">
+      <Filter>ipsec</Filter>
+    </ClInclude>
+    <ClInclude Include="ceutils\rvalloc.h">
+      <Filter>CEUtils Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ceutils\rvhash.h">
+      <Filter>CEUtils Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ceutils\rvlist.h">
+      <Filter>CEUtils Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ceutils\rvptrvector.h">
+      <Filter>CEUtils Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ceutils\rvvector.h">
+      <Filter>CEUtils Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ccore\rv2waylock.h">
+      <Filter>Core Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ccore\rv64ascii.h">
+      <Filter>Core Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ccore\rvassert.h">
+      <Filter>Core Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ccore\rvccore.h">
+      <Filter>Core Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ccore\rvccoreconfig.h">
+      <Filter>Core Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ccore\rvccoredefs.h">
+      <Filter>Core Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ccore\rvccoreglobals.h">
+      <Filter>Core Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ccore\rvccorestrings.h">
+      <Filter>Core Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ccore\rvccoreversion.h">
+      <Filter>Core Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ccore\rvclock.h">
+      <Filter>Core Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ccore\rvcondvar.h">
+      <Filter>Core Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ccore\rvlock.h">
+      <Filter>Core Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ccore\rvlog.h">
+      <Filter>Core Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ccore\rvloginternal.h">
+      <Filter>Core Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ccore\rvloglistener.h">
+      <Filter>Core Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ccore\rvmemory.h">
+      <Filter>Core Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ccore\rvmutex.h">
+      <Filter>Core Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ccore\rvnotify.h">
+      <Filter>Core Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ccore\rvsemaphore.h">
+      <Filter>Core Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ccore\rvstdio.h">
+      <Filter>Core Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ccore\rvthread.h">
+      <Filter>Core Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ccore\rvthreadtls.h">
+      <Filter>Core Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ccore\rvtimestamp.h">
+      <Filter>Core Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ccore\rvtm.h">
+      <Filter>Core Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ccore\memdrivers\rvosmem.h">
+      <Filter>Core Files\memdrivers</Filter>
+    </ClInclude>
+    <ClInclude Include="ccore\memdrivers\rvpoolmem.h">
+      <Filter>Core Files\memdrivers</Filter>
+    </ClInclude>
+    <ClInclude Include="ccore\netdrivers\rvhost.h">
+      <Filter>Core Files\netdrivers</Filter>
+    </ClInclude>
+    <ClInclude Include="ccore\netdrivers\rvif.h">
+      <Filter>Core Files\netdrivers</Filter>
+    </ClInclude>
+    <ClInclude Include="ccore\netdrivers\rvifmonitor.h">
+      <Filter>Core Files\netdrivers</Filter>
+    </ClInclude>
+    <ClInclude Include="ccore\netdrivers\rvnettypes.h">
+      <Filter>Core Files\netdrivers</Filter>
+    </ClInclude>
+    <ClInclude Include="ccore\netdrivers\rvportrange.h">
+      <Filter>Core Files\netdrivers</Filter>
+    </ClInclude>
+    <ClInclude Include="ccore\netdrivers\rvselect.h">
+      <Filter>Core Files\netdrivers</Filter>
+    </ClInclude>
+    <ClInclude Include="ccore\netdrivers\rvselectinternal.h">
+      <Filter>Core Files\netdrivers</Filter>
+    </ClInclude>
+    <ClInclude Include="ccore\netdrivers\rvsocket.h">
+      <Filter>Core Files\netdrivers</Filter>
+    </ClInclude>
+    <ClInclude Include="ccore\netdrivers\rvtls.h">
+      <Filter>Core Files\netdrivers</Filter>
+    </ClInclude>
+    <ClInclude Include="ccore\netdrivers\rvtlstransport.h">
+      <Filter>Core Files\netdrivers</Filter>
+    </ClInclude>
+    <ClInclude Include="ccore\netdrivers\rvtransport.h">
+      <Filter>Core Files\netdrivers</Filter>
+    </ClInclude>
+    <ClInclude Include="ccore\netdrivers\rvtransportsocket.h">
+      <Filter>Core Files\netdrivers</Filter>
+    </ClInclude>
+    <ClInclude Include="ccore\netdrivers\rvwindscp.h">
+      <Filter>Core Files\netdrivers</Filter>
+    </ClInclude>
+    <ClInclude Include="ccore\resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="ccore\rvccoreversion.rc">
+      <Filter>Core Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>

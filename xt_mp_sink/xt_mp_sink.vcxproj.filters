@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="mp_entity.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="packet_sink.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="packet_source.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="recycle_fifo.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="recycle_pool.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="rtp_macro_block.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="rtp_packet_block.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="rtp_packet_pool.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="sink_config.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="sink_singleton.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="xt_av_check.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="xt_mp_sink.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="XTDemuxMan.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="mp_entity.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="packet_sink.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="packet_source.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="recycle_fifo.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="rtp_macro_block.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="rtp_packet_block.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="rtp_packet_pool.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="sink_common.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="sink_config.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="sink_singleton.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="user_config.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="xt_av_check.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="xt_mp_sink_api.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="XTDemuxMan.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="xt_mp_sink.rc">
+      <Filter>资源文件</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,711 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="xt_media_client::custom_session_impl" Collapsed="true">
+    <Position X="0.75" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAASIQAAAgAAAAAAAAAAACgAAQAAQCAAAAAIAA=</HashCode>
+      <FileName>custom_session_impl.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="xt_media_client::media_link_t" Collapsed="true">
+    <Position X="2.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAEIAQAAAAAAAAAAAACAAAAAAaAAAAAEIAA=</HashCode>
+      <FileName>media_link.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="xt_media_client::media_link_factory" Collapsed="true">
+    <Position X="17" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAIAAAAAAAAABAAAgQAAIAAgQAAQABAAA=</HashCode>
+      <FileName>media_link.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="xt_media_client::media_link_impl_base" Collapsed="true">
+    <Position X="8.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgEQgkC0QBVACJACAIgAAAAAAACAAEJAgKYAgghAUBA=</HashCode>
+      <FileName>media_link_impl.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="xt_media_client::media_link_impl" Collapsed="true">
+    <Position X="5.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAEIAggAAEAAAAAAAACAAAQAAaAAAAAEIAA=</HashCode>
+      <FileName>media_link_impl.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="xt_media_client::media_link_impl2" Collapsed="true">
+    <Position X="5.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAACAAAAAQAQAAAAAACAABAACAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>media_link_impl.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="xt_media_client::media_link_ref_impl_t" Collapsed="true">
+    <Position X="5.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAgACAAIAAAAAAAAAAACAACAACAAAIAAAQAEIAA=</HashCode>
+      <FileName>media_link_impl.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="xt_media_client::media_link_ref_t" Collapsed="true">
+    <Position X="2.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAQAAAAAAAEIIggAAhAAAAAAAACAAAYAAaAAAAAEIAA=</HashCode>
+      <FileName>media_link_impl.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="xt_media_client::media_session_t" Collapsed="true">
+    <Position X="4" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACIQAAAgAAAAAAAAACACgAAQAAAAAAAAAIAA=</HashCode>
+      <FileName>media_session.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="xt_media_client::ports_mgr_t" Collapsed="true">
+    <Position X="0.5" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAABAAAAAAQAAAAAAgAAAA=</HashCode>
+      <FileName>ports_mgr.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="xt_media_client::ports_mgr_helper&lt;IPortsMgr&gt;" Collapsed="true">
+    <Position X="3.5" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ZAAAAAQAAAAAAAAAAIAAABAABACAAAAQAAgAAAgAAAg=</HashCode>
+      <FileName>ports_mgr_helper.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="xt_media_client::scoped_ports_mgr_helper&lt;IPortsMgr&gt;" Collapsed="true">
+    <Position X="3.5" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABAIAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ports_mgr_helper.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="xt_media_client::ports_mgr_impl" Collapsed="true">
+    <Position X="0.5" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAJAAAAAAAAAAAAAEBAAAEgABCAAAAQQAAAEAAgAAAA=</HashCode>
+      <FileName>ports_mgr_impl.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="xt_media_client::push_link_impl" Collapsed="true">
+    <Position X="8.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAEAAAAAAAAAAAAAgAAAAAIAAAQAAAAAAAA=</HashCode>
+      <FileName>push_link_impl.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="xt_media_client::frame_data_dump_callback_t" Collapsed="true">
+    <Position X="5.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>rtp_sink.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="xt_media_client::rtp_sink_t" Collapsed="true">
+    <Position X="8.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAEAgBEAAAAABAAUAAAAAAAAAAAAACAAiABAAASBAA=</HashCode>
+      <FileName>rtp_sink.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="xt_media_client::xt_mp_sink_library" Collapsed="true">
+    <Position X="28.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAIAAAAAAAAAAAAAABAAAAAgAAQAAYAAAAAAAAAEAA=</HashCode>
+      <FileName>rtp_sink_impl.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="xt_media_client::payload_to_unpacker_t" Collapsed="true">
+    <Position X="25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAgAAAAAAAAAAACAAAAAAgAAAABAAAAIAA=</HashCode>
+      <FileName>rtp_sink_impl.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="xt_media_client::rtp_sink_impl" Collapsed="true">
+    <Position X="8.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACEACBkAEAAAxACUAAIAQCAAAAAKACAAiABAAASAAI=</HashCode>
+      <FileName>rtp_sink_impl.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="xt_media_client::rtp_unpack_t" Collapsed="true">
+    <Position X="13" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACgAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>rtp_unpack.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="xt_media_client::rtp_unpack_aac_impl" Collapsed="true">
+    <Position X="15.25" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>rtp_unpack_aac.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="xt_media_client::rtp_unpack_h264_impl" Collapsed="true">
+    <Position X="10.75" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAg=</HashCode>
+      <FileName>rtp_unpack_h264.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="xt_media_client::rtp_unpack_h265_impl" Collapsed="true">
+    <Position X="13" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAABAAAAAAAAAAAACAAAAAAAAAAAAg=</HashCode>
+      <FileName>rtp_unpack_h265.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="xt_media_client::rtp_unpack_direct_impl" Collapsed="true">
+    <Position X="13" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACgACAAAAIAwAAAAAAAAAAACAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>rtp_unpack_impl.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="xt_media_client::rtp_priv_frame_data_t" Collapsed="true">
+    <Position X="26.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAAEQAEABAAAAAAAAAAAEQAAAAAAE=</HashCode>
+      <FileName>rtp_unpack_impl.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="xt_media_client::rtp_unpack_priv_impl" Collapsed="true">
+    <Position X="13" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAGAAAAUFAAAQAAAAAAQEAAQAowIAECAAEABAAABAA=</HashCode>
+      <FileName>rtp_unpack_impl.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="xt_media_client::rtp_unpack_scoped_update_seq" Collapsed="true">
+    <Position X="28.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAAAAAAAAAACAAAACAAAAAAAAAAAAAAACAAA=</HashCode>
+      <FileName>rtp_unpack_impl.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="xt_media_client::rtp_unpack_video_priv_impl" Collapsed="true">
+    <Position X="11.75" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAABAAAAAAAAAAAAACAAAgACAAAAAAAAACAAA=</HashCode>
+      <FileName>rtp_unpack_impl.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="xt_media_client::rtsp_link_impl" Collapsed="true">
+    <Position X="2.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAAAAAAAAAAAAACAAAAAAAQAAAAAAAA=</HashCode>
+      <FileName>rtsp_link_impl.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="xt_media_client::rtsp_link_ref_impl_factory_t" Collapsed="true">
+    <Position X="30.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAABAAAAAIAA=</HashCode>
+      <FileName>rtsp_link_impl.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="xt_media_client::rtsp_session_library" Collapsed="true">
+    <Position X="25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAEAAAgAAAEAAgIAAAAAAAAACAQIQMAAQAgEAAgARA=</HashCode>
+      <FileName>rtsp_session_impl.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="xt_media_client::rtsp_session_impl" Collapsed="true">
+    <Position X="3" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAACIQAAAgAhAAAACAAgoCAAAQAACAIAAAAIAA=</HashCode>
+      <FileName>rtsp_session_impl.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="xt_media_client::sdp_parser_library" Collapsed="true">
+    <Position X="26.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAAAAAAAAAAAAAAQAAIAAAAAAAAgIAA=</HashCode>
+      <FileName>sdp_parser.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="xt_media_client::sdp_parser_t" Collapsed="true">
+    <Position X="30.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAgAAAAAAAEAAAAAAAAAIAA=</HashCode>
+      <FileName>sdp_parser.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="xt_media_client::spinlock_t" Collapsed="true">
+    <Position X="25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAA=</HashCode>
+      <FileName>spinlock.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="xt_media_client::tcp_link_impl" Collapsed="true">
+    <Position X="10.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAAAACAAAAAAAAAAAAAAAAAAAQAAAAAAAA=</HashCode>
+      <FileName>tcp_link_impl.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="xt_media_client::tcp_session_impl" Collapsed="true">
+    <Position X="7.5" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAYwEAAAAAAAAAACAAgCoAAAAAAQBAAAAACA=</HashCode>
+      <FileName>tcp_session_impl.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="xt_media_client::tcp_session_connection_t" Collapsed="true">
+    <Position X="26.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>kAQAAAAAAEACIIQJgAAAAAAAgACgoBoAAIAAAAAAMgA=</HashCode>
+      <FileName>tcp_session_impl.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="xt_media_client::tcp_session_service_thread_t" Collapsed="true">
+    <Position X="18" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAGAAAgAAAAAAgAAAAAAAAAQAAAAQAoAQAABACAAAAA=</HashCode>
+      <FileName>tcp_session_impl.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="xt_media_client::tcp_session_connection_mgr_t" Collapsed="true">
+    <Position X="0.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAAAgIKAAAQAAAAAAAAAAIAIBAAAAAAIAA=</HashCode>
+      <FileName>tcp_session_impl.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="xt_media_client::tcp_session_factory" Collapsed="true">
+    <Position X="0.5" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAIAAAAAAAIQADAAAAAAQAQAAoAAAAAEAAgAAA=</HashCode>
+      <FileName>tcp_session_impl.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="xt_media_client::thread_base_t&lt;Drived&gt;" Collapsed="true">
+    <Position X="13.25" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAgAQAAAAAAAAAAAACACAAAAAAIAQAAAAAAAAAA=</HashCode>
+      <FileName>thread.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="xt_media_client::repeat_thread" Collapsed="true">
+    <Position X="13.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAgAAAAAAAAAAAAAIAAAAAAAAAIAQAAAAIABAAA=</HashCode>
+      <FileName>thread.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="xt_media_client::base_timer" Collapsed="true">
+    <Position X="15.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAhAAAAAAAAAAAAAgAAAAACAAAAAEAAAAABACAAAAAA=</HashCode>
+      <FileName>thread_timer.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="xt_media_client::thread_timer" Collapsed="true">
+    <Position X="14.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAIAAAAABAAA=</HashCode>
+      <FileName>thread_timer.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="xt_media_client::udp_link_impl" Collapsed="true">
+    <Position X="5.25" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAAAAIAAAAAAAAAAAAAAAAAAQAAAAAAAA=</HashCode>
+      <FileName>udp_link_impl.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="xt_media_client::udp_session_impl" Collapsed="true">
+    <Position X="5.25" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAECYQBCAAAAARAAAAAAACgAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>udp_session_impl.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="xt_media_client::udp_session_service_t" Collapsed="true">
+    <Position X="19.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIgAAAAAAAAAAAAABAQAAAAAAgAAAQAAAABAAA=</HashCode>
+      <FileName>udp_session_impl.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="xt_media_client::udp_session_factory" Collapsed="true">
+    <Position X="15.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAgAAggIAKAAIAAIAIAAAAIAAIgAAAoAAAAAAAAQIgA=</HashCode>
+      <FileName>udp_session_impl.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="xt_media_client::detail::sdp_parser_msg_helper_t" Collapsed="true">
+    <Position X="28.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAAAAAEAAAAAAEIAAAAAg=</HashCode>
+      <FileName>sdp_parser.cpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="xt_media_client::rtp_demux" Collapsed="true">
+    <Position X="28.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAASAAAAAAAAAACAAAAQAAIAAAAAAkAAAAAAAAA=</HashCode>
+      <FileName>media_link_impl.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="xt_media_client::rtcp_recv_report_t" Collapsed="true">
+    <Position X="26.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAEAAAAAAAADAAAAAAAAAAAACAAAAAAAACAAAAAAAE=</HashCode>
+      <FileName>rtp_sink.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="xt_media_client::rtp_prof_info_t" Collapsed="true">
+    <Position X="25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>rtp_sink.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="xt_media_client::multicast_param_t" Collapsed="true">
+    <Position X="25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgEAAAgAAAAAAA=</HashCode>
+      <FileName>rtp_sink.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="xt_media_client::rtp_priv_header_t" Collapsed="true">
+    <Position X="30.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAAACAAAAAAAAAAAICAAAAgAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>rtp_unpack_impl.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="xt_media_client::v4_addr_t" Collapsed="true">
+    <Position X="28.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAEAAAAAABAAABAAEAAAAAAAAEwAAAAAgA=</HashCode>
+      <FileName>v4_addr.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="_xt_sdp_media_info_t" Collapsed="true">
+    <Position X="9.5" Y="22.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQAAEEABAAAAAAAAgAAAAIAIAAAEAAAAAAAAA=</HashCode>
+      <FileName>xt_media_client_types.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="_xt_session_context_t" Collapsed="true">
+    <Position X="19.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAQAAAAAACAAAAAAAAAACAIAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>xt_media_client_types.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="_xt_session_param_t" Collapsed="true">
+    <Position X="15.5" Y="20.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAAgAAAAABAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>xt_media_client_types.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="_xt_session_server_info_t" Collapsed="true">
+    <Position X="5.5" Y="20.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAIAAAAAAAAAAAAAAAAAgAAAAgAAAAAAA=</HashCode>
+      <FileName>xt_media_client_types.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="_xt_custom_session_callback_t" Collapsed="true">
+    <Position X="15.5" Y="13.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAIAgAACBAAAAAAAAAAAAJAAAAAAAAAKAAA=</HashCode>
+      <FileName>xt_media_client_types.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="_xt_rtp_prof_info_t" Collapsed="true">
+    <Position X="1.5" Y="18.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAQAAAAAAAAAAAAAAAAAAEAAgAAAAAAAAAAAA=</HashCode>
+      <FileName>xt_media_client_types.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="_xt_media_client_cfg_t" Collapsed="true">
+    <Position X="11.5" Y="17.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IIEAQIgAEAQQAIAIAEIAAAgEACAQBABEQAAQAAoAIAA=</HashCode>
+      <FileName>xt_media_client_types.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="_xt_sink_info_t" Collapsed="true">
+    <Position X="7.5" Y="13.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAQAAAAAAAAAAAAAAgAAAAAAAAAAEAAAAABAAA=</HashCode>
+      <FileName>xt_media_client_types.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="xt_media_client::detail::rtsp_client_param_t&lt;RequestT, ResponseT&gt;" Collapsed="true">
+    <Position X="26.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAg=</HashCode>
+      <FileName>rtsp_session_impl.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Typedef Name="xt_media_client::media_session_ptr" Collapsed="true">
+    <Position X="25" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>media_session.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="xt_media_client::rtp_sink_ptr" Collapsed="true">
+    <Position X="28.5" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>rtp_sink.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="xt_media_client::rtp_unpack_ptr" Collapsed="true">
+    <Position X="30.25" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>rtp_unpack.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="xt_media_client::tcp_session_connection_ptr" Collapsed="true">
+    <Position X="25" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>tcp_session_impl.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="xt_media_client::tcp_session_impl_ptr" Collapsed="true">
+    <Position X="26.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>tcp_session_impl.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="xt_media_client::udp_session_impl_ptr" Collapsed="true">
+    <Position X="28.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>udp_session_impl.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="ov_frame_type" Collapsed="true">
+    <Position X="13.5" Y="23.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>xt_media_client_types.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="xt_media_link_handle_t" Collapsed="true">
+    <Position X="26.75" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>xt_media_client_types.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="xt_media_client_status_t" Collapsed="true">
+    <Position X="5.5" Y="23.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>xt_media_client_types.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="xt_media_client_link_mode" Collapsed="true">
+    <Position X="22.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>xt_media_client_types.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="xt_media_client_link_t" Collapsed="true">
+    <Position X="19.5" Y="21.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>xt_media_client_types.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="xt_av_media_t" Collapsed="true">
+    <Position X="1.5" Y="21.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>xt_media_client_types.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="xt_av_codec_id_t" Collapsed="true">
+    <Position X="19.5" Y="16.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>xt_media_client_types.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="xt_media_client_session_flag" Collapsed="true">
+    <Position X="19.5" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>xt_media_client_types.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="xt_sdp_media_info_t" Collapsed="true">
+    <Position X="9.5" Y="20.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>xt_media_client_types.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="xt_session_context_t" Collapsed="true">
+    <Position X="19.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>xt_media_client_types.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="xt_session_param_t" Collapsed="true">
+    <Position X="15.5" Y="18.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>xt_media_client_types.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="xt_session_server_info_t" Collapsed="true">
+    <Position X="5.5" Y="18.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>xt_media_client_types.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="xt_media_client_done_callback_t" Collapsed="true">
+    <Position X="30.25" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>xt_media_client_types.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="xt_custom_session_callback_t" Collapsed="true">
+    <Position X="15.5" Y="15.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>xt_media_client_types.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="xt_rtp_prof_info_t" Collapsed="true">
+    <Position X="1.5" Y="16.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>xt_media_client_types.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="xt_ports_mgr_get_callback_t" Collapsed="true">
+    <Position X="30.25" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>xt_media_client_types.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="xt_ports_mgr_free_callback_t" Collapsed="true">
+    <Position X="28.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>xt_media_client_types.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="xt_media_client_cfg_t" Collapsed="true">
+    <Position X="11.5" Y="15.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>xt_media_client_types.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="xt_media_client_frame_callback_t" Collapsed="true">
+    <Position X="25" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>xt_media_client_types.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="regist_call_back_t" Collapsed="true">
+    <Position X="26.75" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>xt_media_client_types.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="xt_sink_info_t" Collapsed="true">
+    <Position X="7.5" Y="15.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>xt_media_client_types.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Enum Name="xt_media_client::H264_nalu_type" Collapsed="true">
+    <Position X="25" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABAAAAAIAAACgAgAKAHAAAAAQAAEAAAAIAAAgg=</HashCode>
+      <FileName>rtp_unpack_h264.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="xt_media_client::H265_nal_type" Collapsed="true">
+    <Position X="26.75" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAEAAAYAgQAAAAAAAAAAAAAAAAgoAAAAAAAAA=</HashCode>
+      <FileName>rtp_unpack_h265.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="_ov_frame_type" Collapsed="true">
+    <Position X="13.5" Y="25.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACbjAQAAAAAAAAAAAAACKAAAIAAAEAQAAEAhAAAAA=</HashCode>
+      <FileName>xt_media_client_types.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="_xt_media_client_status_t" Collapsed="true">
+    <Position X="5.5" Y="25.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>MAAIAgVAAB0AAgAAIAAAAAAAAAAGBIAAAAAQAAQxAIA=</HashCode>
+      <FileName>xt_media_client_types.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="_xt_media_client_link_mode" Collapsed="true">
+    <Position X="22.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAAAAAAQAAAAAAAAAACAFAAAAAAAAAAAA=</HashCode>
+      <FileName>xt_media_client_types.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="_xt_media_client_link_t" Collapsed="true">
+    <Position X="19.5" Y="23.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAKAAIgAASBAABAAABAAAAMAAAAAAAAQAAEAAFqAQA=</HashCode>
+      <FileName>xt_media_client_types.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="_xt_av_media_t" Collapsed="true">
+    <Position X="1.5" Y="23.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAABACAAAAAAEAAAAAAAAACAAAAAgAAAAAAAA=</HashCode>
+      <FileName>xt_media_client_types.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="_xt_av_codec_id_t" Collapsed="true">
+    <Position X="19.5" Y="18.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>2fu/32WG8/09D3vr919Sn//u3u/V/N/9/6ft/P/vT9o=</HashCode>
+      <FileName>xt_media_client_types.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="_xt_media_client_session_flag" Collapsed="true">
+    <Position X="19.5" Y="13.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAABQAAAgAAAAAAUAAAAAAAAAAAAAA=</HashCode>
+      <FileName>xt_media_client_types.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="微软雅黑" Size="9" />
+</ClassDiagram>

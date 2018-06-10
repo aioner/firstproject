@@ -1,0 +1,16 @@
+0x621057 10/23/14 02:42:46 SDP         : INFO  - Common Core version 1.2.21 (Release)
+0x621057 10/23/14 02:42:46 SDP         : INFO  - OS=Linux
+0x621057 10/23/14 02:42:46 SDP         : INFO  - Compiler=GNU-CygWin 2.7
+0x621057 10/23/14 02:42:46 SDP         : INFO  - Architecture=Little Endian, 32bit
+0x621057 10/23/14 02:42:46 SDP         : INFO  - TIME: Timestamp=Linux, Clock=Linux, Tm=Posix
+0x621057 10/23/14 02:42:46 SDP         : INFO  - THREADS: Semaphore=Posix, Lock=Posix, Mutex=Posix, Thread=Posix
+0x621057 10/23/14 02:42:46 SDP         : INFO  - MEMORY: OsMem=Malloc
+0x621057 10/23/14 02:42:46 SDP         : INFO  - NETWORK: Host=Posix, Select=select(), Socket=BSD, PortRange=Fast, DNS=Ares, TLS=None
+0x621057 10/23/14 02:42:46 SDP         : INFO  - ANSI: 64Ascii=Standard, Assert=Ansi, StdIo=Ansi, LogListener=File&Term
+0x621057 10/23/14 02:42:46 SDP         : INFO  - CHECKS: NULL=on, Range=on, Other=on
+0x621057 10/23/14 02:42:46 SDP         : INFO  - SDP manager was constructed successfully - 3.0.0.5
+0x621057 10/23/14 02:42:46 SDP         : INFO  - 		RV_SDP_CHECK_BAD_SYNTAX is not set
+0x621057 10/23/14 02:42:46 SDP         : INFO  - 		RV_SDP_ADS_IS_USED is not set
+0x621057 10/23/14 02:42:46 SDP         : INFO  - 		RV_SDP_USE_MACROS is set
+0x621057 10/23/14 02:42:46 SDP         : INFO  - Starting SDP parsing
+0x621057 10/23/14 02:42:46 SDP         : INFO  - SDP parsing completed, stat 0

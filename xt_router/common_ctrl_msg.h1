@@ -1,0 +1,153 @@
+#ifndef COMMON_CTRL_MSG_H__
+#define COMMON_CTRL_MSG_H__
+
+#ifdef _USE_COMMON_CTRL_MSG_
+#include <boost/noncopyable.hpp>
+#include <boost/thread.hpp>
+#include <boost/thread/shared_mutex.hpp>
+#include <string>
+#include "sdp.h"
+#include "parse_buffer.h"
+#include "common_type.h"
+#include "communicationlib.h"
+
+#ifdef _WIN32
+#pragma comment(lib,"CommunicationLib.lib")
+#else
+#define __stdcall
+#endif//#ifdef _WIN32
+
+typedef enum
+{
+	INVITE_SESSION=0,
+	REINVITE_SESSION=1,
+}sip_session_type;
+
+typedef struct _struct_std_sip_session_type_
+{
+	std::string call_id;
+	std::string target;
+	std::string to; //通话对方的URI peerurl
+	std::string sdp;
+	uint32_t sdp_len;
+
+	std::string ok_200_with_sdp;
+	boost::posix_time::ptime creat_time;
+
+	typedef std::vector<rtp_id_t> rtp_id_container_t;
+	typedef rtp_id_container_t::iterator rtp_id_container_handle_t;
+	rtp_id_container_t send_rtpid;//保存会话要转发的rtp流id/dst_rtpid
+	rtp_id_container_t recv_rtpid;//保存会话要接收的rtp流id/src_rtpid
+
+	typedef _struct_std_sip_session_type_ my_t;
+	my_t& operator=(const my_t& rf)
+	{
+		this->call_id = rf.call_id;
+		this->target = rf.target;
+		this->to = rf.to;
+		this->sdp = rf.sdp;
+		this->sdp_len = rf.sdp_len;
+		this->ok_200_with_sdp = rf.ok_200_with_sdp;
+		this->creat_time = rf.creat_time;
+		this->send_rtpid = rf.send_rtpid;
+		this->recv_rtpid = rf.recv_rtpid;
+		return *this;
+	}
+}std_sip_session_t,*ptr_std_sip_session_t;
+
+class common_ctrl_msg_mgr : boost::noncopyable
+{
+public:
+    static common_ctrl_msg_mgr* _(){return &my_obj_;};
+private:
+    static common_ctrl_msg_mgr my_obj_;
+
+    //回调管理
+public:
+	//连接中心回调
+    static void __stdcall onLinkServerImp_cb(int serverNum, int operateResult, const char* comment);
+
+    static void __stdcall onLockControlImp_cb(const char* ids, int type, int operateResult);
+
+    static void __stdcall onReceiveLockStateImp_cb(struct LockState* states, int length);
+
+	//收到透传信息回调
+    static void __stdcall onReceiveTransCommandImp_cb(const char* sessionID, const char* command);
+
+    static void __stdcall onUserInOutImp_cb(struct ResourceState* states, int length);
+
+    static void __stdcall onSendInviteImp_cb(const char* xtids, const char* sdp, const char* sessionID, int operateResult,void* extendObj);
+    //收到invite会话回调
+	static void __stdcall onReceiveInviteImp_cb(const char* xtids, const char*sdp, const char* tempSessionID,void* extendObj);
+
+    static void __stdcall onTerminateInviteImp_cb(const char* sessionID, int operateResult);
+
+	//收到bye会话回校
+    static void __stdcall onReceiveTerminateInviteImp_cb(const char* sessionID);
+
+	//收到ack会话回调
+    static void __stdcall onReceiveACKImp_cb(const char* sessionID, const char* sdp);
+
+	static void setCallback();
+
+public:
+    bool init_ctrl_msg();
+    bool uninit_ctrl_msg();
+protected:
+    int load_cfg();
+	void start();
+	void login();
+	//会话管理
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+public:
+	typedef std::map<std::string,std_sip_session_t>  sip_session_mgr_container_t;
+	typedef std::map<std::string,std_sip_session_t>::iterator sip_session_mgr_container_iterator_t;
+
+	void clear_all();
+
+	void add_session(const std_sip_session_t& session);
+	void del_session(const std_sip_session_t& session);
+	void del_session(const std::string& call_id);
+	long get_session(const std::string& call_id,std_sip_session_t& session);
+	void add_send_rtpid_to_session(const std::string& call_id,const rtp_id_t& rtp_id);
+	void add_recv_rtpid_to_session(const std::string& call_id,const rtp_id_t& rtp_id);
+	long update_session(const std_sip_session_t& session);
+
+	sip_session_type get_session_type(const std::string& call_id);
+
+	sdp_direction_t parse_sdp_direction(const std::string& sdp);
+
+	void answer_Invite(const char* tempSessionID, unsigned int code, const char* sdp);
+
+	void response_optstatus_ok();
+	void response_optstatus_fail(const std::string& fail_case);
+	void response_chanstatus(char* ch_status);
+	//功能调度接口
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	long add_send_dst(const int srcno,const rtp_id_t rtpid,const std::string& dst_sdp);
+	long del_send_dst(const int srcno,const rtp_id_t rtpid,const std::string& dst_sdp);
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+private:
+	boost::shared_mutex session_mgr_mutex_;
+	sip_session_mgr_container_t sip_session_mgr_lst;
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+private:
+	std::string commlib_type;
+	std::string sipid;//登陆sip中心
+	std::string ids;//兼容老系统，透传消息回复接口参数
+	std::string server_ip;
+    int server_port;
+    int server_num;
+
+    std::string user_name;
+    std::string pass_word;
+
+    std::string local_name_;
+    std::string client_ip;
+	std::string client_port;
+public:
+	bool demux_s;
+};
+#endif //#ifdef _USE_COMMON_CTRL_MSG_
+#endif //#ifndef COMMON_CTRL_MSG_H__

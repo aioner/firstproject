@@ -1,0 +1,135 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: sdp - Win32 Release--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating command line "rc.exe /l 0x409 /fo"..\binaries\windows\release\obj/rvsdpVersion.res" /d "NDEBUG" "E:\流媒体传输\资料\RtspServer_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspServer_Windows_Source_2.0.0.3\sdp\rvsdpVersion.rc"" 
+Creating temporary file "C:\DOCUME~1\renfei\LOCALS~1\Temp\RSP86.tmp" with contents
+[
+/nologo /MD /W4 /GX /O2 /I "..\ads" /I "../common/ccore/memdrivers" /I "../common/ccore/netdrivers" /I "../common/cbase" /I "../common/ccore" /I "../common/config" /I "../common/config/arch" /I "../common/config/os" /I "../common/config/tool" /I "../common/cutils" /I "../common/cbase/netdrivers" /I "../common/adapters" /I "../common/adapters/windows" /I "../common/ceutils" /I "../sdp" /I "../sdp/codecs" /D "_WINDOWS" /D "_USRDLL" /D "SDP_EXPORTS" /D RV_SDP_DECLSPEC=__declspec(dllexport) /D "NDEBUG" /D "WIN32" /D "_MBCS" /Fo"..\binaries\windows\release\obj/" /Fd"..\binaries\windows\release\obj/" /FD /D /ALIGN:8192 /c 
+"E:\流媒体传输\资料\RtspServer_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspServer_Windows_Source_2.0.0.3\sdp\rvsdpattr.c"
+"E:\流媒体传输\资料\RtspServer_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspServer_Windows_Source_2.0.0.3\sdp\rvsdpbadsyntax.c"
+"E:\流媒体传输\资料\RtspServer_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspServer_Windows_Source_2.0.0.3\sdp\rvsdpbandwidth.c"
+"E:\流媒体传输\资料\RtspServer_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspServer_Windows_Source_2.0.0.3\sdp\rvsdpconnection.c"
+"E:\流媒体传输\资料\RtspServer_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspServer_Windows_Source_2.0.0.3\sdp\rvsdpcrypto.c"
+"E:\流媒体传输\资料\RtspServer_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspServer_Windows_Source_2.0.0.3\sdp\rvsdpemail.c"
+"E:\流媒体传输\资料\RtspServer_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspServer_Windows_Source_2.0.0.3\sdp\rvsdpglobals.c"
+"E:\流媒体传输\资料\RtspServer_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspServer_Windows_Source_2.0.0.3\sdp\rvsdpinit.c"
+"E:\流媒体传输\资料\RtspServer_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspServer_Windows_Source_2.0.0.3\sdp\rvsdpkey.c"
+"E:\流媒体传输\资料\RtspServer_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspServer_Windows_Source_2.0.0.3\sdp\rvsdpkeymgmt.c"
+"E:\流媒体传输\资料\RtspServer_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspServer_Windows_Source_2.0.0.3\sdp\rvsdplist.c"
+"E:\流媒体传输\资料\RtspServer_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspServer_Windows_Source_2.0.0.3\sdp\rvsdpmedia.c"
+"E:\流媒体传输\资料\RtspServer_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspServer_Windows_Source_2.0.0.3\sdp\rvsdpmsg.c"
+"E:\流媒体传输\资料\RtspServer_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspServer_Windows_Source_2.0.0.3\sdp\rvsdpmsgparse.c"
+"E:\流媒体传输\资料\RtspServer_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspServer_Windows_Source_2.0.0.3\sdp\rvsdpmsgreparse.c"
+"E:\流媒体传输\资料\RtspServer_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspServer_Windows_Source_2.0.0.3\sdp\rvsdporigin.c"
+"E:\流媒体传输\资料\RtspServer_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspServer_Windows_Source_2.0.0.3\sdp\rvsdpphone.c"
+"E:\流媒体传输\资料\RtspServer_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspServer_Windows_Source_2.0.0.3\sdp\rvsdpprsutils.c"
+"E:\流媒体传输\资料\RtspServer_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspServer_Windows_Source_2.0.0.3\sdp\rvsdprtpmap.c"
+"E:\流媒体传输\资料\RtspServer_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspServer_Windows_Source_2.0.0.3\sdp\rvsdpsesstime.c"
+"E:\流媒体传输\资料\RtspServer_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspServer_Windows_Source_2.0.0.3\sdp\rvsdpstrings.c"
+]
+Creating command line "cl.exe @C:\DOCUME~1\renfei\LOCALS~1\Temp\RSP86.tmp" 
+Creating temporary file "C:\DOCUME~1\renfei\LOCALS~1\Temp\RSP87.tmp" with contents
+[
+kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /dll /incremental:no /pdb:"..\binaries\windows\release\lib/rvsdp.pdb" /machine:I386 /out:"..\binaries\windows\release\bin/rvsdp.dll" /implib:"..\binaries\windows\release\lib/rvsdp.lib" /ALIGN:8192 
+"\流媒体传输\资料\RtspServer_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspServer_Windows_Source_2.0.0.3\binaries\windows\release\obj\rvsdpattr.obj"
+"\流媒体传输\资料\RtspServer_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspServer_Windows_Source_2.0.0.3\binaries\windows\release\obj\rvsdpbadsyntax.obj"
+"\流媒体传输\资料\RtspServer_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspServer_Windows_Source_2.0.0.3\binaries\windows\release\obj\rvsdpbandwidth.obj"
+"\流媒体传输\资料\RtspServer_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspServer_Windows_Source_2.0.0.3\binaries\windows\release\obj\rvsdpconnection.obj"
+"\流媒体传输\资料\RtspServer_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspServer_Windows_Source_2.0.0.3\binaries\windows\release\obj\rvsdpcrypto.obj"
+"\流媒体传输\资料\RtspServer_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspServer_Windows_Source_2.0.0.3\binaries\windows\release\obj\rvsdpemail.obj"
+"\流媒体传输\资料\RtspServer_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspServer_Windows_Source_2.0.0.3\binaries\windows\release\obj\rvsdpglobals.obj"
+"\流媒体传输\资料\RtspServer_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspServer_Windows_Source_2.0.0.3\binaries\windows\release\obj\rvsdpinit.obj"
+"\流媒体传输\资料\RtspServer_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspServer_Windows_Source_2.0.0.3\binaries\windows\release\obj\rvsdpkey.obj"
+"\流媒体传输\资料\RtspServer_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspServer_Windows_Source_2.0.0.3\binaries\windows\release\obj\rvsdpkeymgmt.obj"
+"\流媒体传输\资料\RtspServer_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspServer_Windows_Source_2.0.0.3\binaries\windows\release\obj\rvsdplist.obj"
+"\流媒体传输\资料\RtspServer_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspServer_Windows_Source_2.0.0.3\binaries\windows\release\obj\rvsdpmedia.obj"
+"\流媒体传输\资料\RtspServer_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspServer_Windows_Source_2.0.0.3\binaries\windows\release\obj\rvsdpmsg.obj"
+"\流媒体传输\资料\RtspServer_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspServer_Windows_Source_2.0.0.3\binaries\windows\release\obj\rvsdpmsgparse.obj"
+"\流媒体传输\资料\RtspServer_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspServer_Windows_Source_2.0.0.3\binaries\windows\release\obj\rvsdpmsgreparse.obj"
+"\流媒体传输\资料\RtspServer_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspServer_Windows_Source_2.0.0.3\binaries\windows\release\obj\rvsdporigin.obj"
+"\流媒体传输\资料\RtspServer_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspServer_Windows_Source_2.0.0.3\binaries\windows\release\obj\rvsdpphone.obj"
+"\流媒体传输\资料\RtspServer_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspServer_Windows_Source_2.0.0.3\binaries\windows\release\obj\rvsdpprsutils.obj"
+"\流媒体传输\资料\RtspServer_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspServer_Windows_Source_2.0.0.3\binaries\windows\release\obj\rvsdprtpmap.obj"
+"\流媒体传输\资料\RtspServer_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspServer_Windows_Source_2.0.0.3\binaries\windows\release\obj\rvsdpsesstime.obj"
+"\流媒体传输\资料\RtspServer_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspServer_Windows_Source_2.0.0.3\binaries\windows\release\obj\rvsdpstrings.obj"
+"\流媒体传输\资料\RtspServer_Windows_2.0.0.3\RTSP_Basic_Win_Src\RtspServer_Windows_Source_2.0.0.3\binaries\windows\release\obj\rvsdpVersion.res"
+]
+Creating command line "link.exe @C:\DOCUME~1\renfei\LOCALS~1\Temp\RSP87.tmp"
+<h3>Output Window</h3>
+Compiling resources...
+Compiling...
+rvsdpattr.c
+rvsdpbadsyntax.c
+rvsdpbandwidth.c
+rvsdpconnection.c
+rvsdpcrypto.c
+rvsdpemail.c
+rvsdpglobals.c
+rvsdpinit.c
+rvsdpkey.c
+rvsdpkeymgmt.c
+rvsdplist.c
+rvsdpmedia.c
+rvsdpmsg.c
+rvsdpmsgparse.c
+rvsdpmsgreparse.c
+rvsdporigin.c
+rvsdpphone.c
+rvsdpprsutils.c
+rvsdprtpmap.c
+rvsdpsesstime.c
+Generating Code...
+Compiling...
+rvsdpstrings.c
+Generating Code...
+Linking...
+LINK : warning LNK4108: /ALIGN specified without /DRIVER or /VXD; image may not run
+   Creating library ..\binaries\windows\release\lib/rvsdp.lib and object ..\binaries\windows\release\lib/rvsdp.exp
+rvsdpstrings.obj : error LNK2001: unresolved external symbol _rvAllocAllocate
+rvsdpmsgparse.obj : error LNK2001: unresolved external symbol _rvAllocAllocate
+rvsdpphone.obj : error LNK2001: unresolved external symbol _rvAllocAllocate
+rvsdprtpmap.obj : error LNK2001: unresolved external symbol _rvAllocAllocate
+rvsdpsesstime.obj : error LNK2001: unresolved external symbol _rvAllocAllocate
+rvsdpemail.obj : error LNK2001: unresolved external symbol _rvAllocAllocate
+rvsdpkeymgmt.obj : error LNK2001: unresolved external symbol _rvAllocAllocate
+rvsdpmedia.obj : error LNK2001: unresolved external symbol _rvAllocAllocate
+rvsdpmsg.obj : error LNK2001: unresolved external symbol _rvAllocAllocate
+rvsdpattr.obj : error LNK2001: unresolved external symbol _rvAllocAllocate
+rvsdpbandwidth.obj : error LNK2001: unresolved external symbol _rvAllocAllocate
+rvsdpconnection.obj : error LNK2001: unresolved external symbol _rvAllocAllocate
+rvsdpcrypto.obj : error LNK2001: unresolved external symbol _rvAllocAllocate
+rvsdpstrings.obj : error LNK2001: unresolved external symbol _rvAllocDeallocate
+rvsdpmsgparse.obj : error LNK2001: unresolved external symbol _rvAllocDeallocate
+rvsdpphone.obj : error LNK2001: unresolved external symbol _rvAllocDeallocate
+rvsdprtpmap.obj : error LNK2001: unresolved external symbol _rvAllocDeallocate
+rvsdpsesstime.obj : error LNK2001: unresolved external symbol _rvAllocDeallocate
+rvsdpemail.obj : error LNK2001: unresolved external symbol _rvAllocDeallocate
+rvsdpkeymgmt.obj : error LNK2001: unresolved external symbol _rvAllocDeallocate
+rvsdpmedia.obj : error LNK2001: unresolved external symbol _rvAllocDeallocate
+rvsdpmsg.obj : error LNK2001: unresolved external symbol _rvAllocDeallocate
+rvsdpattr.obj : error LNK2001: unresolved external symbol _rvAllocDeallocate
+rvsdpbandwidth.obj : error LNK2001: unresolved external symbol _rvAllocDeallocate
+rvsdpconnection.obj : error LNK2001: unresolved external symbol _rvAllocDeallocate
+rvsdpcrypto.obj : error LNK2001: unresolved external symbol _rvAllocDeallocate
+rvsdpinit.obj : error LNK2001: unresolved external symbol _RvDestroyGlobalData
+rvsdpinit.obj : error LNK2001: unresolved external symbol _RvGetGlobalDataPtr
+rvsdpinit.obj : error LNK2001: unresolved external symbol _RvCreateGlobalData
+rvsdpinit.obj : error LNK2001: unresolved external symbol _RvCBaseEnd@0
+rvsdpinit.obj : error LNK2001: unresolved external symbol _RvCBaseInit@0
+rvsdpinit.obj : error LNK2001: unresolved external symbol _rvAllocGetDefaultAllocator
+rvsdpkeymgmt.obj : error LNK2001: unresolved external symbol _rvDecodeB64
+..\binaries\windows\release\bin/rvsdp.dll : fatal error LNK1120: 9 unresolved externals
+执行 link.exe 时出错.
+
+
+
+<h3>Results</h3>
+rvsdp.dll - 1 error(s), 0 warning(s)
+</pre>
+</body>
+</html>

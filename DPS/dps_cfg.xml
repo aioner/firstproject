@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dps_cfg>
+    <system>
+    <link_center>1</link_center><!--连接中心类型 0:不连接 1:私有中心-->
+    <chan_num>64</chan_num><!--支持最大通道数-->
+    <local_bind_ip>0.0.0.0</local_bind_ip><!--收发送数据本地绑定IP-->
+    <send_port>20010</send_port><!--发送数据本地开始端口-->
+    <mul_ip>239.0.0.1</mul_ip><!--多播IP-->
+    <is_demux_s>0</is_demux_s><!--发送端是否支持复用-->
+    <xtmsg_listenport>20001</xtmsg_listenport><!--4.25的TCP私有协商侦听端口-->
+    <rtsp_listenport>1554</rtsp_listenport><!--标准rtsp协商侦听端口-->
+    <udp_listenport>19900</udp_listenport><!--私有udp协商侦听端口-->
+    <is_std_rtp>1</is_std_rtp><!--是否支持rtp标准流-->
+    <is_regist>0</is_regist><!--NAT反向注册开关-->
+    <regist_ip>172.16.2.183</regist_ip><!--NAT反向注册IP-->
+    <regist_port>19901</regist_port><!--NAT反向注册端口-->
+    <is_sink_perch>1</is_sink_perch><!--是否支持NAT穿透一对一转发-->
+    <replay_time_interval>100</replay_time_interval><!--重点时间间隔 单位毫秒 默认100ms-->
+    <break_monitor_time_interval>30000</break_monitor_time_interval><!--接入数据断线监测时间间隔 单位毫秒 默认30000ms-->
+    </system>
+    <access>
+    <rtp_recv_port_num>256</rtp_recv_port_num><!--rtp 接收端端口的数量-->
+    <rtp_recv_start_port>16000</rtp_recv_start_port><!--rtp 接收端开始端口-->
+    <udp_session_bind_port>19901</udp_session_bind_port><!--udp 协商接收端绑定端口-->
+    <udp_session_heartbit_proid>20</udp_session_heartbit_proid><!--udp会话保活心跳周期 单位：毫秒 默认配置为:20-->
+    <udp_session_request_try_count>4</udp_session_request_try_count><!--udp会话操作失败后重试次数 默认配置为:4-->
+    <udp_session_request_one_timeout>5000</udp_session_request_one_timeout><!--udp会话操作等待时间 默认配置为:5000-->
+    <tcp_session_bind_port>19999</tcp_session_bind_port><!--tcp 协商接收端绑定端口-->
+    <tcp_session_connect_timeout>3000</tcp_session_connect_timeout><!--tcp会话连接超时时间，单位：毫秒 默认配置为:10000-->
+    <tcp_session_login_timeout>3000</tcp_session_login_timeout><!--tcp会话登录超时时间，单位：毫秒 默认配置为:10000-->
+    <tcp_session_play_timeout>2000</tcp_session_play_timeout><!--tcp会话点播超时时间，单位：毫秒 默认配置为:2000-->
+    <tcp_session_stop_timeout>2000</tcp_session_stop_timeout><!--tcp会话停点超时时间，单位：毫秒 默认配置为:2000-->
+    <rtsp_session_connect_timeout>3000</rtsp_session_connect_timeout><!--rtsp会话连接超时时间，单位：毫秒 默认配置为:10000-->
+    <rtsp_session_describe_timeout>2000</rtsp_session_describe_timeout><!--rtsp会话describe超时时间，单位：毫秒 默认配置为:10000-->
+    <rtsp_session_setup_timeout>2000</rtsp_session_setup_timeout><!--rtsp会话setup超时时间，单位：毫秒 默认配置为:10000-->
+    <rtsp_session_play_timeout>2000</rtsp_session_play_timeout><!--rtsp会话play超时时间，单位：毫秒 默认配置为:10000-->
+    <rtsp_session_pause_timeout>2000</rtsp_session_pause_timeout><!--rtsp会话pause超时时间，单位：毫秒 默认配置为:10000-->
+    <rtsp_session_teardown_timeout>1000</rtsp_session_teardown_timeout><!--rtsp会话teardown超时时间，单位：毫秒 默认配置为:1000-->
+    </access>
+    <device_list>
+    <dev transmit_ch="0" type="172" ip="172.16.16.223" port="0" ch="0" stream_type="0" link_type="3" usr="" password=""/>
+    <dev transmit_ch="1" type="172" ip="12.55.20.85" port="0" ch="0" stream_type="0" link_type="3" usr="" password=""/>
+    <!--<dev transmit_ch="0" type="172" ip="172.16.16.223" port="0" ch="0" stream_type="1" link_type="3" usr="" password=""/>
+    <dev transmit_ch="0" type="172" ip="172.16.16.223" port="0" ch="0" stream_type="2" link_type="3" usr="" password=""/>
+    <dev transmit_ch="1" type="2" ip="172.16.16.23" port="8000" ch="0" stream_type="0" link_type="3" usr="admin" password="123456"/>-->
+    </device_list>
+</dps_cfg>
+<!--说明
+link_type:点播方式(0:tcp+tcp/1:xtmsg+rtp/2:xtmsg+rtp mul/3:xtmsg+rtp/4:xtmsg+rtp mul/5:xtmsg+rtp demux/6:rtsp+rtp std/7:rtsp+rtp/8:rtsp+rtp demux/9:tcp_rtp_std/10:xmpp+rtp_std/11:xmpp+rtp_pri/
+12:xmpp+rtp_pri_demux/13:udp+rtp_pri/14:udp+rtp_pri_demux/15:私有有UDP协商 RTP多播/16:私有有UDP协商 RTP多播/17:私有有UDP协商 标准RTP 复用流/18:私有有UDP协商 标准RTP流 多播)
+-->
